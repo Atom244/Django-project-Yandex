@@ -8,12 +8,13 @@ stages:          # List of stages for jobs, and their order of execution
 before_script:    # Выполняется перед каждым job
   - pip install --upgrade pip
   - pip install -r requirements.txt
-  - pip install black flake8 autoflake  # Устанавливаем flake8 глобально
+  - pip install black flake8 autoflake isort  # Устанавливаем flake8 глобально
 
 formatting-job:       # This job runs in the build stage, which runs first.
   stage: formatting
   script:
-    - autoflake --remove-unused-variables --remove-all-unused-imports --recursive .
+    - autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive .
+    - isort .
     - black . --line-length 79
     - echo "Formatting and Build job completed."  # Пример действия в стадии сборки
 
