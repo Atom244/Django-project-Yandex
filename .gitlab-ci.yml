@@ -25,9 +25,9 @@ stages:          # List of stages for jobs, and their order of execution
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-    python -m pip install --upgrade pip
-    python -m pip install -r requirements.txt
-    python -m pip install flake8
+    
+    pip install -r requirements.txt
+    pip install flake8
 
 lint-test-job:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
