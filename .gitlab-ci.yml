@@ -1,30 +1,15 @@
 image: python:latest
 
-stages:          
-  - formatting
-  - test
-  - deploy
+stages:
+  - lint
 
-before_script:   
-  - pip install --upgrade pip
-  - pip install -r requirements.txt
-  - pip install black flake8 autoflake 
-
-formatting-job:       # This job runs in the build stage, which runs first.
-  stage: formatting
+lint:
+  stage: lint
   script:
-    - autoflake --remove-unused-variables --in-place .
-    - black . --line-length 79
-    - echo "Formatting and Build job completed." 
-
-lint-test-job:   # This job runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
-  script:
-    - flake8 . --count --show-source --statistics 
-
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - pip install --upgrade pip
+    - pip install flake8
+    - flake8 . 
+  only:
+    - main
+    - merge_requests 
+  allow_failure: false  
