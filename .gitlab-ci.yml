@@ -10,6 +10,6 @@ lint:
     - pip install flake8
     - flake8 . 
   only:
-    - main
+    - master
     - merge_requests 
   allow_failure: false  
