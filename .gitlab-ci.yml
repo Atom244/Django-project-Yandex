@@ -14,9 +14,6 @@ black-formatting:
   stage: lint
   script:
     - black . --line-length 79  
-  only:
-    - merge_requests
-    - main
 
 lint-test-job:
   stage: test
