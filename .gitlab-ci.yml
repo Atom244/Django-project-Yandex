@@ -13,8 +13,8 @@ before_script:    # Выполняется перед каждым job
 formatting-job:       # This job runs in the build stage, which runs first.
   stage: formatting
   script:
-    - autoflake --remove-all-unused-imports --in-place .
-    - autopep8 --in-place --aggressive --aggressive .
+    - autoflake --remove-all-unused-imports --in-place --recursive .
+    - autopep8 --in-place --aggressive --aggressive --recursive .
     - isort .
     - black . --line-length 79
     - echo "Formatting and Build job completed."  # Пример действия в стадии сборки
