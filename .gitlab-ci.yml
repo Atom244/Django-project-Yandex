@@ -1,28 +1,27 @@
 image: python:latest
 
-stages:          # List of stages for jobs, and their order of execution
-  - build
+stages:
+  - lint
   - test
   - deploy
 
-before_script:  
+before_script:
   - pip install --upgrade pip
   - pip install -r requirements.txt
-  - pip install flake8 
+  - pip install black flake8
 
-build-job:       # This job runs in the build stage, which runs first.
-  stage: build
+black-formatting:
+  stage: lint
   script:
-    - echo "Build job completed." 
+    - black . --line-length 79  
+  only:
+    - merge_requests
+    - main
 
-lint-test-job:   # This job runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
+lint-test-job:
+  stage: test
   script:
-    - flake8 . --count --show-source --statistics --max-line-length=100 --ignore=E501,F401
-
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - flake8 . --count --show-source --statistics
+  only:
+    - merge_requests
+    - main
