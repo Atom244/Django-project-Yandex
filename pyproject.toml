@@ -1,8 +1,0 @@
-[tool.black]
-line-length = 88
-skip-string-normalization = true
-
-[flake8]
-max-line-length = 88
-multiline-quotes = double
-extend-ignore = Q003 
