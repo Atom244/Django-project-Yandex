@@ -4,6 +4,5 @@ skip-string-normalization = true
 
 [flake8]
 max-line-length = 88
-inline-quotes = single 
 multiline-quotes = double
 extend-ignore = Q003 
