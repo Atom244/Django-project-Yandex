@@ -9,7 +9,7 @@ lint:
     - pip install --upgrade pip
     - pip install flake8 pep8-naming flake8-import-order flake8-quotes black
     - flake8 . 
-    - black --check .
+    - black --check --skip-string-normalization .
   only:
     - master
     - merge_requests 
