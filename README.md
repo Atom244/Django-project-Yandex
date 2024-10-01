@@ -1,3 +1,4 @@
+[![pipeline status](https://gitlab.com/almasvildanoff/261067-almasvildanoff-course-1187/badges/master/pipeline.svg)](https://gitlab.com/almasvildanoff/261067-almasvildanoff-course-1187/-/pipelines)
 ### Запуск проекта в dev-режиме:
 ### 1) Клонировать репозиторий на свой компьютер:
 #### <command>
