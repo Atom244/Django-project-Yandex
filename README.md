@@ -14,6 +14,11 @@
     venv\Scripts\activate
 #### </command>
 
+### - На Linux:
+#### <command>
+    source venv/bin/activate
+#### </command>
+
 ### 4) Установка зависимостей:
 #### <command>
     pip install -r requirements.txt
