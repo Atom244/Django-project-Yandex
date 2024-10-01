@@ -1,4 +1,4 @@
-![pipeline status](https://gitlab.example.com/almasvildanoff/261067-almasvildanoff-course-1187/badges/master/pipeline.svg)
+![pipeline status](https://gitlab.example.com/almasvildanoff/gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/badges/master/pipeline.svg)
 ### Запуск проекта в dev-режиме:
 ### 1) Клонировать репозиторий на свой компьютер:
 #### <command>
