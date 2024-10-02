@@ -1,6 +1,7 @@
 [![pipeline status](https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/badges/master/pipeline.svg)](https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/-/commits/master)    
 
-![pipeline status](https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/badges/master/pipeline.svg)
+![build](https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/badges/master/pipeline.svg)
+
 ### Запуск проекта в dev-режиме:
 
 - ### Клонировать репозиторий на свой компьютер:
