@@ -1,3 +1,5 @@
-[flake8]
-inline-quotes = '"'
+[tool.black]
+inline-quotes = "
+multiline-quotes = "
+docstring-quotes = """
 
