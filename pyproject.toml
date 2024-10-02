@@ -1,5 +1,5 @@
 [tool.black]
-inline-quotes = "
-multiline-quotes = "
-docstring-quotes = """
+inline-quotes = '
+multiline-quotes = '
+docstring-quotes = '''
 
