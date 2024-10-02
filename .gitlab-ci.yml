@@ -1,4 +1,4 @@
-image: python:latest
+image: registry.gitlab.com/pipeline-components/black:latest
 
 stages:
   - lint
@@ -12,5 +12,5 @@ lint:
     - black --check .
   only:
     - master
-    - merge_requests 
-  allow_failure: false  
+    - merge_requests
+  allow_failure: false
