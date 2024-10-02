@@ -1,5 +1,5 @@
 [tool.black]
-inline-quotes = '
-multiline-quotes = '
-docstring-quotes = """
+line-length = 80
+target-version = ['py39']
+skip-string-normalization = true
 
