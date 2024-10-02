@@ -1,4 +1,4 @@
 [flake8]
-inline-quotes = '"'
-multiline-quotes = '"'
-docstring-quotes = '"'
+inline-quotes = "
+multiline-quotes = "
+docstring-quotes = "
