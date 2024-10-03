@@ -64,9 +64,17 @@
 
 #### Создайте файл .env:
 
+#### На Linux:
 #### <command>
 
     touch .env
+
+#### </command>
+
+#### На Windows:
+#### <command>
+
+    echo. > .env
 
 #### </command>
 
@@ -78,7 +86,7 @@
     cat <<EOF > .env
     SECRET_KEY = '<secret key>'
     ALLOWED_HOSTS = '<allowed hosts>'
-    DEBUG = '<debug>'
+    DEBUG = '<bool>'
     EOF
 
 #### </command>
@@ -88,7 +96,7 @@
 
     echo SECRET_KEY = '^<secret key^>' >> .env
     echo ALLOWED_HOSTS = '^<allowed hosts^>' >> .env
-    echo DEBUG = '^<debug^>' >> .env
+    echo DEBUG = '^<bool^>' >> .env
 
 #### </command>
 - ### Переход к папке lyceum:
