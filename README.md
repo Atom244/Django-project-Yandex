@@ -72,12 +72,25 @@
 
 #### Запишите в файл Env секретный ключ ('SECRET_KEY'):
 
+#### На Linux:
 #### <command>
 
-    echo "SECRET_KEY = '<secret key>'"  | tee -a .env
+    cat <<EOF > .env
+    SECRET_KEY = '<secret key>'
+    ALLOWED_HOSTS = '<allowed hosts>'
+    DEBUG = '<debug>'
+    EOF
 
 #### </command>
 
+#### На Windows:
+#### <command>
+
+    echo SECRET_KEY = '^<secret key^>' >> .env
+    echo ALLOWED_HOSTS = '^<allowed hosts^>' >> .env
+    echo DEBUG = '^<debug^>' >> .env
+
+#### </command>
 - ### Переход к папке lyceum:
 
 #### <command>
