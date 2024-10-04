@@ -22,7 +22,7 @@ black test:
     - black --check .
 
 
-only:
-  - test
-  - merge_requests
-allow_failure: false
+  only:
+    - test
+    - merge_requests
+  allow_failure: false
