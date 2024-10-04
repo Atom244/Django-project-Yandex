@@ -11,6 +11,6 @@ lint:
     - flake8 --config=.flake8 .
     - black --check .
   only:
-    - master
+    - main
     - merge_requests
   allow_failure: false
