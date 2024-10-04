@@ -8,7 +8,10 @@ preparing:
   script:
     - pip install --upgrade pip
     - pip install flake8 pep8-naming flake8-import-order flake8-quotes black
-    
+  only:
+    - test
+    - merge_requests
+  allow_failure: false
     
 flake test:
   stage: lint
@@ -22,7 +25,4 @@ black test:
     - black --check .
 
 
-  only:
-    - test
-    - merge_requests
-  allow_failure: false
+  
