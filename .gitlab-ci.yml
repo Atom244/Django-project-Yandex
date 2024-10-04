@@ -3,14 +3,26 @@ image: registry.gitlab.com/pipeline-components/black:latest
 stages:
   - lint
 
-lint:
+preparing:
   stage: lint
   script:
     - pip install --upgrade pip
     - pip install flake8 pep8-naming flake8-import-order flake8-quotes black
+    
+    
+flake test:
+  stage: lint
+  script:
     - flake8 --config=.flake8 .
+
+
+black test:
+  stage: lint
+  script:
     - black --check .
-  only:
-    - master
-    - merge_requests
-  allow_failure: false
+
+
+only:
+  - test
+  - merge_requests
+allow_failure: false
