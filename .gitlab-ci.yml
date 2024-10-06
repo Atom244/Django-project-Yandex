@@ -2,6 +2,7 @@ image: registry.gitlab.com/pipeline-components/black:latest
 
 stages:
   - lint
+  - test
 
 lint:
   stage: lint
@@ -14,3 +15,10 @@ lint:
     - main
     - merge_requests
   allow_failure: false
+
+test:
+  stage: test
+  script:
+    - pip install -r requirements/test.txt
+    - cd lyceum
+    - python manage.py test
