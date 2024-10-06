@@ -3,6 +3,4 @@ from django.urls import path
 from . import views
 
 
-urlpatterns = [
-    path("", views.description)
-]
+urlpatterns = [path("", views.description)]
