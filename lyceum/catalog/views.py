@@ -7,3 +7,11 @@ def item_list(request):
 
 def item_detail(request, pk):
     return HttpResponse("<body>Подробно элемент</body>")
+
+
+def item_num(request, num):
+    return HttpResponse(num)
+
+
+def item_converter_num(request, number):
+    return HttpResponse(number)
