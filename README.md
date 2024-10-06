@@ -1,4 +1,5 @@
 ![pipeline status](https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/badges/main/pipeline.svg)
+
 ### Запуск проекта в dev-режиме:
 
 - ### Клонирование репозитория на свой компьютер:
@@ -66,6 +67,7 @@
 #### Создайте файл **.env**:
 
 #### На Linux:
+
 #### <command>
 
     touch .env
@@ -73,6 +75,7 @@
 #### </command>
 
 #### На Windows:
+
 #### <command>
 
     echo. > .env
@@ -82,22 +85,24 @@
 #### Запишите в файл Env секретный ключ, разрешённые хосты, debug-мод (True или False):
 
 #### На Linux:
+
 #### <command>
 
     cat <<EOF > .env
-    SECRET_KEY = '<secret key>'
-    ALLOWED_HOSTS = '<allowed hosts>'
-    DEBUG = '<bool>'
+    DJANGO_SECRET_KEY = '<secret key>'
+    DJANGO_ALLOWED_HOSTS = '<allowed hosts>'
+    DJANGO_DEBUG = '<bool>'
     EOF
 
 #### </command>
 
 #### На Windows:
+
 #### <command>
 
-    echo SECRET_KEY = '^<secret key^>' >> .env
-    echo ALLOWED_HOSTS = '^<allowed hosts^>' >> .env
-    echo DEBUG = '^<bool^>' >> .env
+    echo DJANGO_SECRET_KEY = '^<secret key^>' >> .env
+    echo DJANGO_ALLOWED_HOSTS = '^<allowed hosts^>' >> .env
+    echo DJANGO_DEBUG = '^<bool^>' >> .env
 
 #### </command>
 
