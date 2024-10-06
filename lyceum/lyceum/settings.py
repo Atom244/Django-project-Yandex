@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "default_secret_key")
 DEBUG_ENV = os.getenv("DJANGO_DEBUG", "true").lower()
 DEBUG = DEBUG_ENV in ("true", "yes", "1", "y", "t")
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(" ")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(" ")
 
 
 # Application definition
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -59,10 +58,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-INTERNAL_IPS = ["127.0.0.1"]
+INTERNAL_IPS = []
 
 ROOT_URLCONF = "lyceum.urls"
 
@@ -145,3 +143,12 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+if DEBUG:
+    INSTALLED_APPS += [
+        "debug_toolbar",
+    ]
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
+    INTERNAL_IPS += ["127.0.0.1", "localhost"]
