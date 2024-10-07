@@ -7,15 +7,16 @@ class ReverseWordMiddleware:
         self.count = 0
 
     def __call__(self, request):
-
+        print(self.count)
         response = self.get_response(request)
 
         self.count += 1
 
-        if self.count % 10 == 0:
+        if self.count == 10:
+            self.count = 0
             response.content = self.reverse_russian_words(
                 response.content.decode("utf-8")
-            ).encode("utf-8")
+            )
 
         return response
 
