@@ -33,6 +33,17 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fake_key")
 DEBUG_ENV = os.getenv("DJANGO_DEBUG", "True").lower()
 DEBUG = DEBUG_ENV in ("true", "yes", "1", "y", "t")
 
+ALLOW_REVERSE_ENV = os.getenv("DJANGO_ALLOW_REVERSE", "False").lower()
+ALLOW_REVERSE = ALLOW_REVERSE_ENV in (
+    "",
+    "true",
+    "True",
+    "yes",
+    "YES",
+    "1",
+    "y",
+)
+
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(" ")
 
 
@@ -152,3 +163,8 @@ if DEBUG:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
     ]
     INTERNAL_IPS += ["127.0.0.1", "localhost"]
+
+if ALLOW_REVERSE:
+    MIDDLEWARE += [
+        "lyceum.middleware.ReverseWordMiddleware",
+    ]
