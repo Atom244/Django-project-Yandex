@@ -38,6 +38,11 @@ class StaticURLTests(TestCase):
             normal_num_check.status_code, 200, "normal_num_check down"
         )
 
+        zero_num_check = Client().get("/catalog/re/0/")
+        self.assertEqual(
+            zero_num_check.status_code, 404, "zero_num_check down"
+        )
+
         negative_num_check = Client().get("/catalog/re/-1/")
         self.assertEqual(
             negative_num_check.status_code, 404, "negative_num_check down"
@@ -53,6 +58,11 @@ class StaticURLTests(TestCase):
         normal_num_check = Client().get("/catalog/converter/1/")
         self.assertEqual(
             normal_num_check.status_code, 200, "normal_num_check down"
+        )
+
+        zero_num_check = Client().get("/catalog/converter/0/")
+        self.assertEqual(
+            zero_num_check.status_code, 404, "zero_num_check down"
         )
 
         negative_num_check = Client().get("/catalog/converter/-1/")

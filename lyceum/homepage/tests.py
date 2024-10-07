@@ -1,4 +1,5 @@
 from django.test import Client, TestCase
+from http import HTTPStatus
 
 
 class StaticURLTests(TestCase):
@@ -12,12 +13,13 @@ class StaticURLTests(TestCase):
 
         coffee_content_check = Client().get("/coffee/")
         self.assertEqual(
-            (coffee_content_check.content).decode("utf-8"),
-            "<body>Я чайник</body>",
-            "coffee_content_check down",
+            coffee_content_check.content,
+            "Я чайник".encode(),
+            "coffee_content_check down"
         )
 
         coffee_status_check = Client().get("/coffee/")
         self.assertEqual(
-            coffee_status_check.status_code, 418, "coffee_status_check down"
+            coffee_status_check.status_code, HTTPStatus.IM_A_TEAPOT,
+            "coffee_status_check down"
         )
