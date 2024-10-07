@@ -6,4 +6,3 @@ class PositiveNumConverter:
 
     def to_url(self, value):
         return "%s" % value
-

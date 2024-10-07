@@ -1,5 +1,6 @@
-from django.http import HttpResponse
 from http import HTTPStatus
+
+from django.http import HttpResponse
 
 
 def home(request):
