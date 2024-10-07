@@ -11,14 +11,14 @@ class StaticURLTests(TestCase):
             client = Client()
             for _ in range(9):
                 response = client.get("/coffee/")
-                # Отладочная информация
-                print(response.content.decode())
+
+                # print(response.content.decode())
 
             response = client.get("/coffee/")
-            print(response.content.decode())
+            # print(response.content.decode())
             self.assertEqual(
-                response.content,
-                "Я кинйач".encode(),
+                response.content.decode("utf-8"),
+                "Я кинйач",
                 "test_allow_reverse_true_coffee down",
             )
 
@@ -34,7 +34,7 @@ class StaticURLTests(TestCase):
             response = client.get("/coffee/")
             # print(response.content.decode())
             self.assertEqual(
-                response.content,
-                "Я чайник".encode(),
+                response.content.decode("utf-8"),
+                "Я чайник",
                 "test_allow_reverse_false_coffee down",
             )
