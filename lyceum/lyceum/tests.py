@@ -17,8 +17,8 @@ class StaticURLTests(TestCase):
             response = client.get("/coffee/")
             print(response.content.decode())
             self.assertEqual(
-                response.content.decode(),
-                "Я кинйач",
+                response.content,
+                "Я кинйач".encode(),
                 "test_allow_reverse_true_coffee down",
             )
 
@@ -34,7 +34,7 @@ class StaticURLTests(TestCase):
             response = client.get("/coffee/")
             # print(response.content.decode())
             self.assertEqual(
-                response.content.decode(),
-                "Я чайник",
+                response.content,
+                "Я чайник".encode(),
                 "test_allow_reverse_false_coffee down",
             )
