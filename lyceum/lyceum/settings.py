@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fake_key")
 DEBUG_ENV = os.getenv("DJANGO_DEBUG", "True").lower()
 DEBUG = DEBUG_ENV in ("true", "yes", "1", "y", "t")
 
-ALLOW_REVERSE_ENV = os.getenv("DJANGO_ALLOW_REVERSE", "False").lower()
+ALLOW_REVERSE_ENV = os.getenv("DJANGO_ALLOW_REVERSE", "True").lower()
 ALLOW_REVERSE = ALLOW_REVERSE_ENV in (
     "",
     "true",
