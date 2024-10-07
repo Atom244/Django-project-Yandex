@@ -82,7 +82,7 @@
 
 #### </command>
 
-#### Запишите в файл Env секретный ключ, разрешённые хосты, debug-мод (True или False):
+#### Запишите в файл Env следующие данные:
 
 #### На Linux:
 
@@ -92,6 +92,7 @@
     DJANGO_SECRET_KEY = '<secret key>'
     DJANGO_ALLOWED_HOSTS = '<allowed hosts>'
     DJANGO_DEBUG = '<bool>'
+    DJANGO_ALLOW_REVERSE = '<bool>'
     EOF
 
 #### </command>
@@ -103,6 +104,7 @@
     echo DJANGO_SECRET_KEY = '^<secret key^>' >> .env
     echo DJANGO_ALLOWED_HOSTS = '^<allowed hosts^>' >> .env
     echo DJANGO_DEBUG = '^<bool^>' >> .env
+    echo DJANGO_ALLOW_REVERSE = '^<bool^>' >> .env
 
 #### </command>
 
