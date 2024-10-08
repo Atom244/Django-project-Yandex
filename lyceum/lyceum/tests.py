@@ -8,11 +8,13 @@ class StaticURLTests(TestCase):
     def test_allow_reverse_true_coffee(self):
         client = Client()
         # Делаем 10 запросов и проверяем только 10-й
-        for i in range(1, 11):
+        counter = 0
+        for i in range(1, 200):
             response = client.get("/coffee/")
             response_text = response.content.decode("utf-8")
-
-            if i == 10:
+            counter += 1
+            if counter == 10:
+                counter = 0
                 self.assertEqual(
                     response_text,
                     "Я кинйач",  # Ожидаем перевернутую строку на 10-й запрос
@@ -24,7 +26,7 @@ class StaticURLTests(TestCase):
                 self.assertNotEqual(
                     response_text,
                     "Я кинйач",
-                    f"Перевернутый текст не должен был быть на запросе {i}"
+                    f"Перевернутый текст не должен был быть на запросе {i} "
                     f"Получено: {response_text}",
                 )
 
@@ -32,7 +34,7 @@ class StaticURLTests(TestCase):
     def test_allow_reverse_false_coffee(self):
         client = Client()
         # Делаем 10 запросов, но не должно быть переворота ни на одном из них
-        for i in range(1, 11):
+        for i in range(1, 200):
             response = client.get("/coffee/")
             response_text = response.content.decode("utf-8")
             # В каждом ответе ожидаем обычную строку
