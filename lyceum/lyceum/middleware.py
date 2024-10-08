@@ -1,5 +1,7 @@
 import re
 
+from django.conf import settings
+
 
 class ReverseWordMiddleware:
     def __init__(self, get_response):
@@ -7,8 +9,9 @@ class ReverseWordMiddleware:
         self.count = 0
 
     def __call__(self, request):
-        print(self.count)
         response = self.get_response(request)
+        if not settings.ALLOW_REVERSE:
+            return response
 
         self.count += 1
 
