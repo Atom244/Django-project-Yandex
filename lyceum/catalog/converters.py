@@ -1,5 +1,5 @@
 class PositiveNumConverter:
-    regex = r"[1-9]\d*"
+    regex = r"0*[1-9][0-9]*"
 
     def to_python(self, value):
         return int(value)
