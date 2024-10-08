@@ -69,6 +69,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "lyceum.middleware.ReverseWordMiddleware",
 ]
 
 INTERNAL_IPS = []
@@ -164,7 +165,8 @@ if DEBUG:
     ]
     INTERNAL_IPS += ["127.0.0.1", "localhost"]
 
-if ALLOW_REVERSE:
+"""if ALLOW_REVERSE:
     MIDDLEWARE += [
         "lyceum.middleware.ReverseWordMiddleware",
     ]
+"""
