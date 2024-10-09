@@ -1,27 +1,29 @@
 import re
 
 from django.conf import settings
+from django.core.cache import cache
 
 
 class ReverseWordMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.count = 0
 
     def __call__(self, request):
-        response = self.get_response(request)
-
         if settings.ALLOW_REVERSE:
-            self.count += 1
+            response = self.get_response(request)
 
-            if self.count == 10:
-                self.count = 0
-                reversed_content = self.reverse_russian_words(
+            request_count = cache.get("request_count", 0) + 1
+            cache.set("request_count", request_count)
+
+            if request_count % 10 == 0:
+                response.content = self.reverse_russian_words(
                     response.content.decode("utf-8")
                 )
-                response.content = reversed_content.encode("utf-8")
 
-        return response
+            return response
+        else:
+            response = self.get_response(request)
+            return response
 
     def reverse_russian_words(self, text):
         def reverse_res(res):
