@@ -9,21 +9,19 @@ class ReverseWordMiddleware:
         self.count = 0
 
     def __call__(self, request):
-        if settings.ALLOW_REVERSE:
-            response = self.get_response(request)
+        response = self.get_response(request)
 
+        if settings.ALLOW_REVERSE:
             self.count += 1
 
             if self.count == 10:
                 self.count = 0
-                response.content = self.reverse_russian_words(
+                reversed_content = self.reverse_russian_words(
                     response.content.decode("utf-8")
                 )
+                response.content = reversed_content.encode("utf-8")
 
-            return response
-        else:
-            response = self.get_response(request)
-            return response
+        return response
 
     def reverse_russian_words(self, text):
         def reverse_res(res):

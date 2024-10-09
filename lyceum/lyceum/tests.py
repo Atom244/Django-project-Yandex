@@ -12,14 +12,16 @@ class StaticURLTests(TestCase):
         for _ in range(20):
             response = client.get("/coffee/")
             response_text = response.content.decode("utf-8")
-            if response_text == "Я кинйач":
+            if "Я кинйач" in response_text:
                 reversed_found = True
                 break
 
         self.assertTrue(
             reversed_found,
-            "Ни один запрос не вернул перевёрнутую строку 'Я кинйач'"
-            "при ALLOW_REVERSE=True",
+            (
+                "Ни один запрос не вернул перевёрнутую строку 'Я кинйач' "
+                "при ALLOW_REVERSE=True"
+            ),
         )
 
     @override_settings(ALLOW_REVERSE=False)
@@ -30,9 +32,17 @@ class StaticURLTests(TestCase):
             response = client.get("/coffee/")
             response_text = response.content.decode("utf-8")
 
+            self.assertNotIn(
+                "Я кинйач",
+                response_text,
+                (
+                    f"Найден перевёрнутый текст, хотя этого не должно быть: "
+                    f"{response_text}"
+                ),
+            )
+
             self.assertEqual(
                 response_text,
                 "Я чайник",
-                f"Перевёрнутый текст не должен был появиться, "
-                f"но получено: {response_text}",
+                f"Ожидалось 'Я чайник', но получено: {response_text}",
             )
