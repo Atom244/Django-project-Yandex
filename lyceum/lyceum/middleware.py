@@ -7,13 +7,14 @@ from django.core.cache import cache
 class ReverseWordMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
+        if not cache.get("request_count"):
+            cache.set("request_count", 0)
 
     def __call__(self, request):
         if settings.ALLOW_REVERSE:
             response = self.get_response(request)
 
-            request_count = cache.get("request_count", 0) + 1
-            cache.set("request_count", request_count)
+            request_count = cache.incr("request_count")
 
             if request_count % 10 == 0:
                 response.content = self.reverse_russian_words(
@@ -29,4 +30,4 @@ class ReverseWordMiddleware:
         def reverse_res(res):
             return res.group(0)[::-1]
 
-        return re.sub(r"[А-Яа-яЁё]+", reverse_res, text)
+        return re.sub(r"\b[а-яА-ЯёЁ]+\b", reverse_res, text)

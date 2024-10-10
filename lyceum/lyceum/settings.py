@@ -29,20 +29,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fake_key")
 
+trigger_words = ("", "true", "yes", "1", "y", "t")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG_ENV = os.getenv("DJANGO_DEBUG", "True").lower()
-DEBUG = DEBUG_ENV in ("true", "yes", "1", "y", "t")
+DEBUG = DEBUG_ENV in trigger_words
 
 ALLOW_REVERSE_ENV = os.getenv("DJANGO_ALLOW_REVERSE", "False").lower()
-ALLOW_REVERSE = ALLOW_REVERSE_ENV in (
-    "",
-    "true",
-    "True",
-    "yes",
-    "YES",
-    "1",
-    "y",
-)
+ALLOW_REVERSE = ALLOW_REVERSE_ENV in trigger_words
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(" ")
 

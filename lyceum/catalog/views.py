@@ -11,7 +11,3 @@ def item_detail(request, pk):
 
 def item_num(request, num):
     return HttpResponse(num)
-
-
-def item_converter_num(request, number):
-    return HttpResponse(number)

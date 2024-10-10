@@ -11,5 +11,5 @@ urlpatterns = [
     path("", views.item_list),
     path("<int:pk>/", views.item_detail),
     re_path(r"re/(?P<num>0*[1-9][0-9]*)/", views.item_num),
-    path("converter/<posnum:number>/", views.item_converter_num),
+    path("converter/<posnum:num>/", views.item_num),
 ]

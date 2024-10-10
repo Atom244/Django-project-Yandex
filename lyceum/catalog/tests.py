@@ -1,5 +1,7 @@
 from django.test import Client, TestCase
 
+from parameterized import parameterized
+
 
 class StaticURLTests(TestCase):
     def test_catalog_page_endpoint(self):
@@ -14,63 +16,51 @@ class StaticURLTests(TestCase):
             wrong_catalog_check.status_code, 404, "wrong_catalog_check down"
         )
 
-    def test_catalog_page_detail_endpoint(self):
+    @parameterized.expand([(-1), (1.5), (0)])
+    def test_catalog_pages(self, parameter):
 
-        normal_num_check = Client().get("/catalog/1/")
+        normal_catalog_check = Client().get("/catalog/1/")
         self.assertEqual(
-            normal_num_check.status_code, 200, "normal_num_check down"
+            normal_catalog_check.status_code, 200, "normal_catalog_check down."
         )
 
-        negative_num_check = Client().get("/catalog/-1/")
+        normal_catalog_re_check = Client().get("/catalog/re/1/")
         self.assertEqual(
-            negative_num_check.status_code, 404, "negative_num_check down"
+            normal_catalog_re_check.status_code,
+            200,
+            "normal_catalog_re_check down",
         )
 
-        float_num_check = Client().get("/catalog/1.5/")
+        normal_catalog_converter_check = Client().get("/catalog/converter/1/")
         self.assertEqual(
-            float_num_check.status_code, 404, "float_num_check down"
+            normal_catalog_converter_check.status_code,
+            200,
+            "normal_catalog_convrter_check down",
         )
 
-    def test_catalog_reg_path(self):
-
-        normal_num_check = Client().get("/catalog/re/1/")
+        negative_catalog_re_check = Client().get("/catalog/re/{paramter}/")
         self.assertEqual(
-            normal_num_check.status_code, 200, "normal_num_check down"
+            negative_catalog_re_check.status_code,
+            404,
+            f"negative_catalog_re_check down. Parameter: {parameter}",
         )
 
-        zero_num_check = Client().get("/catalog/re/0/")
-        self.assertEqual(
-            zero_num_check.status_code, 404, "zero_num_check down"
+        negative_catalog_converter_check = Client().get(
+            f"/catalog/converter/{parameter}/"
         )
-
-        negative_num_check = Client().get("/catalog/re/-1/")
         self.assertEqual(
-            negative_num_check.status_code, 404, "negative_num_check down"
+            negative_catalog_converter_check.status_code,
+            404,
+            f"negative_catalog_converter_check down. Parameter: {parameter}",
         )
-
-        float_num_check = Client().get("/catalog/re/1.5/")
+        if parameter == 0:
+            self.skipTest(
+                "Следующий тест пропущен, "
+                "тк по адресу /catalog/<param> допустим 0"
+            )
+        negative_catalog_check = Client().get(f"/catalog/{parameter}/")
         self.assertEqual(
-            float_num_check.status_code, 404, "float_num_check down"
-        )
-
-    def test_catalog_converter_path(self):
-
-        normal_num_check = Client().get("/catalog/converter/1/")
-        self.assertEqual(
-            normal_num_check.status_code, 200, "normal_num_check down"
-        )
-
-        zero_num_check = Client().get("/catalog/converter/0/")
-        self.assertEqual(
-            zero_num_check.status_code, 404, "zero_num_check down"
-        )
-
-        negative_num_check = Client().get("/catalog/converter/-1/")
-        self.assertEqual(
-            negative_num_check.status_code, 404, "negative_num_check down"
-        )
-
-        float_num_check = Client().get("/catalog/converter/1.5/")
-        self.assertEqual(
-            float_num_check.status_code, 404, "float_num_check down"
+            negative_catalog_check.status_code,
+            404,
+            "negative_catalog_check down",
         )
