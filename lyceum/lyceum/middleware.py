@@ -7,10 +7,10 @@ from django.core.cache import cache
 class ReverseWordMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        if not cache.get("request_count"):
-            cache.set("request_count", 0)
 
     def __call__(self, request):
+        if not cache.get("request_count"):
+            cache.set("request_count", 0, timeout=60)
         if settings.ALLOW_REVERSE:
             response = self.get_response(request)
 
