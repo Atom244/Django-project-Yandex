@@ -1,4 +1,4 @@
-from catalog.models import Category, Item
+from catalog import models
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
 from parameterized import parameterized
@@ -58,25 +58,81 @@ class StaticURLTests(TestCase):
 
 
 class ItemModelTest(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.category = models.Category.objects.create(
+            is_published=True,
+            name="test-name",
+            slug="test-category-slug",
+            weight=100,
+        )
+        cls.tag = models.Tag.objects.create(
+            is_published=True,
+            name="test-tag",
+            slug="test-tag-slug",
+        )
 
-    def setUp(self):
-        self.category = Category.objects.create(slug="test-slug")
+    @parameterized.expand(
+        [
+            ("РоСкоШно",),
+            ("ПреВоСходно",),
+            ("роскошно",),
+            ("превосходно",),
+            ("!РоСкоШно",),
+            ("ПреВоСходно!",),
+            ("!!роскошно",),
+            ("?превосходно!?",),
+            ("(роскошно)",),
+            ("(превосходно!)",),
+        ],
+    )
+    def test_custom_validator_positive(self, parameter):
+        item_count = models.Item.objects.count()
 
-    def test_custom_validator_positive(self):
-        item = Item.objects.create(
-            text="Это превосходно",
+        self.item = models.Item(
+            name="Тестовый товар",
+            text=parameter,
             category=self.category,
         )
+        self.item.full_clean()
+        self.item.save()
+
+        self.item.tags.add(ItemModelTest.tag)
+
         self.assertEqual(
-            item.text,
-            "Это превосходно",
-            "test_custom_validator_positive down",
+            models.Item.objects.count(),
+            item_count + 1,
+            f"test_custom_validator_positive down слово: {parameter}",
         )
 
-    def test_custom_validator_negative(self):
-        item = Item(text="Обычный текст", category=self.category)
+    @parameterized.expand(
+        [
+            ("Другое",),
+            ("нету слова",),
+            ("Раскошно",),
+        ],
+    )
+    def test_custom_validator_negative(self, parameter):
+        item_count = models.Item.objects.count()
+
+        # Создаем экземпляр Item и добавляем Tag
         with self.assertRaises(
             ValidationError,
-            msg="test_custom_validator_negative down",
+            msg="test_custom_validator_negative down " f"слово: {parameter}",
         ):
-            item.full_clean()
+            self.item = models.Item(
+                name="Тестовый товар",
+                text=parameter,
+                category=self.category,
+            )
+            self.item.full_clean()
+            self.item.save()
+
+            self.item.tags.add(ItemModelTest.tag)
+
+        self.assertEqual(
+            models.Item.objects.count(),
+            item_count,
+            f"test_custom_validator_negative down слово: {parameter}",
+        )
