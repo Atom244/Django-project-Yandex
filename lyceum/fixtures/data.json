@@ -1,0 +1,132 @@
+[
+{
+  "model": "catalog.item",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "Яблоко \"Грэнни Смит\"",
+    "text": "это яблоко превосходно",
+    "category": 1,
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "name": "Папайя",
+    "text": "описание просто РОСКОШНО",
+    "category": 1,
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 3,
+  "fields": {
+    "is_published": true,
+    "name": "Фундук",
+    "text": "превосходно подойдёт для перекуса",
+    "category": 1,
+    "tags": [
+      5
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "name": "Апельсин",
+    "text": "это описание очень роскошно",
+    "category": 1,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "name": "Клубника",
+    "text": "превосходно для украшения тортов",
+    "category": 1,
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "Цитрусовые",
+    "slug": "citrus-fruits"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "name": "Ягоды",
+    "slug": "berries"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 3,
+  "fields": {
+    "is_published": true,
+    "name": "Яблочные",
+    "slug": "apple"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "name": "Тропические",
+    "slug": "tropical"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "name": "Ореховые",
+    "slug": "nutty"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "Фрукты",
+    "slug": "fruits",
+    "weight": 150
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "name": "Овощи",
+    "slug": "vegetables",
+    "weight": 150
+  }
+}
+]
