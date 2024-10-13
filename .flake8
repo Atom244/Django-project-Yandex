@@ -8,3 +8,4 @@ exclude = */migrations/
 max-line-length = 79
 per-file-ignores =
     lyceum\catalog\tests.py: I202
+    ./lyceum/catalog/tests.py: I202
