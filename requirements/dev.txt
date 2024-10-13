@@ -2,5 +2,7 @@ black==24.8.0
 Django==4.2.16
 django-debug-toolbar==4.4.6
 flake8==7.1.1
+flake8-absolute-import==1.0.0.2
+flake8-comma==0.0
 parameterized==0.9.0
 python-dotenv==1.0.1
