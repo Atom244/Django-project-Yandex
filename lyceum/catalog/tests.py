@@ -1,3 +1,6 @@
+from catalog.models import Category, Item
+
+from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
 
 from parameterized import parameterized
@@ -50,3 +53,24 @@ class StaticURLTests(TestCase):
             code,
             f"Check failed. path: {path}, parameter: {parameter}",
         )
+
+
+class ItemModelTest(TestCase):
+
+    def setUp(self):
+        self.category = Category.objects.create(slug="test-slug")
+
+    def test_custom_validator_positive(self):
+        item = Item.objects.create(
+            text="Это превосходно", category=self.category
+        )
+        self.assertEqual(
+            item.text, "Это превосходно", "test_custom_validator_positive down"
+        )
+
+    def test_custom_validator_negative(self):
+        item = Item(text="Обычный текст", category=self.category)
+        with self.assertRaises(
+            ValidationError, msg="test_custom_validator_negative down"
+        ):
+            item.full_clean()
