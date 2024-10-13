@@ -3,5 +3,8 @@ inline-quotes = "
 multiline-quotes = "
 docstring-quotes = """
 import-order-style = google
-application-import-names = core
+application-import-names = lyceum, about, catalog, homepage, core
 exclude = */migrations/
+max-line-length = 79
+per-file-ignores =
+    lyceum\catalog\tests.py: I202

@@ -1,16 +1,24 @@
-import re
+# import re
+from collections import Counter
 
 import django.core.exceptions
 import django.core.validators
 import django.db.models
 
+
 from core.models import AbstractModel
 
 
 def custom_validator(value):
-    pattern = r"\b(превосходно|роскошно)\b"
+    """pattern = r"\b(превосходно|роскошно)\b"
 
     if re.search(pattern, value, re.IGNORECASE):
+        pass"""
+
+    def contains_word(word, value):
+        return not (Counter(word.lower()) - Counter(value.lower()))
+
+    if contains_word("превосходно", value) or contains_word("роскошно", value):
         pass
     else:
         raise django.core.exceptions.ValidationError(

@@ -1,7 +1,9 @@
-from catalog import models
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
+
 from parameterized import parameterized
+
+from catalog import models
 
 
 class StaticURLTests(TestCase):
@@ -85,6 +87,8 @@ class ItemModelTest(TestCase):
             ("?превосходно!?",),
             ("(роскошно)",),
             ("(превосходно!)",),
+            ("(СокрооШн",),
+            ("певоднсхроо!",),
         ],
     )
     def test_custom_validator_positive(self, parameter):
@@ -116,7 +120,6 @@ class ItemModelTest(TestCase):
     def test_custom_validator_negative(self, parameter):
         item_count = models.Item.objects.count()
 
-        # Создаем экземпляр Item и добавляем Tag
         with self.assertRaises(
             ValidationError,
             msg="test_custom_validator_negative down " f"слово: {parameter}",

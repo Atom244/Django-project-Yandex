@@ -1,5 +1,6 @@
-import catalog.models
 from django.contrib import admin
+
+import catalog.models
 
 admin.site.register(catalog.models.Tag)
 admin.site.register(catalog.models.Category)
