@@ -2,3 +2,6 @@
 inline-quotes = "
 multiline-quotes = "
 docstring-quotes = """
+import-order-style = google
+application-import-names = core
+exclude = */migrations/

@@ -2,5 +2,3 @@
 line-length = 79
 target-version = ['py39']
 skip-string-normalization = false 
-
-

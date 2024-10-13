@@ -1,5 +1,4 @@
 import catalog.models
-
 from django.contrib import admin
 
 admin.site.register(catalog.models.Tag)

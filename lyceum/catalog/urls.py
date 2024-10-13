@@ -1,7 +1,5 @@
+from catalog import converters, views
 from django.urls import path, re_path, register_converter
-
-from . import converters
-from . import views
 
 
 register_converter(converters.PositiveNumConverter, "posnum")

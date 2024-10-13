@@ -1,8 +1,8 @@
-from core.models import AbstractModel
-
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+
+from core.models import AbstractModel
 
 
 def custom_validator(value):
@@ -10,7 +10,7 @@ def custom_validator(value):
         pass
     else:
         raise django.core.exceptions.ValidationError(
-            "В тексте должно быть слово 'превосходно' или 'роскошно'"
+            "В тексте должно быть слово 'превосходно' или 'роскошно' ",
         )
 
 

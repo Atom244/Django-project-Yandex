@@ -1,8 +1,7 @@
 from django.core.cache import cache
 from django.test import Client, TestCase
 from django.test.utils import override_settings
-
-from . import middleware
+from lyceum import middleware
 
 
 class StaticURLTests(TestCase):

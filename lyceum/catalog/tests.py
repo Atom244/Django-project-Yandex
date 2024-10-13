@@ -1,8 +1,6 @@
 from catalog.models import Category, Item
-
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
-
 from parameterized import parameterized
 
 
@@ -10,12 +8,16 @@ class StaticURLTests(TestCase):
     def test_catalog_page_endpoint(self):
         normal_catalog_check = Client().get("/catalog/")
         self.assertEqual(
-            normal_catalog_check.status_code, 200, "normal_catalog_check down"
+            normal_catalog_check.status_code,
+            200,
+            "normal_catalog_check down",
         )
 
         wrong_catalog_check = Client().get("/catalogE/")
         self.assertEqual(
-            wrong_catalog_check.status_code, 404, "wrong_catalog_check down"
+            wrong_catalog_check.status_code,
+            404,
+            "wrong_catalog_check down",
         )
 
     @parameterized.expand(
@@ -24,7 +26,7 @@ class StaticURLTests(TestCase):
             (1.5, 404),
             (1, 200),
             (0, 200),
-        ]
+        ],
     )
     def test_catalog(self, parameter, code):
         response = Client().get(f"/catalog/{parameter}/")
@@ -44,7 +46,7 @@ class StaticURLTests(TestCase):
             ("/converter", 1.5, 404),
             ("/converter", 1, 200),
             ("/converter", 0, 404),
-        ]
+        ],
     )
     def test_re_and_converter(self, path, parameter, code):
         response = Client().get(f"/catalog{path}/{parameter}/")
@@ -62,15 +64,19 @@ class ItemModelTest(TestCase):
 
     def test_custom_validator_positive(self):
         item = Item.objects.create(
-            text="Это превосходно", category=self.category
+            text="Это превосходно",
+            category=self.category,
         )
         self.assertEqual(
-            item.text, "Это превосходно", "test_custom_validator_positive down"
+            item.text,
+            "Это превосходно",
+            "test_custom_validator_positive down",
         )
 
     def test_custom_validator_negative(self):
         item = Item(text="Обычный текст", category=self.category)
         with self.assertRaises(
-            ValidationError, msg="test_custom_validator_negative down"
+            ValidationError,
+            msg="test_custom_validator_negative down",
         ):
             item.full_clean()

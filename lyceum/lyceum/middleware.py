@@ -20,7 +20,7 @@ class ReverseWordMiddleware:
                 cache.set("request_count", 0)
                 print(cache.get("request_count"))
                 response.content = self.reverse_russian_words(
-                    response.content.decode("utf-8")
+                    response.content.decode("utf-8"),
                 )
 
             return response
