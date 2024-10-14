@@ -9,7 +9,7 @@ from core.models import AbstractModel
 
 
 def generate_permutations(word):
-    return set("".join(p) for p in itertools.permutations(word))
+    return set("".join(p) for p in itertools.permutations(word, len(word)))
 
 
 PERMUTATIONS = generate_permutations("превосходно").union(
@@ -23,9 +23,9 @@ def custom_validator(value):
     if re.search(pattern, value, re.IGNORECASE):
         return
 
-    permissible_words = PERMUTATIONS
-    for word in permissible_words:
-        if word.lower() in value.lower():
+    value_lower = value.lower()
+    for word in PERMUTATIONS:
+        if word in value_lower:
             return
 
     raise django.core.exceptions.ValidationError(
