@@ -1,4 +1,3 @@
-import itertools
 import re
 
 import django.core.exceptions
@@ -8,29 +7,15 @@ import django.db.models
 from core.models import AbstractModel
 
 
-def generate_permutations(word):
-    return set("".join(p) for p in itertools.permutations(word, len(word)))
-
-
-PERMUTATIONS = generate_permutations("превосходно").union(
-    generate_permutations("роскошно"),
-)
-
-
 def custom_validator(value):
-    pattern = r"\b(превосходно|роскошно)\b"
+    pattern = r"[^\w]*роскошно|превосходно[^\w]*"
 
     if re.search(pattern, value, re.IGNORECASE):
-        return
-
-    value_lower = value.lower()
-    for word in PERMUTATIONS:
-        if word in value_lower:
-            return
-
-    raise django.core.exceptions.ValidationError(
-        "В тексте должно быть слово 'превосходно' или 'роскошно'.",
-    )
+        pass
+    else:
+        raise django.core.exceptions.ValidationError(
+            "В тексте должно быть слово 'превосходно' или 'роскошно'.",
+        )
 
 
 class Tag(AbstractModel):
