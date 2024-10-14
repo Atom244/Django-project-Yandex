@@ -8,14 +8,18 @@ from core.models import AbstractModel
 
 
 def custom_validator(value):
-    pattern = r"[^\w]*роскошно|превосходно[^\w]*"
+    patterns = [
+        r"[^\w]*роскошно[^\w]*",
+        r"[^\w]*превосходно[^\w]*",
+    ]
 
-    if re.search(pattern, value, re.IGNORECASE):
-        pass
-    else:
-        raise django.core.exceptions.ValidationError(
-            "В тексте должно быть слово 'превосходно' или 'роскошно'.",
-        )
+    for pattern in patterns:
+        if re.search(pattern, value, re.IGNORECASE):
+            return
+
+    raise django.core.exceptions.ValidationError(
+        "В тексте должно быть слово 'превосходно' или 'роскошно'.",
+    )
 
 
 class Tag(AbstractModel):
