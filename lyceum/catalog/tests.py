@@ -1,6 +1,5 @@
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
-
 from parameterized import parameterized
 
 from catalog import models

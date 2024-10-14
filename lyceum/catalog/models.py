@@ -1,53 +1,60 @@
-# import re
-from collections import Counter
+import itertools
+import re
 
 import django.core.exceptions
 import django.core.validators
 import django.db.models
 
-
 from core.models import AbstractModel
 
 
+def generate_permutations(word):
+    return set("".join(p) for p in itertools.permutations(word))
+
+
+PERMUTATIONS = generate_permutations("превосходно").union(
+    generate_permutations("роскошно"),
+)
+
+
 def custom_validator(value):
-    """pattern = r"\b(превосходно|роскошно)\b"
+    pattern = r"\b(превосходно|роскошно)\b"
 
     if re.search(pattern, value, re.IGNORECASE):
-        pass"""
+        return
 
-    def contains_word(word, value):
-        return not (Counter(word.lower()) - Counter(value.lower()))
+    permissible_words = PERMUTATIONS
+    for word in permissible_words:
+        if word.lower() in value.lower():
+            return
 
-    if contains_word("превосходно", value) or contains_word("роскошно", value):
-        pass
-    else:
-        raise django.core.exceptions.ValidationError(
-            "В тексте должно быть слово 'превосходно' или 'роскошно'.",
-        )
+    raise django.core.exceptions.ValidationError(
+        "В тексте должно быть слово 'превосходно' или 'роскошно'.",
+    )
 
 
 class Tag(AbstractModel):
     slug = django.db.models.TextField(
-        verbose_name="Слаг",
+        verbose_name="слаг",
         help_text="Напишите слаг",
         max_length=200,
         unique=True,
     )
 
     class Meta:
-        verbose_name = "Тег"
-        verbose_name_plural = "Теги"
+        verbose_name = "тег"
+        verbose_name_plural = "теги"
 
 
 class Category(AbstractModel):
     slug = django.db.models.TextField(
-        verbose_name="Слаг",
+        verbose_name="слаг",
         help_text="Напишите слаг",
         max_length=200,
         unique=True,
     )
     weight = django.db.models.PositiveSmallIntegerField(
-        verbose_name="Вес",
+        verbose_name="вес",
         default=100,
         help_text="Напишите вес товара",
         validators=[
@@ -56,13 +63,13 @@ class Category(AbstractModel):
     )
 
     class Meta:
-        verbose_name = "Категория"
-        verbose_name_plural = "Категории"
+        verbose_name = "категория"
+        verbose_name_plural = "категории"
 
 
 class Item(AbstractModel):
     text = django.db.models.TextField(
-        verbose_name="Текст",
+        verbose_name="текст",
         help_text="Напишите описание товара",
         validators=[
             custom_validator,
@@ -72,13 +79,13 @@ class Item(AbstractModel):
         Category,
         on_delete=django.db.models.CASCADE,
         null=True,
-        verbose_name="Категория",
+        verbose_name="категория",
     )
     tags = django.db.models.ManyToManyField(
         Tag,
-        verbose_name="Теги",
+        verbose_name="теги",
     )
 
     class Meta:
-        verbose_name = "Товар"
-        verbose_name_plural = "Товары"
+        verbose_name = "товар"
+        verbose_name_plural = "товары"

@@ -33,13 +33,13 @@ class Migration(migrations.Migration):
                     models.TextField(
                         help_text="Напишите название товара",
                         max_length=150,
-                        verbose_name="Название",
+                        verbose_name="название",
                     ),
                 ),
                 (
                     "is_published",
                     models.BooleanField(
-                        default=True, verbose_name="Опубликовано"
+                        default=True, verbose_name="опубликовано"
                     ),
                 ),
                 (
@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
                         help_text="Напишите слаг",
                         max_length=200,
                         unique=True,
-                        verbose_name="Слаг",
+                        verbose_name="слаг",
                     ),
                 ),
                 (
@@ -59,14 +59,14 @@ class Migration(migrations.Migration):
                         validators=[
                             django.core.validators.MinValueValidator(1)
                         ],
-                        verbose_name="Вес",
+                        verbose_name="вес",
                     ),
                 ),
             ],
             options={
                 "abstract": False,
-                "verbose_name": "Категория",
-                "verbose_name_plural": "Категории",
+                "verbose_name": "категория",
+                "verbose_name_plural": "категории",
             },
         ),
         migrations.CreateModel(
@@ -83,13 +83,13 @@ class Migration(migrations.Migration):
                     models.TextField(
                         help_text="Напишите название товара",
                         max_length=150,
-                        verbose_name="Название",
+                        verbose_name="название",
                     ),
                 ),
                 (
                     "is_published",
                     models.BooleanField(
-                        default=True, verbose_name="Опубликовано"
+                        default=True, verbose_name="опубликовано"
                     ),
                 ),
                 (
@@ -98,14 +98,14 @@ class Migration(migrations.Migration):
                         help_text="Напишите слаг",
                         max_length=200,
                         unique=True,
-                        verbose_name="Слаг",
+                        verbose_name="слаг",
                     ),
                 ),
             ],
             options={
                 "abstract": False,
-                "verbose_name": "Тег",
-                "verbose_name_plural": "Теги",
+                "verbose_name": "тег",
+                "verbose_name_plural": "теги",
             },
         ),
         migrations.CreateModel(
@@ -122,13 +122,13 @@ class Migration(migrations.Migration):
                     models.TextField(
                         help_text="Напишите название товара",
                         max_length=150,
-                        verbose_name="Название",
+                        verbose_name="название",
                     ),
                 ),
                 (
                     "is_published",
                     models.BooleanField(
-                        default=True, verbose_name="Опубликовано"
+                        default=True, verbose_name="опубликовано"
                     ),
                 ),
                 (
@@ -136,7 +136,7 @@ class Migration(migrations.Migration):
                     models.TextField(
                         help_text="Напишите описание товара",
                         validators=[catalog.models.custom_validator],
-                        verbose_name="Текст",
+                        verbose_name="текст",
                     ),
                 ),
                 (
@@ -145,19 +145,19 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
                         to="catalog.category",
-                        verbose_name="Категория",
+                        verbose_name="категория",
                     ),
                 ),
                 (
                     "tags",
                     models.ManyToManyField(
-                        to="catalog.tag", verbose_name="Теги"
+                        to="catalog.tag", verbose_name="теги"
                     ),
                 ),
             ],
             options={
-                "verbose_name": "Товар",
-                "verbose_name_plural": "Товары",
+                "verbose_name": "товар",
+                "verbose_name_plural": "товары",
             },
         ),
     ]
