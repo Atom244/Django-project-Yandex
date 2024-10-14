@@ -6,4 +6,3 @@ import-order-style = google
 application-import-names = lyceum, about, catalog, homepage, core
 exclude = */migrations/
 max-line-length = 79
-
