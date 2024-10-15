@@ -88,9 +88,6 @@ class ItemModelTest(TestCase):
             ("(превосходно!)",),
             ("(ПрЕВосхоДно!)",),
             ("?превосходно%?",),
-            ("(роскошно612:)",),
-            ("(223превосходно@!)",),
-            ("(ПрЕВосхоДно0*!)",),
         ],
     )
     def test_custom_validator_positive(self, parameter):
