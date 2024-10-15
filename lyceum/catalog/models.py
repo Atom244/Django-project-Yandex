@@ -9,8 +9,8 @@ from core.models import AbstractModel
 
 def custom_validator(value):
     patterns = [
-        r"(?:^|\W)роскошно(?:\W|$)",
-        r"(?:^|\W)превосходно(?:\W|$)",
+        r"(?:^|\W|\d)роскошно(?:\W|\d|$)",
+        r"(?:^|\W|\d)превосходно(?:\W|\d|$)",
     ]
 
     for pattern in patterns:
