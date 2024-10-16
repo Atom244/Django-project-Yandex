@@ -138,4 +138,3 @@ class ItemModelTest(TestCase):
             item_count,
             f"test_custom_validator_negative down слово: {parameter}",
         )
-
