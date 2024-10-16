@@ -9,11 +9,10 @@ from core.models import AbstractModel
 
 def custom_validator(value):
     patterns = [
-        r"(?<!\w)[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}роскошно"
-        r"[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}(?!\w)",
-        r"(?<!\w)[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}превосходно"
-        r"[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}(?!\w)",
+        r"(?<!\w)роскошно(?!\w)",
+        r"(?<!\w)превосходно(?!\w)",
     ]
+
     for pattern in patterns:
         if re.search(pattern, value, re.IGNORECASE):
             return
@@ -42,6 +41,9 @@ class Category(AbstractModel):
         help_text="Напишите слаг",
         max_length=200,
         unique=True,
+        validators=[
+            django.core.validators.MinValueValidator(2),
+        ],
     )
     weight = django.db.models.PositiveSmallIntegerField(
         verbose_name="вес",

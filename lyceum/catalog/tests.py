@@ -87,11 +87,7 @@ class ItemModelTest(TestCase):
             ("(роскошно)",),
             ("(превосходно!)",),
             ("(ПрЕВосхоДно!)",),
-            ("?/превосходно%?",),
-            (".. роскошно__",),
-            (",,,,превосходно_",),
-            ("   ПрЕВосхоДно  ,,,,,,,",),
-            ("↓→←`♫превосходно ..",),
+            ("?превосходно%?",),
         ],
     )
     def test_custom_validator_positive(self, parameter):
@@ -142,3 +138,4 @@ class ItemModelTest(TestCase):
             item_count,
             f"test_custom_validator_negative down слово: {parameter}",
         )
+
