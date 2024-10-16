@@ -9,10 +9,11 @@ from core.models import AbstractModel
 
 def custom_validator(value):
     patterns = [
-        r"(?<!\w)роскошно(?!\w)",
-        r"(?<!\w)превосходно(?!\w)",
+        r"(?<!\w)[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}роскошно"
+        r"[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}(?!\w)",
+        r"(?<!\w)[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}превосходно"
+        r"[\w!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>/?`~]{0,12}(?!\w)",
     ]
-
     for pattern in patterns:
         if re.search(pattern, value, re.IGNORECASE):
             return
