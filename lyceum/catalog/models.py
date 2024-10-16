@@ -47,9 +47,11 @@ class Category(AbstractModel):
     )
     weight = django.db.models.PositiveSmallIntegerField(
         verbose_name="вес",
+        default=100,
         help_text="Напишите вес товара",
         validators=[
             django.core.validators.MinValueValidator(1),
+            django.core.validators.MaxValueValidator(32767),
         ],
     )
 

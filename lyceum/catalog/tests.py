@@ -147,7 +147,9 @@ class ItemModelTest(TestCase):
         ],
     )
     def test_category_validator_positive(
-        self, parameter_weight, parameter_slug
+        self,
+        parameter_weight,
+        parameter_slug,
     ):
         item_count = models.Category.objects.count()
 
@@ -175,7 +177,9 @@ class ItemModelTest(TestCase):
         ],
     )
     def test_category_validator_negative(
-        self, parameter_weight, parameter_slug
+        self,
+        parameter_weight,
+        parameter_slug,
     ):
         with self.assertRaises(ValidationError):
             category = models.Category(
