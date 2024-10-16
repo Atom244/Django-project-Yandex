@@ -138,3 +138,50 @@ class ItemModelTest(TestCase):
             item_count,
             f"test_custom_validator_negative down слово: {parameter}",
         )
+
+    @parameterized.expand(
+        [
+            (100, "test-slug"),
+            (1.4, "test-slug-1"),
+            (100.37, "test-slug-2"),
+        ],
+    )
+    def test_category_validator_positive(
+        self, parameter_weight, parameter_slug
+    ):
+        item_count = models.Category.objects.count()
+
+        self.item = models.Category(
+            name="Тестовая категория",
+            weight=parameter_weight,
+            slug=parameter_slug,
+            is_published=True,
+        )
+        self.item.full_clean()
+        self.item.save()
+
+        self.assertEqual(
+            models.Category.objects.count(),
+            item_count + 1,
+            "test_category_validator_positive down params: "
+            f"{parameter_weight} {parameter_slug}",
+        )
+
+    @parameterized.expand(
+        [
+            (0, "te"),
+            (0.512, "no"),
+            (-345, "4"),
+        ],
+    )
+    def test_category_validator_negative(
+        self, parameter_weight, parameter_slug
+    ):
+        with self.assertRaises(ValidationError):
+            category = models.Category(
+                weight=parameter_weight,
+                slug=parameter_slug,
+                name="test category",
+                is_published=True,
+            )
+            category.full_clean()

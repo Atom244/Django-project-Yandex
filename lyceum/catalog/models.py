@@ -42,7 +42,7 @@ class Category(AbstractModel):
         max_length=200,
         unique=True,
         validators=[
-            django.core.validators.MinValueValidator(2),
+            django.core.validators.MinLengthValidator(2),
         ],
     )
     weight = django.db.models.PositiveSmallIntegerField(
