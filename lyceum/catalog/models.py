@@ -76,7 +76,7 @@ class Item(AbstractModel):
     )
     tags = django.db.models.ManyToManyField(
         Tag,
-        verbose_name="теги",
+        verbose_name="тег",
     )
 
     class Meta:
