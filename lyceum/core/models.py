@@ -2,14 +2,14 @@ import django.db.models
 
 
 class AbstractModel(django.db.models.Model):
-    id = django.db.models.AutoField(primary_key=True, verbose_name="id")
+    id = django.db.models.AutoField(primary_key=True, verbose_name="Id")
     is_published = django.db.models.BooleanField(
         default=True,
-        verbose_name="опубликовано",
+        verbose_name="Опубликовано",
     )
     name = django.db.models.TextField(
         max_length=150,
-        verbose_name="название",
+        verbose_name="Название",
         help_text="Напишите название товара",
         unique=True,
     )

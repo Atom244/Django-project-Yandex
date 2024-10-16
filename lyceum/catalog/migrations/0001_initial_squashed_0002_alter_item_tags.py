@@ -22,13 +22,13 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.AutoField(
-                        primary_key=True, serialize=False, verbose_name="id"
+                        primary_key=True, serialize=False, verbose_name="Id"
                     ),
                 ),
                 (
                     "is_published",
                     models.BooleanField(
-                        default=True, verbose_name="опубликовано"
+                        default=True, verbose_name="Опубликовано"
                     ),
                 ),
                 (
@@ -37,37 +37,37 @@ class Migration(migrations.Migration):
                         help_text="Напишите название товара",
                         max_length=150,
                         unique=True,
-                        verbose_name="название",
+                        verbose_name="Название",
                     ),
                 ),
                 (
                     "slug",
                     models.TextField(
-                        help_text="Напишите слаг",
+                        help_text="Напишите Слаг",
                         max_length=200,
                         unique=True,
                         validators=[
                             django.core.validators.MinLengthValidator(2)
                         ],
-                        verbose_name="слаг",
+                        verbose_name="Слаг",
                     ),
                 ),
                 (
                     "weight",
                     models.PositiveSmallIntegerField(
                         default=100,
-                        help_text="Напишите вес товара",
+                        help_text="Напишите Вес товара",
                         validators=[
                             django.core.validators.MinValueValidator(1),
                             django.core.validators.MaxValueValidator(32767),
                         ],
-                        verbose_name="вес",
+                        verbose_name="Вес",
                     ),
                 ),
             ],
             options={
-                "verbose_name": "категория",
-                "verbose_name_plural": "категории",
+                "verbose_name": "Категория",
+                "verbose_name_plural": "Категории",
             },
         ),
         migrations.CreateModel(
@@ -76,13 +76,13 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.AutoField(
-                        primary_key=True, serialize=False, verbose_name="id"
+                        primary_key=True, serialize=False, verbose_name="Id"
                     ),
                 ),
                 (
                     "is_published",
                     models.BooleanField(
-                        default=True, verbose_name="опубликовано"
+                        default=True, verbose_name="Опубликовано"
                     ),
                 ),
                 (
@@ -91,22 +91,22 @@ class Migration(migrations.Migration):
                         help_text="Напишите название товара",
                         max_length=150,
                         unique=True,
-                        verbose_name="название",
+                        verbose_name="Название",
                     ),
                 ),
                 (
                     "slug",
                     models.TextField(
-                        help_text="Напишите слаг",
+                        help_text="Напишите Слаг",
                         max_length=200,
                         unique=True,
-                        verbose_name="слаг",
+                        verbose_name="Слаг",
                     ),
                 ),
             ],
             options={
-                "verbose_name": "тег",
-                "verbose_name_plural": "теги",
+                "verbose_name": "Тег",
+                "verbose_name_plural": "Теги",
             },
         ),
         migrations.CreateModel(
@@ -115,13 +115,13 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.AutoField(
-                        primary_key=True, serialize=False, verbose_name="id"
+                        primary_key=True, serialize=False, verbose_name="Id"
                     ),
                 ),
                 (
                     "is_published",
                     models.BooleanField(
-                        default=True, verbose_name="опубликовано"
+                        default=True, verbose_name="Опубликовано"
                     ),
                 ),
                 (
@@ -130,7 +130,7 @@ class Migration(migrations.Migration):
                         help_text="Напишите название товара",
                         max_length=150,
                         unique=True,
-                        verbose_name="название",
+                        verbose_name="Название",
                     ),
                 ),
                 (
@@ -138,7 +138,7 @@ class Migration(migrations.Migration):
                     models.TextField(
                         help_text="Напишите описание товара",
                         validators=[catalog.models.custom_validator],
-                        verbose_name="текст",
+                        verbose_name="Текст",
                     ),
                 ),
                 (
@@ -147,19 +147,19 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.CASCADE,
                         to="catalog.category",
-                        verbose_name="категория",
+                        verbose_name="Категория",
                     ),
                 ),
                 (
                     "tags",
                     models.ManyToManyField(
-                        to="catalog.tag", verbose_name="тег"
+                        to="catalog.tag", verbose_name="Тег"
                     ),
                 ),
             ],
             options={
-                "verbose_name": "товар",
-                "verbose_name_plural": "товары",
+                "verbose_name": "Товар",
+                "verbose_name_plural": "Товары",
             },
         ),
     ]

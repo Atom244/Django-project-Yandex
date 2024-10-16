@@ -24,21 +24,21 @@ def custom_validator(value):
 
 class Tag(AbstractModel):
     slug = django.db.models.TextField(
-        verbose_name="слаг",
-        help_text="Напишите слаг",
+        verbose_name="Слаг",
+        help_text="Напишите Слаг",
         max_length=200,
         unique=True,
     )
 
     class Meta:
-        verbose_name = "тег"
-        verbose_name_plural = "теги"
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
 
 
 class Category(AbstractModel):
     slug = django.db.models.TextField(
-        verbose_name="слаг",
-        help_text="Напишите слаг",
+        verbose_name="Слаг",
+        help_text="Напишите Слаг",
         max_length=200,
         unique=True,
         validators=[
@@ -46,9 +46,9 @@ class Category(AbstractModel):
         ],
     )
     weight = django.db.models.PositiveSmallIntegerField(
-        verbose_name="вес",
+        verbose_name="Вес",
         default=100,
-        help_text="Напишите вес товара",
+        help_text="Напишите Вес товара",
         validators=[
             django.core.validators.MinValueValidator(1),
             django.core.validators.MaxValueValidator(32767),
@@ -56,13 +56,13 @@ class Category(AbstractModel):
     )
 
     class Meta:
-        verbose_name = "категория"
-        verbose_name_plural = "категории"
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
 
 
 class Item(AbstractModel):
     text = django.db.models.TextField(
-        verbose_name="текст",
+        verbose_name="Текст",
         help_text="Напишите описание товара",
         validators=[
             custom_validator,
@@ -72,13 +72,13 @@ class Item(AbstractModel):
         Category,
         on_delete=django.db.models.CASCADE,
         null=True,
-        verbose_name="категория",
+        verbose_name="Категория",
     )
     tags = django.db.models.ManyToManyField(
         Tag,
-        verbose_name="тег",
+        verbose_name="Тег",
     )
 
     class Meta:
-        verbose_name = "товар"
-        verbose_name_plural = "товары"
+        verbose_name = "Товар"
+        verbose_name_plural = "Товары"
