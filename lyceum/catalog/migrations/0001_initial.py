@@ -150,7 +150,7 @@ class Migration(migrations.Migration):
                 (
                     "tags",
                     models.ManyToManyField(
-                        to="catalog.tag", verbose_name="теги"
+                        to="catalog.tag", verbose_name="тег"
                     ),
                 ),
             ],
