@@ -8,19 +8,46 @@ from catalog.validators import ValidateMustContain
 from core.models import AbstractModel
 
 
-def custom_validator(value):
-    patterns = [
-        r"(?<!\w)роскошно(?!\w)",
-        r"(?<!\w)превосходно(?!\w)",
-    ]
+def normalize_name(name):
+    name = name.lower()
 
-    for pattern in patterns:
-        if re.search(pattern, value, re.IGNORECASE):
-            return
-
-    raise django.core.exceptions.ValidationError(
-        "В тексте должно быть слово 'превосходно' или 'роскошно'.",
+    translation_table = str.maketrans(
+        {
+            "а": "a",
+            "о": "o",
+            "е": "e",
+            "р": "p",
+            "с": "c",
+            "у": "y",
+            "х": "x",
+            "A": "a",
+            "O": "o",
+            "E": "e",
+            "P": "p",
+            "C": "c",
+            "Y": "y",
+            "X": "x",
+        },
     )
+    name = name.translate(translation_table)
+
+    name = re.sub(r"[^\w]", "", name)
+
+    return name
+
+
+def validate_unique_normalized_name(value):
+    normalized_value = normalize_name(value)
+
+    if Tag.objects.filter(normalized_name=normalized_value).exists():
+        raise django.core.exceptions.ValidationError(
+            "Тег с похожим именем " f"{value} уже существует.",
+        )
+
+    if Category.objects.filter(normalized_name=normalized_value).exists():
+        raise django.core.exceptions.ValidationError(
+            "Категория с похожим именем " f"{value} уже существует.",
+        )
 
 
 class Tag(AbstractModel):
@@ -30,6 +57,22 @@ class Tag(AbstractModel):
         max_length=200,
         unique=True,
     )
+    name = django.db.models.TextField(
+        max_length=150,
+        verbose_name="название",
+        help_text="Напишите название товара",
+        unique=True,
+        validators=[validate_unique_normalized_name],
+    )
+    normalized_name = django.db.models.CharField(
+        max_length=150,
+        editable=False,
+        null=True,
+    )
+
+    def save(self, *args, **kwargs):
+        self.normalized_name = normalize_name(self.name)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "тег"
@@ -55,6 +98,22 @@ class Category(AbstractModel):
             django.core.validators.MaxValueValidator(32767),
         ],
     )
+    name = django.db.models.TextField(
+        max_length=150,
+        verbose_name="название",
+        help_text="Напишите название товара",
+        unique=True,
+        validators=[validate_unique_normalized_name],
+    )
+    normalized_name = django.db.models.CharField(
+        max_length=150,
+        editable=False,
+        null=True,
+    )
+
+    def save(self, *args, **kwargs):
+        self.normalized_name = normalize_name(self.name)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "категория"

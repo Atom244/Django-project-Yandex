@@ -189,3 +189,41 @@ class ItemModelTest(TestCase):
                 is_published=True,
             )
             category.full_clean()
+
+
+class NormalizeNameTests(TestCase):
+    @parameterized.expand(
+        [
+            ("Тег", "тЕГ"),
+            ("Яблоко", "ЯблOко"),
+            ("Что-то", "чтO-то"),
+        ],
+    )
+    def test_tag_normalization(self, param1, param2):
+        models.Tag.objects.create(name=param1)
+        tag = models.Tag(name=param2)
+
+        with self.assertRaises(
+            ValidationError,
+            msg="test_tag_normalization down"
+            f"param1: {param1} param2: {param2}",
+        ):
+            tag.full_clean()
+
+    @parameterized.expand(
+        [
+            ("Тег", "тЕГ"),
+            ("Яблоко", "ЯблOко"),
+            ("Что-то", "чтO-то"),
+        ],
+    )
+    def test_category_normalization(self, param1, param2):
+        models.Category.objects.create(name=param1)
+        tag = models.Category(name=param2)
+
+        with self.assertRaises(
+            ValidationError,
+            msg="test_category_normalization down"
+            f"param1: {param1} param2: {param2}",
+        ):
+            tag.full_clean()
