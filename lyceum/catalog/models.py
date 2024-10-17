@@ -74,10 +74,7 @@ class Item(AbstractModel):
         null=True,
         verbose_name="Категория",
     )
-    tags = django.db.models.ManyToManyField(
-        Tag,
-        verbose_name="Тег",
-    )
+    tags = django.db.models.ManyToManyField(Tag)
 
     class Meta:
         verbose_name = "Товар"
