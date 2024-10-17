@@ -24,7 +24,7 @@ def custom_validator(value):
 
 class Tag(AbstractModel):
     slug = django.db.models.TextField(
-        verbose_name="Слаг",
+        verbose_name="слаг",
         help_text="Напишите Слаг",
         max_length=200,
         unique=True,
@@ -37,7 +37,7 @@ class Tag(AbstractModel):
 
 class Category(AbstractModel):
     slug = django.db.models.TextField(
-        verbose_name="Слаг",
+        verbose_name="слаг",
         help_text="Напишите Слаг",
         max_length=200,
         unique=True,
@@ -46,7 +46,7 @@ class Category(AbstractModel):
         ],
     )
     weight = django.db.models.PositiveSmallIntegerField(
-        verbose_name="Вес",
+        verbose_name="вес",
         default=100,
         help_text="Напишите Вес товара",
         validators=[
@@ -62,7 +62,7 @@ class Category(AbstractModel):
 
 class Item(AbstractModel):
     text = django.db.models.TextField(
-        verbose_name="Текст",
+        verbose_name="текст",
         help_text="Напишите описание товара",
         validators=[
             custom_validator,
@@ -72,9 +72,12 @@ class Item(AbstractModel):
         Category,
         on_delete=django.db.models.CASCADE,
         null=True,
-        verbose_name="Категория",
+        verbose_name="категория",
     )
-    tags = django.db.models.ManyToManyField(Tag)
+    tags = django.db.models.ManyToManyField(
+        Tag,
+        verbose_name="тег",
+    )
 
     class Meta:
         verbose_name = "Товар"
