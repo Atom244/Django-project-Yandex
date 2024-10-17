@@ -16,3 +16,10 @@ class ValidateMustContain:
             "Текст должен содержать одно из следующих слов: "
             f"{', '.join(self.required_words)}.",
         )
+
+    def deconstruct(self):
+        return (
+            "catalog.validators.ValidateMustContain",
+            self.required_words,
+            {},
+        )
