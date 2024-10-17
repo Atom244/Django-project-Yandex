@@ -4,6 +4,7 @@ import django.core.exceptions
 import django.core.validators
 import django.db.models
 
+from catalog.validators import ValidateMustContain
 from core.models import AbstractModel
 
 
@@ -65,7 +66,7 @@ class Item(AbstractModel):
         verbose_name="текст",
         help_text="Напишите описание товара",
         validators=[
-            custom_validator,
+            ValidateMustContain("роскошно", "превосходно"),
         ],
     )
     category = django.db.models.ForeignKey(

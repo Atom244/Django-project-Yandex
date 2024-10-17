@@ -1,5 +1,10 @@
 ![pipeline status](https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/badges/main/pipeline.svg)
 
+### Структура БД проекта:
+![ER](ER.jpg)
+
+> [!IMPORTANT]  
+> ##### Требования для нормального запуска проекта: Python версии 3.10+
 ### Запуск проекта в dev-режиме:
 
 - ### Клонирование репозитория на свой компьютер:
