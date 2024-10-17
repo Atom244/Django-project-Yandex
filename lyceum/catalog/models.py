@@ -20,6 +20,7 @@ def normalize_name(name):
             "с": "c",
             "у": "y",
             "х": "x",
+            "k": "к",
             "A": "a",
             "O": "o",
             "E": "e",
@@ -27,6 +28,7 @@ def normalize_name(name):
             "C": "c",
             "Y": "y",
             "X": "x",
+            "K": "к",
         },
     )
     name = name.translate(translation_table)
