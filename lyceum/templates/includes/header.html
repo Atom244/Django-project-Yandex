@@ -1,0 +1,30 @@
+{% load static %}
+<div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <img src="{% static "img/logo.svg" %}" alt="" width=7%>
+      <span class="fs-4">Продукты у Кота</span>
+    </a>
+    {% with request.resolver_match.view_name as view_name %}
+    <ul class="nav nav-pills">
+      {% if view_name == "home" %}
+      <li class="nav-item"><a class="nav-link active">На главную</a></li>
+      {% else %}
+      <li class="nav-item"><a href="{% url "home" %}" class="nav-link">На главную</a></li>
+      {% endif %}
+
+      {% if view_name == "about" %}
+      <li class="nav-item"><a class="nav-link active">О проекте</a></li>
+      {% else %}
+      <li class="nav-item"><a href="{% url "about" %}" class="nav-link">О проекте</a></li>
+      {% endif %}
+
+      {% if view_name == "item_list" %}
+      <li class="nav-item"><a class="nav-link active">Список товаров</a></li>
+      {% else %}
+      <li class="nav-item"><a href="{% url "item_list" %}" class="nav-link">Список товаров</a></li>
+      {% endif %}
+    </ul>
+    {% endwith %}
+  </header>
+</div>

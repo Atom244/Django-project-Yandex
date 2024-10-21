@@ -3,9 +3,12 @@ import re
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+from django.utils.safestring import mark_safe
 
 from catalog.validators import ValidateMustContain
 from core.models import AbstractModel
+
+from sorl.thumbnail import get_thumbnail
 
 
 def normalize_name(name):
@@ -122,6 +125,9 @@ class Category(AbstractModel):
         verbose_name_plural = "категории"
 
 
+
+
+
 class Item(AbstractModel):
     text = django.db.models.TextField(
         verbose_name="текст",
@@ -140,7 +146,34 @@ class Item(AbstractModel):
         Tag,
         verbose_name="тег",
     )
+    main_image = django.db.models.ImageField(
+        "главное изображение",
+        upload_to="catalog/",
+        blank=True,
+    )
+
+    def get_main_image_300x300(self):
+        return get_thumbnail(self.main_image, "300x300", quality=51)
+
+    def main_image_tmb(self):
+        if self.main_image:
+            return mark_safe(
+                f"<img src='{self.main_image.url}' width='50'>",
+            )
+        return "Нет изображения"
+
+    main_image_tmb.short_description = "Превью"
+    main_image_tmb.allow_tags = True
 
     class Meta:
         verbose_name = "товар"
         verbose_name_plural = "товары"
+
+
+class ImageModel(django.db.models.Model):
+    images = django.db.models.ImageField(
+        "изображения",
+        upload_to="catalog/",
+        blank=True,
+    )
+    item = django.db.models.ForeignKey(Item, on_delete=django.db.models.CASCADE, related_name="изображения", blank=True)
