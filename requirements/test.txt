@@ -6,3 +6,4 @@ flake8-absolute-import==1.0.0.2
 flake8-comma==0.0
 parameterized==0.9.0
 python-dotenv==1.0.1
+sorl-thumbnail==12.11.0
