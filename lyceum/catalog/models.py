@@ -4,11 +4,10 @@ import django.core.exceptions
 import django.core.validators
 import django.db.models
 from django.utils.safestring import mark_safe
+from sorl.thumbnail import get_thumbnail
 
 from catalog.validators import ValidateMustContain
 from core.models import AbstractModel
-
-from sorl.thumbnail import get_thumbnail
 
 
 def normalize_name(name):
@@ -125,9 +124,6 @@ class Category(AbstractModel):
         verbose_name_plural = "категории"
 
 
-
-
-
 class Item(AbstractModel):
     text = django.db.models.TextField(
         verbose_name="текст",
@@ -176,4 +172,14 @@ class ImageModel(django.db.models.Model):
         upload_to="catalog/",
         blank=True,
     )
-    item = django.db.models.ForeignKey(Item, on_delete=django.db.models.CASCADE, related_name="изображения", blank=True)
+    item = django.db.models.ForeignKey(
+        Item,
+        on_delete=django.db.models.CASCADE,
+        related_name="изображения",
+        blank=True,
+        verbose_name="товар",
+    )
+
+    class Meta:
+        verbose_name = "изображение"
+        verbose_name_plural = "изображения"
