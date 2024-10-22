@@ -7,6 +7,7 @@
     "name": "Яблоко \"Грэнни Смит\"",
     "text": "это яблоко превосходно",
     "category": 1,
+    "main_image": "",
     "tags": [
       3
     ]
@@ -20,6 +21,7 @@
     "name": "Папайя",
     "text": "описание просто РОСКОШНО",
     "category": 1,
+    "main_image": "",
     "tags": [
       4
     ]
@@ -33,6 +35,7 @@
     "name": "Фундук",
     "text": "превосходно подойдёт для перекуса",
     "category": 1,
+    "main_image": "",
     "tags": [
       5
     ]
@@ -46,6 +49,7 @@
     "name": "Апельсин",
     "text": "это описание очень роскошно",
     "category": 1,
+    "main_image": "",
     "tags": [
       1
     ]
@@ -59,6 +63,7 @@
     "name": "Клубника",
     "text": "превосходно для украшения тортов",
     "category": 1,
+    "main_image": "",
     "tags": [
       2
     ]
@@ -69,8 +74,9 @@
   "pk": 1,
   "fields": {
     "is_published": true,
+    "slug": "citrus-fruits",
     "name": "Цитрусовые",
-    "slug": "citrus-fruits"
+    "normalized_name": "цитpycoвыe"
   }
 },
 {
@@ -78,8 +84,9 @@
   "pk": 2,
   "fields": {
     "is_published": true,
+    "slug": "berries",
     "name": "Ягоды",
-    "slug": "berries"
+    "normalized_name": "ягoды"
   }
 },
 {
@@ -87,8 +94,9 @@
   "pk": 3,
   "fields": {
     "is_published": true,
+    "slug": "apple",
     "name": "Яблочные",
-    "slug": "apple"
+    "normalized_name": "яблoчныe"
   }
 },
 {
@@ -96,8 +104,9 @@
   "pk": 4,
   "fields": {
     "is_published": true,
+    "slug": "tropical",
     "name": "Тропические",
-    "slug": "tropical"
+    "normalized_name": "тpoпичecкиe"
   }
 },
 {
@@ -105,8 +114,9 @@
   "pk": 5,
   "fields": {
     "is_published": true,
+    "slug": "nutty",
     "name": "Ореховые",
-    "slug": "nutty"
+    "normalized_name": "opexoвыe"
   }
 },
 {
@@ -114,9 +124,10 @@
   "pk": 1,
   "fields": {
     "is_published": true,
-    "name": "Фрукты",
     "slug": "fruits",
-    "weight": 150
+    "weight": 150,
+    "name": "Фрукты",
+    "normalized_name": "фpyкты"
   }
 },
 {
@@ -124,9 +135,10 @@
   "pk": 2,
   "fields": {
     "is_published": true,
-    "name": "Овощи",
     "slug": "vegetables",
-    "weight": 150
+    "weight": 150,
+    "name": "Овощи",
+    "normalized_name": "oвoщи"
   }
 }
 ]

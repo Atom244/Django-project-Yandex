@@ -4,7 +4,7 @@ import catalog.models
 
 admin.site.register(catalog.models.Tag)
 admin.site.register(catalog.models.Category)
-admin.site.register(catalog.models.ImageModel)
+admin.site.register(catalog.models.MainImage)
 
 
 @admin.register(catalog.models.Item)

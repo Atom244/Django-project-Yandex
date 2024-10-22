@@ -12,7 +12,7 @@
             <div class="card-body">
               <h5 class="card-title">Яблоко "Грэнни Смит"</h5>
               <p class="card-text">Да, это яблоко</p>
-              <a href="#" class="btn btn-secondary">Подробнее</a>
+              <a href="{% url "item_detail" 1 %}" class="btn btn-secondary">Подробнее</a>
             </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
             <div class="card-body">
               <h5 class="card-title">Папайя</h5>
               <p class="card-text">Освежающий фрукт</p>
-              <a href="#" class="btn btn-secondary">Подробнее</a>
+              <a href="{% url "item_detail" 2 %}" class="btn btn-secondary">Подробнее</a>
             </div>
         </div>
       </div>
@@ -32,10 +32,10 @@
             <div class="card-body">
               <h5 class="card-title">Грецкий орех</h5>
               <p class="card-text">Отлично подойдет для ланча</p>
-              <a href="#" class="btn btn-secondary">Подробнее</a>
+              <a href="{% url "item_detail" 3 %}" class="btn btn-secondary">Подробнее</a>
             </div>
         </div>
       </div>
     </div>
-  </div>
+</div>
 {% endblock %}

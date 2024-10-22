@@ -38,7 +38,9 @@ DEBUG = DEBUG_ENV in trigger_words
 ALLOW_REVERSE_ENV = os.getenv("DJANGO_ALLOW_REVERSE", "False").lower()
 ALLOW_REVERSE = ALLOW_REVERSE_ENV in trigger_words
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(" ")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1").split(
+    " ",
+)
 
 
 # Application definition

@@ -18,7 +18,6 @@ class ReverseWordMiddleware:
 
             if request_count % 10 == 0:
                 cache.set("request_count", 0)
-                print(cache.get("request_count"))
                 response.content = self.reverse_russian_words(
                     response.content.decode("utf-8"),
                 )

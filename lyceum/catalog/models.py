@@ -166,7 +166,7 @@ class Item(AbstractModel):
         verbose_name_plural = "товары"
 
 
-class ImageModel(django.db.models.Model):
+class MainImage(django.db.models.Model):
     images = django.db.models.ImageField(
         "изображения",
         upload_to="catalog/",

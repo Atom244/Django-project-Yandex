@@ -9,7 +9,9 @@ def item_list(request):
 
 
 def item_detail(request, pk):
-    return HttpResponse("<body>Подробно элемент</body>")
+    template = "catalog/includes/item.html"
+    context = {"pk": pk}
+    return render(request, template, context)
 
 
 def item_num(request, num):
