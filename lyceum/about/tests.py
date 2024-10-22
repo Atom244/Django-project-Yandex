@@ -1,5 +1,7 @@
 from django.test import Client, TestCase
 
+__all__ = ["StaticURLTests"]
+
 
 class StaticURLTests(TestCase):
     def test_about_page_endpoint(self):

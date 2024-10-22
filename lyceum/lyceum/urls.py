@@ -22,11 +22,11 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path("", include("homepage.urls")),
-    path("catalog/", include("catalog.urls")),
-    path("catalog/<int:pk>/", include("catalog.urls")),
-    path("about/", include("about.urls")),
-    path("admin/", admin.site.urls),
+    path("", include("homepage.urls"), name="home"),
+    path("catalog/", include("catalog.urls"), name="catalog"),
+    path("catalog/<int:pk>/", include("catalog.urls"), name="catalogpk"),
+    path("about/", include("about.urls"), name="about"),
+    path("admin/", admin.site.urls, name="admin"),
 ]
 
 if settings.DEBUG:
