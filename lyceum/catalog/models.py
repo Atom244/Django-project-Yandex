@@ -9,6 +9,8 @@ from sorl.thumbnail import get_thumbnail
 from catalog.validators import ValidateMustContain
 from core.models import AbstractModel
 
+__all__ = ["Tag", "Category", "Item", "MainImage"]
+
 
 def normalize_name(name):
     name = name.lower()

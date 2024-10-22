@@ -4,6 +4,8 @@ from django.test.utils import override_settings
 
 from lyceum import middleware
 
+__all__ = ["StaticURLTests"]
+
 
 class StaticURLTests(TestCase):
 

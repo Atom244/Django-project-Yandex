@@ -3,6 +3,8 @@ from http import HTTPStatus
 from django.core.cache import cache
 from django.test import Client, TestCase
 
+__all__ = ["StaticURLTests"]
+
 
 class StaticURLTests(TestCase):
     def test_home_page_endpoint(self):

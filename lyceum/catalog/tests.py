@@ -4,6 +4,8 @@ from parameterized import parameterized
 
 from catalog import models
 
+__all__ = ["StaticURLTests", "ItemModelTest", "NormalizeNameTests"]
+
 
 class StaticURLTests(TestCase):
     def test_catalog_page_endpoint(self):

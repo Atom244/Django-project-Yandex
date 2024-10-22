@@ -3,6 +3,8 @@ import re
 from django.conf import settings
 from django.core.cache import cache
 
+__all__ = ["ReverseWordMiddleware"]
+
 
 class ReverseWordMiddleware:
     def __init__(self, get_response):

@@ -1,5 +1,7 @@
 import django.db.models
 
+__all__ = ["AbstractModel"]
+
 
 class AbstractModel(django.db.models.Model):
     id = django.db.models.AutoField(primary_key=True, verbose_name="Id")

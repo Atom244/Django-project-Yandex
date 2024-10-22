@@ -2,6 +2,8 @@ import re
 
 from django.core.exceptions import ValidationError
 
+__all__ = ["ValidateMustContain"]
+
 
 class ValidateMustContain:
     def __init__(self, *required_words):
