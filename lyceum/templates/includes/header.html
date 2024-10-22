@@ -7,19 +7,19 @@
     </a>
     {% with request.resolver_match.view_name as view_name %}
     <ul class="nav nav-pills">
-      {% if view_name == "home" %}
+      {% if view_name == "homepage:home" %}
       <li class="nav-item"><a class="nav-link active">На главную</a></li>
       {% else %}
       <li class="nav-item"><a href="{% url "homepage:home" %}" class="nav-link">На главную</a></li>
       {% endif %}
 
-      {% if view_name == "about" %}
+      {% if view_name == "about:about" %}
       <li class="nav-item"><a class="nav-link active">О проекте</a></li>
       {% else %}
       <li class="nav-item"><a href="{% url "about:about" %}" class="nav-link">О проекте</a></li>
       {% endif %}
 
-      {% if view_name == "item_list" %}
+      {% if view_name == "catalog:item_list" %}
       <li class="nav-item"><a class="nav-link active">Список товаров</a></li>
       {% else %}
       <li class="nav-item"><a href="{% url "catalog:item_list" %}" class="nav-link">Список товаров</a></li>

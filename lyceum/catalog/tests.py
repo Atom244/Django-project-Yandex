@@ -1,8 +1,10 @@
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
+from django.urls import reverse
 from parameterized import parameterized
 
 from catalog import models
+
 
 __all__ = ["StaticURLTests", "ItemModelTest", "NormalizeNameTests"]
 
@@ -229,3 +231,41 @@ class NormalizeNameTests(TestCase):
             f"param1: {param1} param2: {param2}",
         ):
             tag.full_clean()
+
+
+class ReverseUrlTests(TestCase):
+    def test_catalog_page_endpoint(self):
+        normal_catalog_check = Client().get("/catalog/")
+        self.assertEqual(
+            normal_catalog_check.status_code,
+            200,
+            "normal_catalog_check down",
+        )
+
+    def test_catalog(self):
+        response = Client().get(
+            reverse("catalog:item_detail", kwargs={"pk": 1}),
+        )
+        self.assertEqual(
+            response.status_code,
+            200,
+            "catalog_check failed",
+        )
+
+    def test_catalog_re(self):
+        response = Client().get(reverse("catalog:re", kwargs={"num": 1}))
+        self.assertEqual(
+            response.status_code,
+            200,
+            "catalog_re_check failed",
+        )
+
+    def test_catalog_converter(self):
+        response = Client().get(
+            reverse("catalog:converter", kwargs={"num": 1}),
+        )
+        self.assertEqual(
+            response.status_code,
+            200,
+            "catalog_converter_check failed",
+        )
