@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "sorl.thumbnail",
     "django_cleanup.apps.CleanupConfig",
-    "ckeditor",
+    "django_ckeditor_5",
 ]
 
 MIDDLEWARE = [
@@ -172,11 +172,35 @@ if DEBUG:
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     "default": {
-        "toolbar": "full",
+        "toolbar": [
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "link",
+            "bulletedList",
+            "numberedList",
+            "blockQuote",
+            "undo",
+            "redo",
+            "alignment:left",
+            "alignment:center",
+            "alignment:right",
+            "fontColor",
+        ],
+        "fontColor": {
+            "colors": [
+                {
+                    "color": "rgb(0, 0, 0)",
+                    "label": "Black",
+                },
+            ],
+        },
         "height": 300,
         "width": "100%",
-        "removePlugins": "stylesheetparser",
     },
 }
+
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"

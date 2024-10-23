@@ -1,10 +1,10 @@
 import re
 
-from ckeditor.fields import RichTextField
 import django.core.exceptions
 import django.core.validators
 import django.db.models
 from django.utils.safestring import mark_safe
+from django_ckeditor_5.fields import CKEditor5Field
 from sorl.thumbnail import get_thumbnail
 
 from catalog.validators import ValidateMustContain
@@ -129,7 +129,7 @@ class Category(AbstractModel):
 
 
 class Item(AbstractModel):
-    text = RichTextField(
+    text = CKEditor5Field(
         verbose_name="текст",
         help_text="Напишите описание товара",
         validators=[
