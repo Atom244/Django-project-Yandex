@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 18:12+0300\n"
+"POT-Creation-Date: 2024-10-24 20:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\templates\includes\header.html:6
+#: .\templates\includes\header.html:8
 msgid "Продукты у Кота"
 msgstr "Products at the Cat's"
 
-#: .\templates\includes\header.html:11 .\templates\includes\header.html:13
-msgid "На главную"
+#: .\templates\includes\header.html:13 .\templates\includes\header.html:15
+msgid "Главная"
 msgstr "Home"
 
-#: .\templates\includes\header.html:17 .\templates\includes\header.html:19
+#: .\templates\includes\header.html:19 .\templates\includes\header.html:21
 msgid "О проекте"
 msgstr "About"
 
-#: .\templates\includes\header.html:23 .\templates\includes\header.html:25
+#: .\templates\includes\header.html:25 .\templates\includes\header.html:27
 msgid "Список товаров"
 msgstr "Product List"
+
+#: .\templates\includes\header.html:38
+msgid "Английский"
+msgstr "English"
+
+#: .\templates\includes\header.html:40
+msgid "Русский"
+msgstr "Russian"

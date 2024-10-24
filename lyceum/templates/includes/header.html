@@ -10,9 +10,9 @@
     {% with request.resolver_match.view_name as view_name %}
     <ul class="nav nav-pills">
       {% if view_name == "homepage:home" %}
-      <li class="nav-item"><a class="nav-link active">{% trans "На главную" %}</a></li>
+      <li class="nav-item"><a class="nav-link active">{% trans "Главная" %}</a></li>
       {% else %}
-      <li class="nav-item"><a href="{% url "homepage:home" %}" class="nav-link">{% trans "На главную" %}</a></li>
+      <li class="nav-item"><a href="{% url "homepage:home" %}" class="nav-link">{% trans "Главная" %}</a></li>
       {% endif %}
 
       {% if view_name == "about:about" %}
