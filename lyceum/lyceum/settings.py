@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
 
@@ -143,8 +144,8 @@ LANGUAGE_CODE = "ru"
 USE_I18N = True
 
 LANGUAGES = [
-    ("ru", "Russian"),
-    ("en", "English"),
+    ("ru", _("Russian")),
+    ("en", _("English")),
 ]
 
 LOCALE_PATHS = [
