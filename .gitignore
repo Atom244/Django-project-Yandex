@@ -6,5 +6,5 @@ __pycache__/
 db.sqlite3
 .env
 /media/
-lyceum\locale\ru\LC_MESSAGES\django.mo
-lyceum\locale\en\LC_MESSAGES\django.mo
+/django.mo/
+django.mo
