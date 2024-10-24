@@ -1,5 +1,20 @@
 <div class="footer" align="center">
   <footer class="footer-text">
-    <p>© Almas Vildanov</p>
+    <p>© Almas Vildanov <span id="year">{{ current_year }}</span></p>
   </footer>
 </div>
+
+<script>
+  (function() {
+    // Получаем текущий год с сервера
+    var serverYear = {{ current_year }};
+    // Получаем текущий год на клиенте
+    var clientYear = new Date().getFullYear();
+    
+    // Если разница между годами больше 24 часов (различие по годам)
+    if (Math.abs(clientYear - serverYear) <= 1) {
+      // Устанавливаем год с клиента, если разница не превышает суток
+      document.getElementById("year").textContent = clientYear;
+    }
+  })();
+</script>

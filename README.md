@@ -115,6 +115,36 @@
 
 ###### Также вы могли скопировать данные для примера из **.env.example** в **.env**
 
+- ### Проект поддерживает локализацию
+##### Шаги для настройки локализации:
+
+1. Убедитесь, что в `settings.py` включены локализация и языки; присутствует ли `gettext`:
+
+    ```python
+    LANGUAGE_CODE = 'ru'
+    LANGUAGES = [
+        ('ru', 'Russian'),
+        ('en', 'English'),
+    ]
+    ```
+   - Установка gettext на Linux:
+    ```bash
+    sudo apt install gettext
+    ```
+    - На [Windows](https://mlocati.github.io/articles/gettext-iconv-windows.html)
+
+2. Для генерации файлов перевода используйте команду `(в проекте они уже сгенерированы и скомпилированы)`:
+
+    ```bash
+    django-admin makemessages -l ru -l en
+    ```
+
+3. После добавления переводов в файлы `.po` скомпилируйте их с помощью команды:
+
+    ```bash
+    django-admin compilemessages
+    ```
+
 - ### Переход к папке lyceum:
 
 #### <command>

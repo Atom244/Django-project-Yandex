@@ -70,6 +70,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "lyceum.middleware.ReverseWordMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 INTERNAL_IPS = []
@@ -87,6 +88,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "lyceum.context_processors.current_year",
             ],
         },
     },
@@ -137,7 +139,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "ru"
+LANGUAGE_CODE = "en"
+USE_I18N = True
+
+LANGUAGES = [
+    ("ru", "Russian"),
+    ("en", "English"),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
+
 
 TIME_ZONE = "UTC"
 
