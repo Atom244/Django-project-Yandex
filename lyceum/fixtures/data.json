@@ -5,9 +5,8 @@
   "fields": {
     "is_published": true,
     "name": "Яблоко \"Грэнни Смит\"",
-    "text": "это яблоко превосходно",
+    "text": "<p>это яблоко превосходно</p>",
     "category": 1,
-    "main_image": "",
     "tags": [
       3
     ]
@@ -19,9 +18,8 @@
   "fields": {
     "is_published": true,
     "name": "Папайя",
-    "text": "описание просто РОСКОШНО",
+    "text": "<p>описание просто РОСКОШНО</p>",
     "category": 1,
-    "main_image": "",
     "tags": [
       4
     ]
@@ -33,9 +31,8 @@
   "fields": {
     "is_published": true,
     "name": "Фундук",
-    "text": "превосходно подойдёт для перекуса",
+    "text": "<p>превосходно подойдёт для перекуса</p>",
     "category": 1,
-    "main_image": "",
     "tags": [
       5
     ]
@@ -47,9 +44,8 @@
   "fields": {
     "is_published": true,
     "name": "Апельсин",
-    "text": "это описание очень роскошно",
+    "text": "<p>это описание очень роскошно</p>",
     "category": 1,
-    "main_image": "",
     "tags": [
       1
     ]
@@ -61,9 +57,8 @@
   "fields": {
     "is_published": true,
     "name": "Клубника",
-    "text": "превосходно для украшения тортов",
+    "text": "<p>превосходно для украшения тортов</p>",
     "category": 1,
-    "main_image": "",
     "tags": [
       2
     ]

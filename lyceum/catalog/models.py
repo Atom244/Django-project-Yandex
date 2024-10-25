@@ -146,21 +146,20 @@ class Item(AbstractModel):
         Tag,
         verbose_name="тег",
     )
-    main_image = django.db.models.ImageField(
-        "главное изображение",
-        upload_to="catalog/",
-        blank=True,
-    )
 
     def get_main_image_300x300(self):
-        return get_thumbnail(self.main_image, "300x300", quality=51)
+        if self.main_image and self.main_image.image:
+            return get_thumbnail(self.main_image.image, "300x300", quality=51)
+        else:
+            return "Нет изображения"
 
     def main_image_tmb(self):
-        if self.main_image:
+        if self.main_image and self.main_image.image:
             return mark_safe(
-                f"<img src='{self.main_image.url}' width='50'>",
+                f"<img src='{self.main_image.image.url}' width='50'>",
             )
-        return "Нет изображения"
+        else:
+            return "Нет изображения"
 
     main_image_tmb.short_description = "Превью"
     main_image_tmb.allow_tags = True
@@ -171,19 +170,40 @@ class Item(AbstractModel):
 
 
 class MainImage(django.db.models.Model):
-    images = django.db.models.ImageField(
-        "изображения",
+    item = django.db.models.OneToOneField(
+        Item,
+        verbose_name="товар",
+        on_delete=django.db.models.deletion.CASCADE,
+        null=True,
+        related_name="main_image",
+    )
+
+    image = django.db.models.ImageField(
+        "главное изображение",
         upload_to="catalog/",
         blank=True,
     )
+
+    class Meta:
+        verbose_name = "главное изображение"
+        verbose_name_plural = "главные изображения"
+
+
+class Images(django.db.models.Model):
     item = django.db.models.ForeignKey(
         Item,
-        on_delete=django.db.models.CASCADE,
-        related_name="изображения",
-        blank=True,
         verbose_name="товар",
+        on_delete=django.db.models.deletion.CASCADE,
+        related_name="images",
+        related_query_name="image",
+    )
+
+    image = django.db.models.ImageField(
+        "доп. изображение",
+        upload_to="catalog/",
+        blank=True,
     )
 
     class Meta:
-        verbose_name = "изображение"
-        verbose_name_plural = "изображения"
+        verbose_name = "доп. изображение"
+        verbose_name_plural = "доп. изображения"
