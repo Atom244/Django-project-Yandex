@@ -361,4 +361,4 @@ class ContextTests(TestCase):
     def test_home_count_item(self):
         response = Client().get(reverse("homepage:home"))
         items = response.context["items"]
-        self.assertEqual(items.count(), 1)
+        self.assertEqual(len(list(items)), 1)

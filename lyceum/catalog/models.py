@@ -37,9 +37,8 @@ def normalize_name(name):
             "K": "к",
         },
     )
-    name = name.translate(translation_table)
 
-    name = re.sub(r"[^\w]", "", name)
+    name = re.sub(r"[^\w]", "", name.translate(translation_table))
 
     return name
 
@@ -184,16 +183,14 @@ class Item(AbstractModel):
     def get_main_image_300x300(self):
         if self.main_image and self.main_image.image:
             return get_thumbnail(self.main_image.image, "300x300", quality=51)
-        else:
-            return "Нет изображения"
+        return "Нет изображения"
 
     def main_image_tmb(self):
         if self.main_image and self.main_image.image:
             return mark_safe(
                 f"<img src='{self.main_image.image.url}' width='50'>",
             )
-        else:
-            return "Нет изображения"
+        return "Нет изображения"
 
     main_image_tmb.short_description = "Превью"
     main_image_tmb.allow_tags = True
