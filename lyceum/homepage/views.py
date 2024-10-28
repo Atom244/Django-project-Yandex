@@ -10,12 +10,7 @@ __all__ = ["home", "coffee"]
 
 def home(request):
     template = "homepage/main.html"
-    items = (
-        catalog.models.Item.objects.published()
-        .defer("is_published")
-        .filter(is_on_main=True)
-        .order_by("name")
-    )
+    items = catalog.models.Item.objects.on_main()
     context = {
         "items": items,
     }

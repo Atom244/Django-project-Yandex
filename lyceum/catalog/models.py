@@ -75,6 +75,9 @@ class ItemManager(django.db.models.Manager):
             )
         )
 
+    def on_main(self):
+        return self.published().filter(is_on_main=True).order_by("name")
+
 
 class PublishedTagManager(django.db.models.Manager):
     def published(self):
