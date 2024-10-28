@@ -315,23 +315,13 @@ class ContextTests(TestCase):
         cls.published_tag.save()
         cls.unpublished_tag.save()
 
-        cls.published_item = models.Item.objects.create(
-            name="Published item",
-            category=cls.published_category,
-            text="роскошно",
-        )
-
         cls.published_item_on_main = models.Item.objects.create(
             name="Published on main item",
             category=cls.published_category,
             text="роскошно",
             is_on_main=True,
         )
-        cls.unpublished_item = models.Item.objects.create(
-            name="Unpublished item",
-            category=cls.unpublished_category,
-            text="роскошно",
-        )
+
         cls.unpublished_item_on_main = models.Item.objects.create(
             name="Unpublished on main item",
             category=cls.unpublished_category,
@@ -339,19 +329,16 @@ class ContextTests(TestCase):
             is_on_main=True,
         )
 
-        cls.published_item.clean()
         cls.published_item_on_main.clean()
-        cls.unpublished_item.clean()
+
         cls.unpublished_item_on_main.clean()
 
-        cls.published_item.save()
         cls.published_item_on_main.save()
-        cls.unpublished_item.save()
+
         cls.unpublished_item_on_main.save()
 
-        cls.published_item.tags.add(cls.published_tag)
         cls.published_item_on_main.tags.add(cls.published_tag)
-        cls.unpublished_item.tags.add(cls.unpublished_tag)
+
         cls.unpublished_item_on_main.tags.add(cls.unpublished_tag)
 
     def test_home_page_show_correct_context(self):

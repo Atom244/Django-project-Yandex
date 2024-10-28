@@ -26,8 +26,7 @@ class ReverseWordMiddleware:
 
             return response
 
-        response = self.get_response(request)
-        return response
+        return self.get_response(request)
 
     def reverse_russian_words(self, text):
         def reverse_res(res):

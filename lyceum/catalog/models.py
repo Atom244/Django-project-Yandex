@@ -38,9 +38,7 @@ def normalize_name(name):
         },
     )
 
-    name = re.sub(r"[^\w]", "", name.translate(translation_table))
-
-    return name
+    return re.sub(r"[^\w]", "", name.translate(translation_table))
 
 
 def validate_unique_normalized_name(value):
