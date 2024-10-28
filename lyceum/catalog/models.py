@@ -64,7 +64,7 @@ class ItemManager(django.db.models.Manager):
             .prefetch_related(
                 django.db.models.Prefetch(
                     "tags",
-                    queryset=Tag.objects.published(),
+                    queryset=Tag.objects.published().defer("is_published"),
                 ),
             )
             .only(
