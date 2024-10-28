@@ -355,3 +355,20 @@ class ContextTests(TestCase):
         response = Client().get(reverse("homepage:home"))
         items = response.context["items"]
         self.assertIsInstance(items, QuerySet)
+
+    @parameterized.expand(
+        [
+            ("homepage:home"),
+            ("catalog:item_list"),
+        ],
+    )
+    def test_excluding_bad_attributes_in_querysets(self, app_url):
+        response = Client().get(reverse(app_url))
+        items = response.context["items"]
+        item_attributes = items[0].__dict__
+        tag_attributes = item_attributes["_prefetched_objects_cache"]["tags"][
+            0
+        ].__dict__
+        self.assertNotIn("is_published", item_attributes)
+        self.assertNotIn("images", item_attributes)
+        self.assertNotIn("is_published", tag_attributes)
