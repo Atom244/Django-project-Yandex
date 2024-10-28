@@ -58,7 +58,35 @@ def validate_unique_normalized_name(value):
         )
 
 
+class ItemManager(django.db.models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(is_published=True, category__is_published=True)
+            .select_related("category", "main_image")
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    "tags",
+                    queryset=Tag.objects.published(),
+                ),
+            )
+            .only(
+                "name",
+                "text",
+                "category__name",
+                "main_image__image",
+            )
+        )
+
+
+class PublishedTagManager(django.db.models.Manager):
+    def published(self):
+        return self.get_queryset().filter(is_published=True)
+
+
 class Tag(AbstractModel):
+    objects = PublishedTagManager()
+
     slug = django.db.models.TextField(
         verbose_name="слаг",
         help_text="Напишите Слаг",
@@ -129,6 +157,7 @@ class Category(AbstractModel):
 
 
 class Item(AbstractModel):
+    objects = ItemManager()
     text = CKEditor5Field(
         verbose_name="текст",
         help_text="Напишите описание товара",
@@ -145,6 +174,11 @@ class Item(AbstractModel):
     tags = django.db.models.ManyToManyField(
         Tag,
         verbose_name="тег",
+    )
+
+    is_on_main = django.db.models.BooleanField(
+        default=False,
+        verbose_name="показывать на главной",
     )
 
     def get_main_image_300x300(self):

@@ -10,4 +10,18 @@
     <div align="center">
         <img src="{% static "img/main_img.png" %}" alt="main image" width=30%>
     </div>
+
+    <div align="center">
+        <div class="row">
+          
+            {% for item in items %}
+            <div class="col-12 col-md-6 col-xl-4">
+              {% include "includes/item_card.html" %}
+            </div>
+            {% empty %}
+              <p>Список пуст :(</p>
+            {% endfor %}
+          
+        </div>
+      </div>
 {% endblock %}

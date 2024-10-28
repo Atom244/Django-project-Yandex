@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static thumbnail %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static "css/main.css" %}">
+<title>Товар</title>
+{% endblock %}
+
+{% block content %}
+
+{% for tag in item.tags.all %}
+    <span class="badge bg-success">{{ tag.name }}</span>
+{% endfor %}
+
+<p><small>ID: {{ item.item_id }}</small></p>
+
+</div>
+<div class="container">
+    <div class="card mb-3" style="max-width: 1440px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src={{ item.main_image.image.url }} class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name|safe }}</h5>
+                <p class="card-text">{{ item.text|safe }}</p>
+
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        {% for image in item.images.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                {% thumbnail image.image "800x650" crop="center" as img %}
+                                    <img src="{{ img.url }}" class="d-block w-100" alt="..."  style="border-radius:20px;">
+                                {% endthumbnail %}
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Предыдущий</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Следующий</span>
+                    </button>
+                </div>
+                <a href="{% url "homepage:home" %}" class="btn btn-success" style="margin: 10px;">Купить</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
