@@ -7,14 +7,8 @@ __all__ = ["StaticURLTests"]
 class StaticURLTests(TestCase):
     def test_about_page_endpoint(self):
 
-        response = Client().get("/about/")
+        url = reverse("about:about")
 
-        self.assertEqual(response.status_code, 200, "ERROR-WRONG RESPONSE!")
-
-
-class ReverseURLTests(TestCase):
-    def test_about_page_endpoint(self):
-
-        response = Client().get(reverse("about:about"))
+        response = Client().get(url)
 
         self.assertEqual(response.status_code, 200, "ERROR-WRONG RESPONSE!")

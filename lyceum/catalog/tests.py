@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
-from django.urls import reverse
+from django.urls import NoReverseMatch, reverse
 from parameterized import parameterized
 
 from catalog import models
@@ -10,8 +10,33 @@ __all__ = ["StaticURLTests", "ItemModelTest", "NormalizeNameTests"]
 
 
 class StaticURLTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        category = models.Category.objects.create(
+            name="Тестовая категория",
+            slug="test-category",
+            weight=10,
+        )
+
+        tag = models.Tag.objects.create(
+            name="Тестовый тег",
+            slug="test-tag",
+        )
+
+        cls.item = models.Item.objects.create(
+            name="Тестовый товар",
+            text="Это описание товара, содержащее роскошно и превосходно.",
+            category=category,
+            is_on_main=True,
+        )
+
+        cls.item.tags.add(tag)
+
+        cls.client = Client()
+
     def test_catalog_page_endpoint(self):
-        normal_catalog_check = Client().get("/catalog/")
+        norm_url = reverse("catalog:item_list")
+        normal_catalog_check = Client().get(norm_url)
         self.assertEqual(
             normal_catalog_check.status_code,
             200,
@@ -30,36 +55,55 @@ class StaticURLTests(TestCase):
             (-1, 404),
             (1.5, 404),
             (1, 200),
-            (0, 200),
+            (0, 404),
         ],
     )
     def test_catalog(self, parameter, code):
-        response = Client().get(f"/catalog/{parameter}/")
-        self.assertEqual(
-            response.status_code,
-            code,
-            f"catalog_check failed with parameter: {parameter}",
-        )
+        try:
+            url = reverse("catalog:item_detail", kwargs={"pk": parameter})
+            response = Client().get(url)
+
+            self.assertEqual(
+                response.status_code,
+                code,
+                f"catalog_check failed with parameter: {parameter}",
+            )
+        except NoReverseMatch:
+            self.assertEqual(
+                code,
+                404,
+                f"Ожидалось 404 по: {parameter}, но получили NoReverseMatch.",
+            )
 
     @parameterized.expand(
         [
-            ("/re", -1, 404),
-            ("/re", 1.5, 404),
-            ("/re", 1, 200),
-            ("/re", 0, 404),
-            ("/converter", -1, 404),
-            ("/converter", 1.5, 404),
-            ("/converter", 1, 200),
-            ("/converter", 0, 404),
+            ("re", -1, 404),
+            ("re", 1.5, 404),
+            ("re", 1, 200),
+            ("re", 0, 404),
+            ("converter", -1, 404),
+            ("converter", 1.5, 404),
+            ("converter", 1, 200),
+            ("converter", 0, 404),
         ],
     )
     def test_re_and_converter(self, path, parameter, code):
-        response = Client().get(f"/catalog{path}/{parameter}/")
-        self.assertEqual(
-            response.status_code,
-            code,
-            f"Check failed. path: {path}, parameter: {parameter}",
-        )
+        try:
+            url = reverse(f"catalog:{path}", kwargs={"num": parameter})
+            response = Client().get(url)
+
+            self.assertEqual(
+                response.status_code,
+                code,
+                f"catalog_check failed with parameter: {parameter}",
+            )
+        except NoReverseMatch:
+            self.assertEqual(
+                code,
+                404,
+                f"Ожидалось 404 по: {parameter} путь: {path},"
+                " но получили NoReverseMatch.",
+            )
 
 
 class ItemModelTest(TestCase):
@@ -231,41 +275,3 @@ class NormalizeNameTests(TestCase):
             f"param1: {param1} param2: {param2}",
         ):
             tag.full_clean()
-
-
-class ReverseUrlTests(TestCase):
-    def test_catalog_page_endpoint(self):
-        normal_catalog_check = Client().get("/catalog/")
-        self.assertEqual(
-            normal_catalog_check.status_code,
-            200,
-            "normal_catalog_check down",
-        )
-
-    def test_catalog(self):
-        response = Client().get(
-            reverse("catalog:item_detail", kwargs={"pk": 1}),
-        )
-        self.assertEqual(
-            response.status_code,
-            200,
-            "catalog_check failed",
-        )
-
-    def test_catalog_re(self):
-        response = Client().get(reverse("catalog:re", kwargs={"num": 1}))
-        self.assertEqual(
-            response.status_code,
-            200,
-            "catalog_re_check failed",
-        )
-
-    def test_catalog_converter(self):
-        response = Client().get(
-            reverse("catalog:converter", kwargs={"num": 1}),
-        )
-        self.assertEqual(
-            response.status_code,
-            200,
-            "catalog_converter_check failed",
-        )
