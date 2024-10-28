@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.db.models.query import QuerySet
 from django.test import Client, TestCase
 from django.urls import NoReverseMatch, reverse
 from parameterized import parameterized
@@ -348,4 +349,9 @@ class ContextTests(TestCase):
     def test_home_count_item(self):
         response = Client().get(reverse("homepage:home"))
         items = response.context["items"]
-        self.assertEqual(len(list(items)), 1)
+        self.assertEqual(len(items), 1)
+
+    def test_type_of_context(self):
+        response = Client().get(reverse("homepage:home"))
+        items = response.context["items"]
+        self.assertIsInstance(items, QuerySet)
