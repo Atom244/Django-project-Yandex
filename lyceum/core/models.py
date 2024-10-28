@@ -4,7 +4,7 @@ __all__ = ["AbstractModel"]
 
 
 class AbstractModel(django.db.models.Model):
-    item_id = django.db.models.AutoField(primary_key=True, verbose_name="Id")
+    id = django.db.models.AutoField(primary_key=True, verbose_name="Id")
     is_published = django.db.models.BooleanField(
         default=True,
         verbose_name="опубликовано",
