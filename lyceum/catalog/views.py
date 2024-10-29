@@ -24,8 +24,11 @@ def item_list(request):
 
 def item_detail(request, pk):
     template = "catalog/item.html"
+    item = catalog.models.Item.objects.published()
+    if not item:
+        return HttpResponse("Товар отсутствует", status=200)
     items = django.shortcuts.get_object_or_404(
-        catalog.models.Item.objects.published(),
+        item,
         pk=pk,
     )
     context = {"item": items}
