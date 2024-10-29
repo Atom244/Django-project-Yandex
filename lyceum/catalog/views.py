@@ -14,8 +14,10 @@ __all__ = ["item_list", "item_detail", "item_num"]
 def item_list(request):
     template = "catalog/item_list.html"
     items = catalog.models.Item.objects.published().order_by("name")
+    title = "Каталог"
     context = {
         "items": items,
+        "title": title,
     }
     return render(request, template, context)
 
@@ -48,8 +50,10 @@ def catalog_new(request):
         )
         .order_by("?")
     )[:5]
+    title = "Новинки"
     context = {
         "items": items,
+        "title": title,
     }
     return django.shortcuts.render(request, template, context)
 
@@ -61,8 +65,10 @@ def catalog_changed_on_friday(request):
             updated_at__week_day=6,
         )
     )[:5]
+    title = "Пятница"
     context = {
         "items": items,
+        "title": title,
     }
     return django.shortcuts.render(request, template, context)
 
@@ -84,7 +90,9 @@ def catalog_unverified(request):
             time_diff__lte=datetime.timedelta(seconds=1),
         )
     )
+    title = "Непроверенное"
     context = {
         "items": items,
+        "title": title,
     }
     return django.shortcuts.render(request, template, context)
