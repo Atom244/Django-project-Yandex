@@ -19,5 +19,5 @@ def download_image(request, file_path):
             f'attachment; filename="{file_path.name}"'
         )
         return response
-    else:
-        raise Http404("Файл не найден")
+
+    raise Http404("Файл не найден")
