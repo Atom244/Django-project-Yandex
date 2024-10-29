@@ -47,6 +47,7 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1").split(
 # Application definition
 
 INSTALLED_APPS = [
+    "download.apps.DownloadConfig",
     "core.apps.CoreConfig",
     "about.apps.AboutConfig",
     "catalog.apps.CatalogConfig",

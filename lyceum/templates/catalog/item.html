@@ -21,6 +21,7 @@
         <div class="row g-0">
           <div class="col-md-4">
             <img src={{ item.main_image.image.url }} class="img-fluid rounded-start" alt="...">
+            <a href="{% url 'download:download_image' file_path=item.main_image.image.name %}" class="btn btn-light btn-sm" style="margin-left:5px;">скачать картинку</a>
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -34,11 +35,12 @@
                                 {% thumbnail image.image "800x650" crop="center" as img %}
                                     <img src="{{ img.url }}" class="d-block w-100" alt="..."  style="border-radius:20px;">
                                 {% endthumbnail %}
+                                <a href="{% url 'download:download_image' file_path=image.image.name %}" class="btn btn-light btn-sm" style="position: relative; z-index: 1; margin:5px;">скачать картинку</a>
                                 
                             </div>
                         {% endfor %}
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="z-index: 0;">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Предыдущий</span>
                     </button>

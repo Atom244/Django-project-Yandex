@@ -181,6 +181,17 @@ class Item(AbstractModel):
         verbose_name="показывать на главной",
     )
 
+    created_at = django.db.models.DateTimeField(
+        "время создания",
+        auto_now_add=True,
+        null=True,
+    )
+    updated_at = django.db.models.DateTimeField(
+        "время последнего изменения",
+        auto_now=True,
+        null=True,
+    )
+
     def get_main_image_300x300(self):
         if self.main_image and self.main_image.image:
             return get_thumbnail(self.main_image.image, "300x300", quality=51)
