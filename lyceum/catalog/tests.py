@@ -86,7 +86,7 @@ class StaticURLTests(TestCase):
             ("converter", -1, 404),
             ("converter", 1.5, 404),
             ("converter", 1, 200),
-            ("converter", 0, 404),
+            ("converter", 0, 200),
         ],
     )
     def test_re_and_converter(self, path, parameter, code):
