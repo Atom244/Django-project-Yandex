@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db.models.query import QuerySet
 from django.test import Client, TestCase
 from django.urls import NoReverseMatch, reverse
+import freezegun
 from parameterized import parameterized
 
 from catalog import models
@@ -280,8 +281,8 @@ class NormalizeNameTests(TestCase):
 
 class ContextTests(TestCase):
     @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUpTestData(cls):
+
         cls.published_category = models.Category.objects.create(
             is_published=True,
             name="Опубликованная категория",
@@ -342,6 +343,16 @@ class ContextTests(TestCase):
 
         cls.unpublished_item_on_main.tags.add(cls.unpublished_tag)
 
+        with freezegun.freeze_time("01-06-2023"):
+            cls.published_item_friday = models.Item(
+                name="Published item Friday",
+                category=cls.published_category,
+                text="роскошно fd",
+            )
+            cls.published_item_friday.clean()
+            cls.published_item_friday.save()
+            cls.published_item_friday.tags.add(cls.published_tag)
+
     def test_home_page_show_correct_context(self):
         response = Client().get(reverse("homepage:home"))
         self.assertIn("items", response.context)
@@ -372,3 +383,29 @@ class ContextTests(TestCase):
         self.assertNotIn("is_published", item_attributes)
         self.assertNotIn("images", item_attributes)
         self.assertNotIn("is_published", tag_attributes)
+
+    @parameterized.expand(
+        [
+            ("homepage:home", 1),
+            ("catalog:item_list", 2),
+        ],
+    )
+    def test_published_item_count(self, app_url, correct_count):
+        response = Client().get(reverse(app_url))
+        items = response.context["items"]
+        self.assertEqual(len(items), correct_count)
+
+    def test_context_new(self):
+        response = Client().get(reverse("catalog:new"))
+        items = response.context["items"]
+        self.assertEqual(len(items), 1)
+
+    def test_context_friday(self):
+        response = Client().get(reverse("catalog:friday"))
+        items = response.context["items"]
+        self.assertEqual(len(items), 1)
+
+    def test_context_unverified(self):
+        response = Client().get(reverse("catalog:unverified"))
+        items = response.context["items"]
+        self.assertEqual(len(items), 2)
