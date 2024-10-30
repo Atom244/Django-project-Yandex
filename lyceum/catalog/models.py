@@ -8,7 +8,7 @@ from django_ckeditor_5.fields import CKEditor5Field
 from sorl.thumbnail import get_thumbnail
 
 from catalog.validators import ValidateMustContain
-from core.models import AbstractModel
+from core.models import AbstractModel, AbstractImage
 
 
 __all__ = []
@@ -87,16 +87,17 @@ class PublishedTagManager(django.db.models.Manager):
 class Tag(AbstractModel):
     objects = PublishedTagManager()
 
-    slug = django.db.models.TextField(
+    slug = django.db.models.SlugField(
         verbose_name="слаг",
-        help_text="Напишите Слаг",
+        help_text="Напишите слаг (макс кол-во символов 200)",
         max_length=200,
         unique=True,
     )
     name = django.db.models.TextField(
         max_length=150,
         verbose_name="название",
-        help_text="Напишите название товара",
+        help_text="Напишите название тега (макс кол-во символов 150, "
+        "название должно быть уникальным)",
         unique=True,
         validators=[validate_unique_normalized_name],
     )
@@ -106,19 +107,22 @@ class Tag(AbstractModel):
         null=True,
     )
 
-    def save(self, *args, **kwargs):
-        self.normalized_name = normalize_name(self.name)
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = "тег"
         verbose_name_plural = "теги"
 
+    def __str__(self):
+        return self.name[:15]
+
+    def save(self, *args, **kwargs):
+        self.normalized_name = normalize_name(self.name)
+        super().save(*args, **kwargs)
+
 
 class Category(AbstractModel):
-    slug = django.db.models.TextField(
+    slug = django.db.models.SlugField(
         verbose_name="слаг",
-        help_text="Напишите Слаг",
+        help_text="Напишите слаг (макс кол-во символов 200)",
         max_length=200,
         unique=True,
         validators=[
@@ -128,7 +132,7 @@ class Category(AbstractModel):
     weight = django.db.models.PositiveSmallIntegerField(
         verbose_name="вес",
         default=100,
-        help_text="Напишите Вес товара",
+        help_text="Напишите Вес товара (минимум 1, максимум 32767)",
         validators=[
             django.core.validators.MinValueValidator(1),
             django.core.validators.MaxValueValidator(32767),
@@ -137,7 +141,8 @@ class Category(AbstractModel):
     name = django.db.models.TextField(
         max_length=150,
         verbose_name="название",
-        help_text="Напишите название товара",
+        help_text="Напишите название категории (макс кол-во символов 150, "
+        "название должно быть уникальным)",
         unique=True,
         validators=[validate_unique_normalized_name],
     )
@@ -147,20 +152,24 @@ class Category(AbstractModel):
         null=True,
     )
 
-    def save(self, *args, **kwargs):
-        self.normalized_name = normalize_name(self.name)
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = "категория"
         verbose_name_plural = "категории"
+
+    def __str__(self):
+        return self.name[:15]
+
+    def save(self, *args, **kwargs):
+        self.normalized_name = normalize_name(self.name)
+        super().save(*args, **kwargs)
 
 
 class Item(AbstractModel):
     objects = ItemManager()
     text = CKEditor5Field(
         verbose_name="текст",
-        help_text="Напишите описание товара",
+        help_text="Напишите описание товара (должно содержать 'роскошно' или "
+        "'превосходно')",
         validators=[
             ValidateMustContain("роскошно", "превосходно"),
         ],
@@ -192,6 +201,13 @@ class Item(AbstractModel):
         null=True,
     )
 
+    class Meta:
+        verbose_name = "товар"
+        verbose_name_plural = "товары"
+
+    def __str__(self):
+        return self.name[:15]
+
     def get_main_image_300x300(self):
         if self.main_image and self.main_image.image:
             return get_thumbnail(self.main_image.image, "300x300", quality=51)
@@ -207,12 +223,8 @@ class Item(AbstractModel):
     main_image_tmb.short_description = "Превью"
     main_image_tmb.allow_tags = True
 
-    class Meta:
-        verbose_name = "товар"
-        verbose_name_plural = "товары"
 
-
-class MainImage(django.db.models.Model):
+class MainImage(AbstractImage):
     item = django.db.models.OneToOneField(
         Item,
         verbose_name="товар",
@@ -221,18 +233,12 @@ class MainImage(django.db.models.Model):
         related_name="main_image",
     )
 
-    image = django.db.models.ImageField(
-        "главное изображение",
-        upload_to="catalog/",
-        blank=True,
-    )
-
     class Meta:
         verbose_name = "главное изображение"
         verbose_name_plural = "главные изображения"
 
 
-class Images(django.db.models.Model):
+class GalleryImage(AbstractImage):
     item = django.db.models.ForeignKey(
         Item,
         verbose_name="товар",
@@ -241,12 +247,6 @@ class Images(django.db.models.Model):
         related_query_name="image",
     )
 
-    image = django.db.models.ImageField(
-        "доп. изображение",
-        upload_to="catalog/",
-        blank=True,
-    )
-
     class Meta:
         verbose_name = "доп. изображение"
-        verbose_name_plural = "доп. изображения"
+        verbose_name_plural = "галерея"

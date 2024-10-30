@@ -16,7 +16,7 @@ class MainImageInline(admin.TabularInline):
 
 
 class ImagesInline(admin.TabularInline):
-    model = catalog.models.Images
+    model = catalog.models.GalleryImage
     extra = 3
     verbose_name = "дополнительное изображение"
     verbose_name_plural = "дополнительные изображения"
