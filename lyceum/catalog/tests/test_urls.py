@@ -1,4 +1,5 @@
 from http import HTTPStatus
+
 from django.test import Client, TestCase
 from django.urls import NoReverseMatch, reverse
 from parameterized import parameterized
@@ -30,7 +31,6 @@ class StaticURLTest(TestCase):
             ("0lff9", HTTPStatus.NOT_FOUND),
             ("&hge59", HTTPStatus.NOT_FOUND),
             ("$h78", HTTPStatus.NOT_FOUND),
-
             (1, HTTPStatus.OK),
             (10, HTTPStatus.OK),
             (100, HTTPStatus.OK),
@@ -68,11 +68,9 @@ class StaticURLTest(TestCase):
             ("re", "$h78", HTTPStatus.NOT_FOUND),
             ("re", "01", HTTPStatus.NOT_FOUND),
             ("re", "010", HTTPStatus.NOT_FOUND),
-
             ("re", 1, HTTPStatus.OK),
             ("re", 10, HTTPStatus.OK),
             ("re", 100, HTTPStatus.OK),
-
             ("converter", -1, HTTPStatus.NOT_FOUND),
             ("converter", 1.5, HTTPStatus.NOT_FOUND),
             ("converter", -0, HTTPStatus.NOT_FOUND),
@@ -83,7 +81,6 @@ class StaticURLTest(TestCase):
             ("converter", "$h78", HTTPStatus.NOT_FOUND),
             ("converter", "01", HTTPStatus.NOT_FOUND),
             ("converter", "010", HTTPStatus.NOT_FOUND),
-
             ("converter", 1, HTTPStatus.OK),
             ("converter", 10, HTTPStatus.OK),
             ("converter", 100, HTTPStatus.OK),

@@ -1,8 +1,9 @@
 from django.db.models.query import QuerySet
 from django.test import Client, TestCase
 from django.urls import reverse
-from parameterized import parameterized
 import freezegun
+from parameterized import parameterized
+
 from catalog import models
 
 

@@ -13,5 +13,8 @@ class StaticURLTests(TestCase):
 
         response = Client().get(url)
 
-        self.assertEqual(response.status_code, HTTPStatus.OK,
-                         "ERROR-WRONG RESPONSE!")
+        self.assertEqual(
+            response.status_code,
+            HTTPStatus.OK,
+            "ERROR-WRONG RESPONSE!",
+        )

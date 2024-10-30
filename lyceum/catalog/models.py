@@ -8,7 +8,7 @@ from django_ckeditor_5.fields import CKEditor5Field
 from sorl.thumbnail import get_thumbnail
 
 from catalog.validators import ValidateMustContain
-from core.models import AbstractModel, AbstractImage
+from core.models import AbstractImage, AbstractModel
 
 
 __all__ = []
