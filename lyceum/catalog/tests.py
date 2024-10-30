@@ -8,7 +8,7 @@ from parameterized import parameterized
 from catalog import models
 
 
-__all__ = ["StaticURLTests", "ItemModelTest", "NormalizeNameTests"]
+__all__ = []
 
 
 class StaticURLTests(TestCase):

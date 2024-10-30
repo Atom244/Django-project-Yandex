@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from lyceum import middleware
 
-__all__ = ["StaticURLTests"]
+__all__ = []
 
 
 class StaticURLTests(TestCase):

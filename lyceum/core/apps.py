@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
-__all__ = ["CoreConfig"]
+__all__ = []
 
 
 class CoreConfig(AppConfig):

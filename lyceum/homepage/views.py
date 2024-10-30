@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 import catalog.models
 
-__all__ = ["home", "coffee"]
+__all__ = []
 
 
 def home(request):

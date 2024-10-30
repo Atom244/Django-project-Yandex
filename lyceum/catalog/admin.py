@@ -2,7 +2,7 @@ from django.contrib import admin
 
 import catalog.models
 
-__all__ = ["ItemAdmin"]
+__all__ = []
 
 admin.site.register(catalog.models.Tag)
 admin.site.register(catalog.models.Category)
