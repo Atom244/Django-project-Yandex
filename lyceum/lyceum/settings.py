@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fake_key")
 trigger_words = ("", "true", "yes", "1", "y", "t")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG_ENV = os.getenv("DJANGO_DEBUG", "True").lower()
+DEBUG_ENV = os.getenv("DJANGO_DEBUG", "False").lower()
 DEBUG = DEBUG_ENV in trigger_words
 
 ALLOW_REVERSE_ENV = os.getenv("DJANGO_ALLOW_REVERSE", "False").lower()
@@ -86,8 +86,8 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
-            "django.contrib.auth.password_validation."
-            "UserAttributeSimilarityValidator"
+            "django.contrib.auth.password_validation"
+            ".UserAttributeSimilarityValidator"
         ),
     },
     {
@@ -107,12 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "ru"
+LANGUAGE_CODE = "ru-ru"
 USE_I18N = True
 
 LANGUAGES = [
-    ("ru", _("Russian")),
-    ("en", _("English")),
+    ("ru-ru", _("Russian")),
+    ("en-uk", _("English")),
 ]
 
 LOCALE_PATHS = [
@@ -135,12 +135,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 if DEBUG:
-    INSTALLED_APPS += [
-        "debug_toolbar",
-    ]
-    MIDDLEWARE += [
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
-    ]
+    INSTALLED_APPS += ["debug_toolbar"]
+    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
     INTERNAL_IPS += ["127.0.0.1", "localhost"]
 
 MEDIA_ROOT = BASE_DIR / "media"
