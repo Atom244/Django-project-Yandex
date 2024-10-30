@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from django.test import Client, TestCase
 from django.urls import reverse
 
@@ -11,4 +13,5 @@ class StaticURLTests(TestCase):
 
         response = Client().get(url)
 
-        self.assertEqual(response.status_code, 200, "ERROR-WRONG RESPONSE!")
+        self.assertEqual(response.status_code, HTTPStatus.OK,
+                         "ERROR-WRONG RESPONSE!")

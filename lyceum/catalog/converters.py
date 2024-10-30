@@ -2,7 +2,7 @@ __all__ = ["PositiveNumConverter"]
 
 
 class PositiveNumConverter:
-    regex = r"0|0*[1-9][0-9]*"
+    regex = r"[1-9][0-9]*"
 
     def to_python(self, value):
         return str(value)

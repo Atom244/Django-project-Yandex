@@ -10,7 +10,7 @@ __all__ = []
 class StaticURLTests(TestCase):
     def test_home_page_endpoint(self):
         response = Client().get(reverse("homepage:home"))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_coffee(self):
         cache.clear()
