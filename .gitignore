@@ -1,10 +1,63 @@
-venv
-.vscode/
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+# Backup files # 
+*.bak 
+
+###
 .idea/
 __pycache__/
 **/__pycache__
 db.sqlite3
-.env
-/media/
-**/media/
+thumbs.db.
+
+# Compiled localization
 *.mo
+
+# Environments 
+.env 
+.venv 
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/ 
+
+# mkdocs documentation 
+/site 
+
+# mypy 
+.mypy_cache/ 
+
+# Sublime Text # 
+*.tmlanguage.cache 
+*.tmPreferences.cache 
+*.stTheme.cache 
+*.sublime-workspace 
+*.sublime-project 
+
+# sftp configuration file 
+sftp-config.json 
+
+# Package control specific files Package 
+Control.last-run 
+Control.ca-list 
+Control.ca-bundle 
+Control.system-ca-bundle 
+GitHub.sublime-settings 
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+
+# Mac
+.DS_Store
