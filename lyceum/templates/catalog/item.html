@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static thumbnail %}
+{% load i18n static thumbnail %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static "css/main.css" %}">
@@ -21,7 +21,7 @@
         <div class="row g-0">
           <div class="col-md-4">
             <img src={{ item.main_image.image.url }} class="img-fluid rounded-start" alt="...">
-            <a href="{{ item.main_image.image.url }}" download class="btn btn-light btn-sm" style="margin-left:5px;">скачать картинку</a>
+            <a href="{{ item.main_image.image.url }}" download class="btn btn-light btn-sm" style="margin-left:5px;">{% trans "скачать картинку" %}</a>
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -35,7 +35,7 @@
                                 {% thumbnail image.image "800x650" crop="center" as img %}
                                     <img src="{{ img.url }}" class="d-block w-100" alt="..."  style="border-radius:20px;">
                                 {% endthumbnail %}
-                                <a href="{{ image.image.url }}" download class="btn btn-light btn-sm" style="position: relative; z-index: 1; margin:5px;">скачать картинку</a>
+                                <a href="{{ image.image.url }}" download class="btn btn-light btn-sm" style="position: relative; z-index: 1; margin:5px;">{% trans "скачать картинку" %}</a>
                                 
                             </div>
                         {% endfor %}
@@ -49,7 +49,7 @@
                         <span class="visually-hidden">Следующий</span>
                     </button>
                 </div>
-                <a href="{% url "homepage:home" %}" class="btn btn-success" style="margin: 10px;">Купить</a>
+                <a href="{% url "homepage:home" %}" class="btn btn-success" style="margin: 10px;">{% trans "Купить" %}</a>
             </div>
           </div>
         </div>

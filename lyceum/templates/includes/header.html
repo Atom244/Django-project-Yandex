@@ -3,31 +3,31 @@
   <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
     {% load i18n %}
     
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a href="{% url "homepage:home" %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
       <img src="{% static "img/logo.svg" %}" alt="" width=7%>
       <span class="fs-4">{% trans "Продукты у Кота" %}</span>
     </a>
     {% with request.resolver_match.view_name as view_name %}
     <ul class="nav nav-pills">
       {% if request.user.is_staff and request.user.is_superuser %}
-      <li class="nav-item"><a class="badge bg-dark" style="margin:10px;" href={% url "admin:index" %}>{% trans "Админ" %}</a></li>
+        <li class="nav-item"><a class="badge bg-dark" style="margin:10px;" href={% url "admin:index" %}>{% trans "Админ" %}</a></li>
       {% endif %}
       {% if view_name == "homepage:home" %}
-      <li class="nav-item"><a class="nav-link active">{% trans "Главная" %}</a></li>
+        <li class="nav-item"><a class="nav-link active">{% trans "Главная" %}</a></li>
       {% else %}
-      <li class="nav-item"><a href="{% url "homepage:home" %}" class="nav-link">{% trans "Главная" %}</a></li>
+        <li class="nav-item"><a href="{% url "homepage:home" %}" class="nav-link">{% trans "Главная" %}</a></li>
       {% endif %}
 
       {% if view_name == "about:about" %}
-      <li class="nav-item"><a class="nav-link active">{% trans "О проекте" %}</a></li>
+        <li class="nav-item"><a class="nav-link active">{% trans "О проекте" %}</a></li>
       {% else %}
-      <li class="nav-item"><a href="{% url "about:about" %}" class="nav-link">{% trans "О проекте" %}</a></li>
+        <li class="nav-item"><a href="{% url "about:about" %}" class="nav-link">{% trans "О проекте" %}</a></li>
       {% endif %}
 
       {% if view_name == "catalog:item_list" %}
-      <li class="nav-item"><a class="nav-link active">{% trans "Список товаров" %}</a></li>
+        <li class="nav-item"><a class="nav-link active">{% trans "Список товаров" %}</a></li>
       {% else %}
-      <li class="nav-item"><a href="{% url "catalog:item_list" %}" class="nav-link">{% trans "Список товаров" %}</a></li>
+        <li class="nav-item"><a href="{% url "catalog:item_list" %}" class="nav-link">{% trans "Список товаров" %}</a></li>
       {% endif %}
       <form action="{% url 'set_language' %}" method="post" class="language-switcher">
         {% csrf_token %}

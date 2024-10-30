@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 20:09+0300\n"
+"POT-Creation-Date: 2024-10-30 16:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,53 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\lyceum\settings.py:114
+msgid "Russian"
+msgstr "Russian"
+
+#: .\lyceum\settings.py:115
+msgid "English"
+msgstr "English"
+
+#: .\templates\about\about.html:7 .\templates\includes\header.html:22
+#: .\templates\includes\header.html:24
+msgid "О проекте"
+msgstr "About"
+
+#: .\templates\catalog\item.html:24 .\templates\catalog\item.html:38
+msgid "скачать картинку"
+msgstr "download image"
+
+#: .\templates\catalog\item.html:52
+msgid "Купить"
+msgstr "Buy"
+
+#: .\templates\homepage\main.html:6 .\templates\includes\header.html:16
+#: .\templates\includes\header.html:18
+msgid "Главная"
+msgstr "Home"
+
 #: .\templates\includes\header.html:8
 msgid "Продукты у Кота"
 msgstr "Products at the Cat's"
 
-#: .\templates\includes\header.html:13 .\templates\includes\header.html:15
-msgid "Главная"
-msgstr "Home"
+#: .\templates\includes\header.html:13
+msgid "Админ"
+msgstr "Admin"
 
-#: .\templates\includes\header.html:19 .\templates\includes\header.html:21
-msgid "О проекте"
-msgstr "About"
-
-#: .\templates\includes\header.html:25 .\templates\includes\header.html:27
+#: .\templates\includes\header.html:28 .\templates\includes\header.html:30
 msgid "Список товаров"
 msgstr "Product List"
 
-#: .\templates\includes\header.html:38
+#: .\templates\includes\header.html:41
 msgid "Английский"
 msgstr "English"
 
-#: .\templates\includes\header.html:40
+#: .\templates\includes\header.html:43
 msgid "Русский"
 msgstr "Russian"
+
+#: .\templates\includes\item_card.html:14
+msgid "Подробнее"
+msgstr "More"

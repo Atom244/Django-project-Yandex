@@ -237,6 +237,9 @@ class MainImage(AbstractImage):
         verbose_name = "главное изображение"
         verbose_name_plural = "главные изображения"
 
+    def __str__(self):
+        return f"Главное изображение для {self.item.name}"
+
 
 class GalleryImage(AbstractImage):
     item = django.db.models.ForeignKey(
@@ -250,3 +253,6 @@ class GalleryImage(AbstractImage):
     class Meta:
         verbose_name = "доп. изображение"
         verbose_name_plural = "галерея"
+
+    def __str__(self):
+        return f"Доп. изображение для {self.item.name}"
