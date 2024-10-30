@@ -147,13 +147,13 @@ cd lyceum
 На Linux:
 
 ```bash
-python3 lyceum/manage.py loaddata data.json
+python3 manage.py loaddata data.json
 ```
 
 На Windows:
 
 ```bash
-python lyceum/manage.py loaddata data.json
+python manage.py loaddata data.json
 ```
 
 - ### Создание супер-пользователя (если будете заходить в админку)
