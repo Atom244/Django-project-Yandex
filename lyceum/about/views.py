@@ -5,5 +5,4 @@ __all__ = ["description"]
 
 def description(request):
     template = "about/about.html"
-    context = {}
-    return render(request, template, context)
+    return render(request, template)
