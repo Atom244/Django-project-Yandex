@@ -1,26 +1,127 @@
+# Проект по специализации Яндекс 'Разработка веб-приложений на Django'
+
 ![pipeline status](https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187/badges/main/pipeline.svg)
 
-### Структура БД проекта:
-![ER](ER.jpg)
- 
-> ##### Требования для нормального запуска проекта: Python версии 3.10+
+> Требования для нормального запуска проекта: Python версии 3.10+
+
+## Запуск проекта в dev-режиме
+
+- ### Клонирование репозитория на свой компьютер
+
+```bash
+git clone https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187
+```
+
+- ### Создание виртуального окружения
+
+#### Перед созданием venv перейдите в склонированную (корневую) папку проекта - `cd 261067-almasvildanoff-course-1187`
+
+На Linux:
+
+```bash
+python3 -m venv venv
+```
+
+На Windows:
+
+```bash
+python -m venv venv
+```
+
+- ### Запуск виртуального окружения
+
+На Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+На Linux
+
+```bash
+source venv/bin/activate
+```
+
+- ### Установка зависимостей
+
+#### Основные
+
+На Linux:
+
+```bash
+pip3 install -r requirements/prod.txt
+```
+
+На Windows:
+
+```bash
+pip install -r requirements/prod.txt
+```
+
+#### Для тестов
+
+На Linux:
+
+```bash
+pip3 install -r requirements/test.txt
+```
+
+На Windows:
+
+```bash
+pip install -r requirements/test.txt
+```
+
+#### Для разработки
+
+На Linux:
+
+```bash
+pip3 install -r requirements/dev.txt
+```
+
+На Windows:
+
+```bash
+pip install -r requirements/dev.txt
+```
+
+- ### Создание файла .env для хранения переменных окружения
+
+#### Скопируйте данные из `.env.example`(находится в корне репозитория) и запишите их в файл `.env`
+
+На Linux:
+
+```bash
+cp .env.example .env
+```
+
+На Windows:
+
+```bash
+copy .env.example .env
+```
 
 - ### Проект поддерживает локализацию
-  ##### Шаги для настройки локализации:
 
-1. Убедитесь, что в `settings.py` включены локализация и языки; присутствует ли `gettext`:
+#### Шаги для настройки локализации
+
+1. Убедитесь, что в `settings.py`(по пути `склонированная директория/lyceum/lyceum`) включены локализация и языки; присутствует ли `gettext`:
 
     ```python
-    LANGUAGE_CODE = 'ru'
+    LANGUAGE_CODE = "ru"
     LANGUAGES = [
-        ('ru', 'Russian'),
-        ('en', 'English'),
+        ("ru", "Russian"),
+        ("en", "English"),
     ]
     ```
+
    - Установка gettext на Linux:
+
     ```bash
     sudo apt install gettext
     ```
+
     - На [Windows](https://mlocati.github.io/articles/gettext-iconv-windows.html)
 
 2. Для генерации файлов перевода `(в проекте они уже сгенерированы)` используйте команду:
@@ -35,131 +136,56 @@
     django-admin compilemessages
     ```
 
-- ### База данных:
-  В корне проекта содержится демонстрационная база данных `db_example.sqlite3`, которая совпадает с фикстурами
+- ### Переход к папке lyceum
 
-## Запуск проекта в dev-режиме:
+```bash
+cd lyceum
+```
 
-- ### Клонирование репозитория на свой компьютер:
+- ### Подготовка базы данных по данным из фикстур
 
-#### <command>
+На Linux:
 
-    git clone https://gitlab.crja72.ru/django/2024/autumn/course/students/261067-almasvildanoff-course-1187
+```bash
+python3 lyceum/manage.py loaddata data.json
+```
 
-#### </command>
+На Windows:
 
-- ### Создание виртуального окружения:
+```bash
+python lyceum/manage.py loaddata data.json
+```
 
-#### <command>
+- ### Создание супер-пользователя (если будете заходить в админку)
 
-    python -m venv venv
+На Linux:
 
-#### </command>
+```bash
+python3 manage.py createsuperuser
+```
 
-- ### Запуск виртуального окружения:
+На Windows:
 
-#### На Windows:
+```bash
+python manage.py createsuperuser
+```
 
-#### <command>
+- ### Запуск проекта
 
-    venv\Scripts\activate
+#### Запущенный проект вы можете открыть в браузере по адресу `http://127.0.0.1:8000`
 
-#### </command>
+На Linux:
 
-#### На Linux:
+```bash
+python3 manage.py runserver
+```
 
-#### <command>
+На Windows:
 
-    source venv/bin/activate
+```bash
+python manage.py runserver
+```
 
-#### </command>
+### Структура БД проекта
 
-- ### Установка зависимостей:
-
-#### Основные:
-
-#### <command>
-
-    pip install -r requirements/prod.txt
-
-#### </command>
-
-#### Для тестов:
-
-#### <command>
-
-    pip install -r requirements/test.txt
-
-#### </command>
-
-#### Для разработки:
-
-#### <command>
-
-    pip install -r requirements/dev.txt
-
-#### </command>
-
-- ### Создание файла .env для хранения переменных окружения:
-
-#### Создайте файл **.env**:
-
-#### На Linux:
-
-#### <command>
-
-    touch .env
-
-#### </command>
-
-#### На Windows:
-
-#### <command>
-
-    echo. > .env
-
-#### </command>
-
-#### Запишите в файл Env следующие данные:
-
-#### На Linux:
-
-#### <command>
-
-    cat <<EOF > .env
-    DJANGO_SECRET_KEY = '<secret key>'
-    DJANGO_ALLOWED_HOSTS = '<allowed hosts>'
-    DJANGO_DEBUG = '<bool>'
-    DJANGO_ALLOW_REVERSE = '<bool>'
-    EOF
-
-#### </command>
-
-#### На Windows:
-
-#### <command>
-
-    echo DJANGO_SECRET_KEY = '^<secret key^>' >> .env
-    echo DJANGO_ALLOWED_HOSTS = '^<allowed hosts^>' >> .env
-    echo DJANGO_DEBUG = '^<bool^>' >> .env
-    echo DJANGO_ALLOW_REVERSE = '^<bool^>' >> .env
-
-#### </command>
-
-> ###### Также вы могли скопировать данные для примера из **.env.example** в **.env**
-
-- ### Переход к папке lyceum:
-
-#### <command>
-
-    cd lyceum
-
-#### </command>
-
-- ### Запуск проекта:
-
-#### <command>
-
-    python manage.py runserver
-
-#### </command>
+![ER](ER.jpg)
