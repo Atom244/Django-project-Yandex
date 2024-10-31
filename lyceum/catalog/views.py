@@ -35,10 +35,6 @@ def item_detail(request, pk):
     return render(request, template, context)
 
 
-def item_num(request, num):
-    return HttpResponse(num)
-
-
 def catalog_new(request):
     template = "catalog/item_list.html"
     end_date = django.utils.timezone.now()
