@@ -7,5 +7,5 @@ __all__ = []
 app_name = "download"
 
 urlpatterns = [
-    path("<path:file_path>/", views.download_image, name="download_image"),
+    path("<path:file_path>/", views.download_image, name="download-image"),
 ]

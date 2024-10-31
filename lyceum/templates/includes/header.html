@@ -24,10 +24,10 @@
         <li class="nav-item"><a href="{% url "about:about" %}" class="nav-link">{% trans "О проекте" %}</a></li>
       {% endif %}
 
-      {% if view_name == "catalog:item_list" %}
+      {% if view_name == "catalog:item-list" %}
         <li class="nav-item"><a class="nav-link active">{% trans "Список товаров" %}</a></li>
       {% else %}
-        <li class="nav-item"><a href="{% url "catalog:item_list" %}" class="nav-link">{% trans "Список товаров" %}</a></li>
+        <li class="nav-item"><a href="{% url "catalog:item-list" %}" class="nav-link">{% trans "Список товаров" %}</a></li>
       {% endif %}
       <form action="{% url 'set_language' %}" method="post" class="language-switcher">
         {% csrf_token %}

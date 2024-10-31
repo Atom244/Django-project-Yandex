@@ -11,6 +11,6 @@
                 <span class="badge bg-success rounded-pill">{{ tag.name }}</span>
             {% endfor %}
         </div>
-      <a href="{% url "catalog:item_detail" item.pk %}" class="btn btn-secondary">{% trans "Подробнее" %}</a>
+      <a href="{% url "catalog:item-detail" item.pk %}" class="btn btn-secondary">{% trans "Подробнее" %}</a>
     </div>
 </div>

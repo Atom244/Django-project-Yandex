@@ -100,7 +100,7 @@ class ContextTests(TestCase):
     @parameterized.expand(
         [
             ("homepage:home"),
-            ("catalog:item_list"),
+            ("catalog:item-list"),
         ],
     )
     def test_excluding_bad_attributes_in_querysets(self, app_url):
@@ -117,7 +117,7 @@ class ContextTests(TestCase):
     @parameterized.expand(
         [
             ("homepage:home", 1),
-            ("catalog:item_list", 2),
+            ("catalog:item-list", 2),
         ],
     )
     def test_published_item_count(self, app_url, correct_count):

@@ -9,7 +9,7 @@ __all__ = []
 
 class StaticURLTest(TestCase):
     def test_catalog_page_endpoint(self):
-        norm_url = reverse("catalog:item_list")
+        norm_url = reverse("catalog:item-list")
         normal_catalog_check = Client().get(norm_url)
         self.assertEqual(
             normal_catalog_check.status_code,
@@ -43,7 +43,7 @@ class StaticURLTest(TestCase):
     )
     def test_catalog(self, parameter, code):
         try:
-            url = reverse("catalog:item_detail", kwargs={"pk": parameter})
+            url = reverse("catalog:item-detail", kwargs={"pk": parameter})
             response = Client().get(url)
 
             self.assertEqual(
