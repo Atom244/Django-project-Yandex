@@ -1,5 +1,3 @@
-import re
-
 import django.core.exceptions
 import django.core.validators
 import django.db.models
@@ -8,51 +6,14 @@ from django_ckeditor_5.fields import CKEditor5Field
 from sorl.thumbnail import get_thumbnail
 
 from catalog.validators import ValidateMustContain
-from core.models import AbstractImage, AbstractModel
+from core.models import (
+    AbstractImage,
+    AbstractModel,
+    AbstractModelNormalizedName,
+)
 
 
 __all__ = []
-
-
-def normalize_name(name):
-    name = name.lower()
-
-    translation_table = str.maketrans(
-        {
-            "а": "a",
-            "о": "o",
-            "е": "e",
-            "р": "p",
-            "с": "c",
-            "у": "y",
-            "х": "x",
-            "k": "к",
-            "A": "a",
-            "O": "o",
-            "E": "e",
-            "P": "p",
-            "C": "c",
-            "Y": "y",
-            "X": "x",
-            "K": "к",
-        },
-    )
-
-    return re.sub(r"[^\w]", "", name.translate(translation_table))
-
-
-def validate_unique_normalized_name(value):
-    normalized_value = normalize_name(value)
-
-    if Tag.objects.filter(normalized_name=normalized_value).exists():
-        raise django.core.exceptions.ValidationError(
-            "Тег с похожим именем " f"{value} уже существует.",
-        )
-
-    if Category.objects.filter(normalized_name=normalized_value).exists():
-        raise django.core.exceptions.ValidationError(
-            "Категория с похожим именем " f"{value} уже существует.",
-        )
 
 
 class ItemManager(django.db.models.Manager):
@@ -84,7 +45,7 @@ class PublishedTagManager(django.db.models.Manager):
         return self.get_queryset().filter(is_published=True)
 
 
-class Tag(AbstractModel):
+class Tag(AbstractModel, AbstractModelNormalizedName):
     objects = PublishedTagManager()
 
     slug = django.db.models.SlugField(
@@ -99,12 +60,6 @@ class Tag(AbstractModel):
         help_text="Напишите название тега (макс кол-во символов 150, "
         "название должно быть уникальным)",
         unique=True,
-        validators=[validate_unique_normalized_name],
-    )
-    normalized_name = django.db.models.CharField(
-        max_length=150,
-        editable=False,
-        null=True,
     )
 
     class Meta:
@@ -114,12 +69,8 @@ class Tag(AbstractModel):
     def __str__(self):
         return self.name[:15]
 
-    def save(self, *args, **kwargs):
-        self.normalized_name = normalize_name(self.name)
-        super().save(*args, **kwargs)
 
-
-class Category(AbstractModel):
+class Category(AbstractModel, AbstractModelNormalizedName):
     slug = django.db.models.SlugField(
         verbose_name="слаг",
         help_text="Напишите слаг (макс кол-во символов 200)",
@@ -144,12 +95,6 @@ class Category(AbstractModel):
         help_text="Напишите название категории (макс кол-во символов 150, "
         "название должно быть уникальным)",
         unique=True,
-        validators=[validate_unique_normalized_name],
-    )
-    normalized_name = django.db.models.CharField(
-        max_length=150,
-        editable=False,
-        null=True,
     )
 
     class Meta:
@@ -158,10 +103,6 @@ class Category(AbstractModel):
 
     def __str__(self):
         return self.name[:15]
-
-    def save(self, *args, **kwargs):
-        self.normalized_name = normalize_name(self.name)
-        super().save(*args, **kwargs)
 
 
 class Item(AbstractModel):

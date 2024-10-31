@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-30 16:49+0300\n"
+"POT-Creation-Date: 2024-10-31 15:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\catalog\views.py:18
+msgid "Каталог"
+msgstr "Catalog"
+
+#: .\catalog\views.py:53
+msgid "Новинки"
+msgstr "New"
+
+#: .\catalog\views.py:68
+msgid "Пятница"
+msgstr "Friday"
+
+#: .\catalog\views.py:93
+msgid "Непроверенное"
+msgstr "Unverified"
 
 #: .\lyceum\settings.py:114
 msgid "Russian"
@@ -30,6 +46,10 @@ msgstr "English"
 #: .\templates\includes\header.html:24
 msgid "О проекте"
 msgstr "About"
+
+#: .\templates\catalog\item.html:7
+msgid "Товар"
+msgstr "Product"
 
 #: .\templates\catalog\item.html:24 .\templates\catalog\item.html:38
 msgid "скачать картинку"

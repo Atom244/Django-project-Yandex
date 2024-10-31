@@ -4,6 +4,7 @@ import django.db.models
 from django.http import HttpResponse
 import django.shortcuts
 from django.shortcuts import render
+from django.utils.translation import gettext_lazy as _
 
 import catalog.models
 
@@ -14,7 +15,7 @@ __all__ = []
 def item_list(request):
     template = "catalog/item_list.html"
     items = catalog.models.Item.objects.published().order_by("name")
-    title = "Каталог"
+    title = _("Каталог")
     context = {
         "items": items,
         "title": title,
@@ -49,7 +50,7 @@ def catalog_new(request):
         )
         .order_by("?")
     )[:5]
-    title = "Новинки"
+    title = _("Новинки")
     context = {
         "items": items,
         "title": title,
@@ -64,7 +65,7 @@ def catalog_changed_on_friday(request):
             updated_at__week_day=6,
         )
     )[:5]
-    title = "Пятница"
+    title = _("Пятница")
     context = {
         "items": items,
         "title": title,
@@ -89,7 +90,7 @@ def catalog_unverified(request):
             time_diff__lte=datetime.timedelta(seconds=1),
         )
     )
-    title = "Непроверенное"
+    title = _("Непроверенное")
     context = {
         "items": items,
         "title": title,
