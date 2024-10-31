@@ -19,6 +19,6 @@ lint:
 test:
   stage: test
   script:
-    - pip install -r requirements/test.txt
+    - pip install -r requirements/test.txt -r requirements/prod.txt
     - cd lyceum
     - python manage.py test
