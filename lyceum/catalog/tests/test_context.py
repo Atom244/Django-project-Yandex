@@ -6,6 +6,8 @@ from parameterized import parameterized
 
 from catalog import models
 
+__all__ = []
+
 
 class ContextTests(TestCase):
     @classmethod

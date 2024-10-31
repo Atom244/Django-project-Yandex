@@ -3,7 +3,7 @@ import re
 from django.conf import settings
 from django.core.cache import cache
 
-__all__ = ["ReverseWordMiddleware"]
+__all__ = []
 
 
 class ReverseWordMiddleware:

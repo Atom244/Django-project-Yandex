@@ -2,7 +2,7 @@ import re
 
 from django.core.exceptions import ValidationError
 
-__all__ = ["ValidateMustContain"]
+__all__ = []
 
 
 class ValidateMustContain:

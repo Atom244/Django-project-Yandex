@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.test import Client, TestCase
 from django.urls import reverse
 
-__all__ = ["StaticURLTests"]
+__all__ = []
 
 
 class StaticURLTests(TestCase):

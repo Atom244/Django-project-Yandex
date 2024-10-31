@@ -1,6 +1,6 @@
 import django.db.models
 
-__all__ = ["AbstractModel"]
+__all__ = []
 
 
 class AbstractModel(django.db.models.Model):

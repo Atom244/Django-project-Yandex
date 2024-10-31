@@ -4,6 +4,8 @@ from django.test import Client, TestCase
 from django.urls import NoReverseMatch, reverse
 from parameterized import parameterized
 
+__all__ = []
+
 
 class StaticURLTest(TestCase):
     def test_catalog_page_endpoint(self):

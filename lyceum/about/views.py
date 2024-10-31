@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-__all__ = ["description"]
+__all__ = []
 
 
 def description(request):
