@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 from django_ckeditor_5.fields import CKEditor5Field
 from sorl.thumbnail import get_thumbnail
 
+from catalog.managers import ItemManager, PublishedTagManager
 from catalog.validators import ValidateMustContain
 from core.models import (
     AbstractImage,
@@ -14,35 +15,6 @@ from core.models import (
 
 
 __all__ = []
-
-
-class ItemManager(django.db.models.Manager):
-    def published(self):
-        return (
-            self.get_queryset()
-            .filter(is_published=True, category__is_published=True)
-            .select_related("category", "main_image")
-            .prefetch_related(
-                django.db.models.Prefetch(
-                    "tags",
-                    queryset=Tag.objects.published().defer("is_published"),
-                ),
-            )
-            .only(
-                "name",
-                "text",
-                "category__name",
-                "main_image__image",
-            )
-        )
-
-    def on_main(self):
-        return self.published().filter(is_on_main=True).order_by("name")
-
-
-class PublishedTagManager(django.db.models.Manager):
-    def published(self):
-        return self.get_queryset().filter(is_published=True)
 
 
 class Tag(AbstractModel, AbstractModelNormalizedName):
