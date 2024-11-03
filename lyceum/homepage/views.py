@@ -30,6 +30,7 @@ def echo(request):
             "form": form,
         }
         return render(request, template, context)
+
     return HttpResponseNotAllowed(["POST"])
 
 
@@ -43,4 +44,5 @@ def echo_submit(request):
                 content_type="text/plain; charset=utf-8",
                 charset="utf-8",
             )
+
     return HttpResponseNotAllowed(["POST"])

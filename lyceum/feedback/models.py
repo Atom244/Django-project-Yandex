@@ -1,5 +1,7 @@
 import django.db.models
 
+__all__ = []
+
 
 class Feedback(django.db.models.Model):
     name = django.db.models.TextField(
@@ -21,7 +23,7 @@ class Feedback(django.db.models.Model):
         null=True,
     )
 
-    mail = django.db.models.TextField(
+    mail = django.db.models.EmailField(
         "почта",
         help_text="Электронный адрес отправителя",
     )

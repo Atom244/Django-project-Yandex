@@ -59,3 +59,33 @@ class FeedbackTests(django.test.TestCase):
             response,
             django.urls.reverse("feedback:feedback"),
         )
+
+    def test_correct_data_form_submit(self):
+        form_data = {
+            "text": "Good text",
+            "mail": "good@mail.ru",
+            "name": "Test Name",
+        }
+        form = feedback.forms.FeedbackForm(form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_incorrect_data_form_submit(self):
+        form_data = {
+            "text": "Bad text",
+            "mail": "a@a.a",
+            "name": "bad name",
+        }
+        form = feedback.forms.FeedbackForm(form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn("Некорректный e-mail адрес", form.errors["mail"])
+
+    def test_empty_fields(self):
+        form_data = {
+            "text": "",
+            "mail": "",
+            "name": "",
+        }
+        form = feedback.forms.FeedbackForm(form_data)
+        self.assertFalse(form.is_valid())
+        self.assertTrue(form.has_error("mail"))
+        self.assertTrue(form.has_error("text"))

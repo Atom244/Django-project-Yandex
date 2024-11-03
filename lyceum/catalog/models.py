@@ -13,7 +13,6 @@ from core.models import (
     AbstractModelNormalizedName,
 )
 
-
 __all__ = []
 
 
@@ -22,14 +21,14 @@ class Tag(AbstractModel, AbstractModelNormalizedName):
 
     slug = django.db.models.SlugField(
         verbose_name="слаг",
-        help_text="Напишите слаг (макс кол-во символов 200)",
+        help_text="Напишите слаг (макс. кол-во символов 200)",
         max_length=200,
         unique=True,
     )
     name = django.db.models.TextField(
         max_length=150,
         verbose_name="название",
-        help_text="Напишите название тега (макс кол-во символов 150, "
+        help_text="Напишите название тега (макс. кол-во символов 150, "
         "название должно быть уникальным)",
         unique=True,
     )
@@ -45,7 +44,7 @@ class Tag(AbstractModel, AbstractModelNormalizedName):
 class Category(AbstractModel, AbstractModelNormalizedName):
     slug = django.db.models.SlugField(
         verbose_name="слаг",
-        help_text="Напишите слаг (макс кол-во символов 200)",
+        help_text="Напишите слаг (макс. кол-во символов 200)",
         max_length=200,
         unique=True,
         validators=[
@@ -64,7 +63,7 @@ class Category(AbstractModel, AbstractModelNormalizedName):
     name = django.db.models.TextField(
         max_length=150,
         verbose_name="название",
-        help_text="Напишите название категории (макс кол-во символов 150, "
+        help_text="Напишите название категории (макс. кол-во символов 150, "
         "название должно быть уникальным)",
         unique=True,
     )
@@ -124,6 +123,7 @@ class Item(AbstractModel):
     def get_main_image_300x300(self):
         if self.main_image and self.main_image.image:
             return get_thumbnail(self.main_image.image, "300x300", quality=51)
+
         return "Нет изображения"
 
     def main_image_tmb(self):
@@ -131,6 +131,7 @@ class Item(AbstractModel):
             return mark_safe(
                 f"<img src='{self.main_image.image.url}' width='50'>",
             )
+
         return "Нет изображения"
 
     main_image_tmb.short_description = "Превью"

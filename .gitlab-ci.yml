@@ -8,7 +8,7 @@ lint:
   stage: lint
   script:
     - pip install --upgrade pip
-    - pip install flake8 pep8-naming flake8-import-order flake8-quotes
+    - pip install flake8 pep8-naming flake8-import-order flake8-quotes flake8-expression-complexity flake8-dunder-all
     - flake8 --config=.flake8 .
     - black --check .
   only:

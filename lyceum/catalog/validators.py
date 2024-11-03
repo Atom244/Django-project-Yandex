@@ -14,6 +14,7 @@ class ValidateMustContain:
             pattern = rf"(?<!\w){word}(?!\w)"
             if re.search(pattern, value, re.IGNORECASE):
                 return
+
         raise ValidationError(
             "Текст должен содержать одно из следующих слов: "
             f"{', '.join(self.required_words)}.",

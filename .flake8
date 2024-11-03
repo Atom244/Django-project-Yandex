@@ -4,5 +4,5 @@ multiline-quotes = "
 docstring-quotes = """
 import-order-style = google
 application-import-names = lyceum, about, catalog, homepage, core, download, feedback
-exclude = */migrations/
+exclude = */migrations/ manage.py
 max-line-length = 79
