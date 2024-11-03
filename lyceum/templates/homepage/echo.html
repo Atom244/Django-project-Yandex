@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+echo
+{% endblock %}
+
+{% block content %}
+<h1>Echo</h1>
+<form action="{% url 'homepage:echo-submit' %}" method="post">
+  {% csrf_token %}
+  <div class="mx-1 my-2">
+    {{ form.as_p }}
+  </div>
+  <input type="submit" class="btn btn-primary mb-2">
+</form>
+{% endblock %}

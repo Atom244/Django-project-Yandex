@@ -26,6 +26,7 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1").split(
 )
 
 INSTALLED_APPS = [
+    "feedback.apps.FeedbackConfig",
     "download.apps.DownloadConfig",
     "core.apps.CoreConfig",
     "about.apps.AboutConfig",
@@ -174,3 +175,7 @@ CKEDITOR_5_CONFIGS = {
 }
 
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
+
+EMAIL_ADDRESS = os.getenv("DJANGO_MAIL", "1@examplemail.com")
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "send_mail"

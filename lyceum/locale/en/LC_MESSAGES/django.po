@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 15:15+0300\n"
+"POT-Creation-Date: 2024-11-03 14:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,23 +22,23 @@ msgstr ""
 msgid "Каталог"
 msgstr "Catalog"
 
-#: .\catalog\views.py:53
+#: .\catalog\views.py:53 .\templates\catalog\item_list.html:15
 msgid "Новинки"
 msgstr "New"
 
-#: .\catalog\views.py:68
+#: .\catalog\views.py:68 .\templates\catalog\item_list.html:16
 msgid "Пятница"
 msgstr "Friday"
 
-#: .\catalog\views.py:93
+#: .\catalog\views.py:93 .\templates\catalog\item_list.html:17
 msgid "Непроверенное"
 msgstr "Unverified"
 
-#: .\lyceum\settings.py:114
+#: .\lyceum\settings.py:115
 msgid "Russian"
 msgstr "Russian"
 
-#: .\lyceum\settings.py:115
+#: .\lyceum\settings.py:116
 msgid "English"
 msgstr "English"
 
@@ -59,6 +59,10 @@ msgstr "download image"
 msgid "Купить"
 msgstr "Buy"
 
+#: .\templates\catalog\item_list.html:27
+msgid "Список пуст :("
+msgstr "The list is empty :("
+
 #: .\templates\homepage\main.html:6 .\templates\includes\header.html:16
 #: .\templates\includes\header.html:18
 msgid "Главная"
@@ -73,14 +77,18 @@ msgid "Админ"
 msgstr "Admin"
 
 #: .\templates\includes\header.html:28 .\templates\includes\header.html:30
+msgid "Отзыв"
+msgstr "Feedback"
+
+#: .\templates\includes\header.html:34 .\templates\includes\header.html:36
 msgid "Список товаров"
 msgstr "Product List"
 
-#: .\templates\includes\header.html:41
+#: .\templates\includes\header.html:47
 msgid "Английский"
 msgstr "English"
 
-#: .\templates\includes\header.html:43
+#: .\templates\includes\header.html:49
 msgid "Русский"
 msgstr "Russian"
 

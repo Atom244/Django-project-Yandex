@@ -24,6 +24,12 @@
         <li class="nav-item"><a href="{% url "about:about" %}" class="nav-link">{% trans "О проекте" %}</a></li>
       {% endif %}
 
+      {% if view_name == "feedback:feedback" %}
+        <li class="nav-item"><a class="nav-link active">{% trans "Отзыв" %}</a></li>
+      {% else %}
+        <li class="nav-item"><a href="{% url "feedback:feedback" %}" class="nav-link">{% trans "Отзыв" %}</a></li>
+      {% endif %}
+
       {% if view_name == "catalog:item-list" %}
         <li class="nav-item"><a class="nav-link active">{% trans "Список товаров" %}</a></li>
       {% else %}

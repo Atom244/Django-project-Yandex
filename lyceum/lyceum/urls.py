@@ -10,6 +10,7 @@ urlpatterns = [
     path("about/", include("about.urls")),
     path("catalog/", include("catalog.urls")),
     path("download/", include("download.urls")),
+    path("feedback/", include("feedback.urls")),
     path("admin/", admin.site.urls),
 ]
 

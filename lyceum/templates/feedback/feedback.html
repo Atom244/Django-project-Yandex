@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Форма обратной связи
+{% endblock %}
+
+{% block content %}
+<h1>Форма обратной связи</h1>
+
+{% if messages %}
+<div class="my-2 mx-auto">
+  {% for message in messages %}
+  <div class="alert alert-warning my-1">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <div class="mx-1 my-2">
+    <div class="my-3">
+      {{ form.as_p }}
+    </div>
+  </div>
+  <input type="submit" class="btn btn-primary mb-2">
+</form>
+{% endblock %}
