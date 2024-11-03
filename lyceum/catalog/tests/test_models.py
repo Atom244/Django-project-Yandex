@@ -70,7 +70,7 @@ class ItemModelTest(TestCase):
 
         with self.assertRaises(
             ValidationError,
-            msg="test_custom_validator_negative down " f"слово: {parameter}",
+            msg=f"test_custom_validator_negative down слово: {parameter}",
         ):
             self.item = models.Item(
                 name="Тестовый товар",
