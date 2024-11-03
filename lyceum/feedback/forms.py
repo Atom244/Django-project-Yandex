@@ -37,4 +37,4 @@ class FeedbackForm(django.forms.ModelForm):
 
     class Meta:
         model = feedback.models.Feedback
-        exclude = ["name", "text", "mail", "created_on"]
+        exclude = ["name", "text", "mail", "created_on", "status"]

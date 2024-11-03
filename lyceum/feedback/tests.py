@@ -89,3 +89,37 @@ class FeedbackTests(django.test.TestCase):
         self.assertFalse(form.is_valid())
         self.assertTrue(form.has_error("mail"))
         self.assertTrue(form.has_error("text"))
+
+    def test_save_correct_feedback_form_in_model(self):
+        form_data = {
+            "text": "some text",
+            "mail": "test@mail.com",
+            "name": "Some Name",
+        }
+        count = feedback.models.Feedback.objects.count()
+        django.test.Client().post(
+            django.urls.reverse("feedback:feedback"),
+            data=form_data,
+            follow=True,
+        )
+        self.assertEqual(
+            feedback.models.Feedback.objects.count(),
+            count + 1,
+        )
+
+    def test_save_incorrect_feedback_form_in_model(self):
+        form_data = {
+            "text": "some text",
+            "mail": "l@mY.p",
+            "name": "Some Name",
+        }
+        count = feedback.models.Feedback.objects.count()
+        django.test.Client().post(
+            django.urls.reverse("feedback:feedback"),
+            data=form_data,
+            follow=True,
+        )
+        self.assertEqual(
+            feedback.models.Feedback.objects.count(),
+            count,
+        )
