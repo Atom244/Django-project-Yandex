@@ -7,6 +7,25 @@ import feedback.models
 __all__ = []
 
 
+class MultipleFileInput(django.forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+
+class MultipleFileField(django.forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput())
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        single_file_clean = super().clean
+        if isinstance(data, (list, tuple)):
+            result = [single_file_clean(d, initial) for d in data]
+        else:
+            result = [single_file_clean(data, initial)]
+
+        return result
+
+
 class FeedbackForm(django.forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,6 +54,19 @@ class FeedbackForm(django.forms.ModelForm):
         ],
     )
 
+    file_field = MultipleFileField(
+        label="Загрузить файлы",
+        help_text="Вы можете загрузить несколько файлов",
+    )
+
     class Meta:
         model = feedback.models.Feedback
-        exclude = ["name", "text", "mail", "created_on", "status"]
+        exclude = [
+            "name",
+            "text",
+            "mail",
+            "files",
+            "created_on",
+            "status",
+            "personal_data",
+        ]

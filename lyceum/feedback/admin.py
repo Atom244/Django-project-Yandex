@@ -10,16 +10,15 @@ __all__ = []
 @admin.register(feedback.models.Feedback)
 class FeedbackModelAdmin(admin.ModelAdmin):
     list_display = (
-        feedback.models.Feedback.name.field.name,
+        feedback.models.Feedback.text.field.name,
         feedback.models.Feedback.status.field.name,
     )
 
-    list_display_links = (feedback.models.Feedback.name.field.name,)
+    list_display_links = (feedback.models.Feedback.text.field.name,)
 
     readonly_fields = (
-        feedback.models.Feedback.name.field.name,
         feedback.models.Feedback.text.field.name,
-        feedback.models.Feedback.mail.field.name,
+        feedback.models.Feedback.created_on.field.name,
     )
 
     list_editable = (feedback.models.Feedback.status.field.name,)
@@ -51,4 +50,16 @@ class StatusLogAdmin(admin.ModelAdmin):
         feedback.models.StatusLog.user.field.name,
         feedback.models.StatusLog.from_status.field.name,
         feedback.models.StatusLog.to.field.name,
+    )
+
+
+@admin.register(feedback.models.PersonalData)
+class PersonalDataAdmin(admin.ModelAdmin):
+    list_display = (feedback.models.PersonalData.name.field.name,)
+
+    list_display_links = (feedback.models.PersonalData.name.field.name,)
+
+    readonly_fields = (
+        feedback.models.PersonalData.name.field.name,
+        feedback.models.PersonalData.mail.field.name,
     )

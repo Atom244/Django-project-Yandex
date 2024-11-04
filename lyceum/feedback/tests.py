@@ -1,3 +1,7 @@
+from pathlib import Path
+
+import django.conf
+from django.core.files.uploadedfile import SimpleUploadedFile
 import django.test
 import django.urls
 import parameterized
@@ -123,3 +127,32 @@ class FeedbackTests(django.test.TestCase):
             feedback.models.Feedback.objects.count(),
             count,
         )
+
+    def test_file_upload(self):
+        test_file = SimpleUploadedFile(
+            "test_file.txt",
+            b"Test file content",
+            content_type="text/plain",
+        )
+        form_data = {
+            "name": "Test User",
+            "text": "This is a test feedback.",
+            "mail": "test@example.com",
+            "file_field": test_file,
+        }
+        response = django.test.Client().post(
+            django.urls.reverse("feedback:feedback"),
+            data=form_data,
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+
+        feedbck = feedback.models.Feedback.objects.last()
+        upload_path = (
+            Path(django.conf.settings.MEDIA_ROOT) / f"uploads/{feedbck.id}/"
+        )
+        self.assertTrue(
+            upload_path.is_dir(),
+            f"Directory {upload_path} was not created.",
+        )
+        self.assertTrue((upload_path / "test_file.txt").is_file())
