@@ -5,7 +5,11 @@ from django.utils.safestring import mark_safe
 from django_ckeditor_5.fields import CKEditor5Field
 from sorl.thumbnail import get_thumbnail
 
-from catalog.managers import ItemManager, PublishedTagManager
+from catalog.managers import (
+    ItemManager,
+    PublishedCategoryManager,
+    PublishedTagManager,
+)
 from catalog.validators import ValidateMustContain
 from core.models import (
     AbstractImage,
@@ -42,6 +46,8 @@ class Tag(AbstractModel, AbstractModelNormalizedName):
 
 
 class Category(AbstractModel, AbstractModelNormalizedName):
+    objects = PublishedCategoryManager()
+
     slug = django.db.models.SlugField(
         verbose_name="слаг",
         help_text="Напишите слаг (макс. кол-во символов 200)",
