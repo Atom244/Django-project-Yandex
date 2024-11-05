@@ -59,6 +59,9 @@ class Feedback(django.db.models.Model):
         default=StatusChoices.GOT,
     )
 
+    def clean(self):
+        super().clean()
+
     def __str__(self):
         return self.text[:15]
 
