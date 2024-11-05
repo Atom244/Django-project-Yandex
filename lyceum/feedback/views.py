@@ -32,7 +32,7 @@ def feedback_views(request):
 
     if request.method == "POST":
         if form.is_valid():
-            personal_data = feedback.models.PersonalData.objects.create(
+            personal_data = feedback.models.PersonalData(
                 name=form.cleaned_data["name"],
                 mail=form.cleaned_data["mail"],
             )
