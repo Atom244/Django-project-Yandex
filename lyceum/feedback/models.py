@@ -114,9 +114,8 @@ class MultipleFile(django.db.models.Model):
         help_text="файл прикрепленный к фидбеку",
     )
 
-    @staticmethod
-    def get_upload_path(instance, filename):
-        return f"uploads/files_db/{instance.feedback.id}/{filename}"
+    def get_upload_path(self, filename):
+        return f"uploads/files_db/{self.feedback_id}/{filename}"
 
     file = django.db.models.FileField(
         upload_to=get_upload_path,
