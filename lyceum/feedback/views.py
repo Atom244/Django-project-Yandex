@@ -36,6 +36,7 @@ def feedback_views(request):
                 name=form.cleaned_data["name"],
                 mail=form.cleaned_data["mail"],
             )
+            personal_data.save()
 
             new_feedback = feedback.models.Feedback(
                 personal_data=personal_data,
