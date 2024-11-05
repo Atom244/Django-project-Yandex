@@ -92,6 +92,7 @@ class StatusLog(django.db.models.Model):
     from_status = django.db.models.CharField(
         "начальное состояние",
         max_length=2,
+        db_column="from",
     )
 
     to = django.db.models.CharField(
@@ -113,8 +114,9 @@ class MultipleFile(django.db.models.Model):
         help_text="файл прикрепленный к фидбеку",
     )
 
-    def get_upload_path(self, filename):
-        return f"uploads/files_db/{self.feedback.id}/{filename}"
+    @staticmethod
+    def get_upload_path(instance, filename):
+        return f"uploads/files_db/{instance.feedback.id}/{filename}"
 
     file = django.db.models.FileField(
         upload_to=get_upload_path,
