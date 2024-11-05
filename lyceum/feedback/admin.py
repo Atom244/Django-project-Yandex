@@ -30,21 +30,21 @@ class PersonalDataAdmin(admin.ModelAdmin):
     inlines = [FeedbackInline]
 
     def save_related(self, request, form, formsets, change):
-        feedback_instance = form.instance.feedbacks
-        if change:
-            for formset in formsets:
-                for feedback_form in formset:
-                    if feedback_form.cleaned_data[
-                        "status"
-                    ] != feedback_form.initial.get("status"):
-                        feedback.models.StatusLog.objects.create(
-                            user=request.user,
-                            from_status=feedback_form.initial.get("status"),
-                            to=feedback_form.cleaned_data["status"],
-                            feedback=feedback_instance,
-                        )
-
         super().save_related(request, form, formsets, change)
+        feedback_instance = form.instance.feedbacks
+        for formset in formsets:
+            for feedback_form in formset:
+                if (
+                    "status" in feedback_form.cleaned_data
+                    and feedback_form.cleaned_data["status"]
+                    != feedback_form.initial.get("status")
+                ):
+                    feedback.models.StatusLog.objects.create(
+                        user=request.user,
+                        from_status=feedback_form.initial.get("status"),
+                        to=feedback_form.cleaned_data["status"],
+                        feedback=feedback_instance,
+                    )
 
     def has_delete_permission(self, request, obj=None):
         if obj and hasattr(obj, "feedbacks"):

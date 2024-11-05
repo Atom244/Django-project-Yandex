@@ -1,9 +1,9 @@
 from pathlib import Path
-import shutil
 
 import django.conf
 from django.core.files.uploadedfile import SimpleUploadedFile
 import django.test
+from django.test import override_settings
 import django.urls
 import parameterized
 
@@ -14,21 +14,8 @@ import feedback.models
 __all__ = []
 
 
+@override_settings(MEDIA_ROOT=Path("media_test"))
 class FeedbackTests(django.test.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.form = feedback.forms.FeedbackForm()
-        cls.media_root = Path("media_test")
-        django.conf.settings.MEDIA_ROOT = cls.media_root
-        cls.media_root.mkdir(exist_ok=True)
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
-        if cls.media_root.exists():
-            shutil.rmtree(cls.media_root)
-
     def test_feedback_context(self):
         response = django.test.Client().get(
             django.urls.reverse("feedback:feedback"),
@@ -44,7 +31,11 @@ class FeedbackTests(django.test.TestCase):
         ],
     )
     def test_feedback_labels(self, field, expected_text):
-        label = self.form.fields[field].label
+        response = django.test.Client().get(
+            django.urls.reverse("feedback:feedback"),
+        )
+        form = response.context["form"]
+        label = form.fields[field].label
         self.assertEqual(label, expected_text)
 
     @parameterized.parameterized.expand(
@@ -55,7 +46,11 @@ class FeedbackTests(django.test.TestCase):
         ],
     )
     def test_feedback_help_texts(self, field, expected_text):
-        help_text = self.form.fields[field].help_text
+        response = django.test.Client().get(
+            django.urls.reverse("feedback:feedback"),
+        )
+        form = response.context["form"]
+        help_text = form.fields[field].help_text
         self.assertEqual(help_text, expected_text)
 
     def test_feedback_redirect_after_submit(self):

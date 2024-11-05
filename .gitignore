@@ -16,6 +16,7 @@ __pycache__/
 db.sqlite3
 thumbs.db.
 send_mail
+media_test
 
 # Compiled localization
 *.mo

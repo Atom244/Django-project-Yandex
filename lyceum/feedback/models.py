@@ -59,20 +59,6 @@ class Feedback(django.db.models.Model):
         default=StatusChoices.GOT,
     )
 
-    files = django.db.models.FileField(
-        upload_to="uploads/db_uploads/",
-        null=True,
-    )
-
-    def upload_to(self, filename):
-        return f"uploads/{self.id}/{filename}"
-
-    def save(self, *args, **kwargs):
-        if self.id:
-            self.files.upload_to = self.upload_to
-
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return self.text[:15]
 
@@ -116,3 +102,28 @@ class StatusLog(django.db.models.Model):
     class Meta:
         verbose_name = "лог статусов"
         verbose_name_plural = "логи статусов"
+
+
+class MultipleFile(django.db.models.Model):
+    feedback = django.db.models.ForeignKey(
+        Feedback,
+        on_delete=django.db.models.CASCADE,
+        related_name="files",
+        verbose_name="файл",
+        help_text="файл прикрепленный к фидбеку",
+    )
+
+    def get_upload_path(self, filename):
+        return f"uploads/files_db/{self.feedback.id}/{filename}"
+
+    file = django.db.models.FileField(
+        upload_to=get_upload_path,
+        null=True,
+    )
+
+    def __str__(self):
+        return f"Файл для {self.feedback}"
+
+    class Meta:
+        verbose_name = "файл"
+        verbose_name_plural = "файлы"

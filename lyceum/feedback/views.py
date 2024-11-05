@@ -43,8 +43,13 @@ def feedback_views(request):
                 upload_path.mkdir(parents=True, exist_ok=True)
 
                 for f in files:
+                    multiple_file = feedback.models.MultipleFile(
+                        feedback=new_feedback,
+                        file=f,
+                    )
+                    multiple_file.save()
                     file_path = upload_path / f.name
-                    with open(file_path, "wb+") as destination:
+                    with file_path.open("wb+") as destination:
                         for chunk in f.chunks():
                             destination.write(chunk)
 
