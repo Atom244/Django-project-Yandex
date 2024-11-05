@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 
 import django.conf
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -18,6 +19,15 @@ class FeedbackTests(django.test.TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.form = feedback.forms.FeedbackForm()
+        cls.media_root = Path("media_test")
+        django.conf.settings.MEDIA_ROOT = cls.media_root
+        cls.media_root.mkdir(exist_ok=True)
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        if cls.media_root.exists():
+            shutil.rmtree(cls.media_root)
 
     def test_feedback_context(self):
         response = django.test.Client().get(
@@ -134,25 +144,25 @@ class FeedbackTests(django.test.TestCase):
             b"Test file content",
             content_type="text/plain",
         )
-        form_data = {
-            "name": "Test User",
-            "text": "This is a test feedback.",
-            "mail": "test@example.com",
-            "file_field": test_file,
-        }
-        response = django.test.Client().post(
+
+        response = self.client.post(
             django.urls.reverse("feedback:feedback"),
-            data=form_data,
+            {
+                "name": "Test User",
+                "text": "This is a test feedback.",
+                "mail": "test@example.com",
+                "file_field": [test_file],
+            },
             follow=True,
         )
+
         self.assertEqual(response.status_code, 200)
 
-        feedbck = feedback.models.Feedback.objects.last()
+        feedback_instance = feedback.models.Feedback.objects.last()
+
         upload_path = (
-            Path(django.conf.settings.MEDIA_ROOT) / f"uploads/{feedbck.id}/"
+            Path(django.conf.settings.MEDIA_ROOT)
+            / f"uploads/{feedback_instance.id}/"
         )
-        self.assertTrue(
-            upload_path.is_dir(),
-            f"Directory {upload_path} was not created.",
-        )
+        self.assertTrue(upload_path.is_dir())
         self.assertTrue((upload_path / "test_file.txt").is_file())

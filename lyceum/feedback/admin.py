@@ -1,40 +1,56 @@
 from django.contrib import admin
 
-
 import feedback.models
-
 
 __all__ = []
 
 
-@admin.register(feedback.models.Feedback)
-class FeedbackModelAdmin(admin.ModelAdmin):
-    list_display = (
+class FeedbackInline(admin.StackedInline):
+    model = feedback.models.Feedback
+    fields = (
         feedback.models.Feedback.text.field.name,
         feedback.models.Feedback.status.field.name,
     )
-
-    list_display_links = (feedback.models.Feedback.text.field.name,)
-
     readonly_fields = (
         feedback.models.Feedback.text.field.name,
         feedback.models.Feedback.created_on.field.name,
     )
+    can_delete = False
+    extra = 0
 
-    list_editable = (feedback.models.Feedback.status.field.name,)
 
-    def save_model(self, request, obj, form, change):
-        if change and form.cleaned_data["status"] != form.initial.get(
-            "status",
-        ):
-            feedback.models.StatusLog.objects.create(
-                user=request.user,
-                from_status=form.initial.get("status"),
-                to=form.cleaned_data.get("status"),
-                feedback=obj,
-            )
+@admin.register(feedback.models.PersonalData)
+class PersonalDataAdmin(admin.ModelAdmin):
+    list_display = (feedback.models.PersonalData.name.field.name,)
+    list_display_links = (feedback.models.PersonalData.name.field.name,)
+    readonly_fields = (
+        feedback.models.PersonalData.name.field.name,
+        feedback.models.PersonalData.mail.field.name,
+    )
+    inlines = [FeedbackInline]
 
-        super().save_model(request, obj, form, change)
+    def save_related(self, request, form, formsets, change):
+        feedback_instance = form.instance.feedbacks
+        if change:
+            for formset in formsets:
+                for feedback_form in formset:
+                    if feedback_form.cleaned_data[
+                        "status"
+                    ] != feedback_form.initial.get("status"):
+                        feedback.models.StatusLog.objects.create(
+                            user=request.user,
+                            from_status=feedback_form.initial.get("status"),
+                            to=feedback_form.cleaned_data["status"],
+                            feedback=feedback_instance,
+                        )
+
+        super().save_related(request, form, formsets, change)
+
+    def has_delete_permission(self, request, obj=None):
+        if obj and hasattr(obj, "feedbacks"):
+            return False
+
+        return super().has_delete_permission(request, obj)
 
 
 @admin.register(feedback.models.StatusLog)
@@ -44,22 +60,9 @@ class StatusLogAdmin(admin.ModelAdmin):
         feedback.models.StatusLog.from_status.field.name,
         feedback.models.StatusLog.to.field.name,
     )
-
     readonly_fields = (
         feedback.models.StatusLog.timestamp.field.name,
         feedback.models.StatusLog.user.field.name,
         feedback.models.StatusLog.from_status.field.name,
         feedback.models.StatusLog.to.field.name,
-    )
-
-
-@admin.register(feedback.models.PersonalData)
-class PersonalDataAdmin(admin.ModelAdmin):
-    list_display = (feedback.models.PersonalData.name.field.name,)
-
-    list_display_links = (feedback.models.PersonalData.name.field.name,)
-
-    readonly_fields = (
-        feedback.models.PersonalData.name.field.name,
-        feedback.models.PersonalData.mail.field.name,
     )

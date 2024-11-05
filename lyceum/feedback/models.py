@@ -30,9 +30,9 @@ class Feedback(django.db.models.Model):
         IN_PROCESSING = ("PR", "в обработке")
         DONE = ("OK", "ответ дан")
 
-    personal_data = django.db.models.ForeignKey(
+    personal_data = django.db.models.OneToOneField(
         PersonalData,
-        on_delete=django.db.models.SET_NULL,
+        on_delete=django.db.models.CASCADE,
         null=True,
         blank=True,
         related_name="feedbacks",
@@ -58,6 +58,20 @@ class Feedback(django.db.models.Model):
         choices=StatusChoices.choices,
         default=StatusChoices.GOT,
     )
+
+    files = django.db.models.FileField(
+        upload_to="uploads/db_uploads/",
+        null=True,
+    )
+
+    def upload_to(self, filename):
+        return f"uploads/{self.id}/{filename}"
+
+    def save(self, *args, **kwargs):
+        if self.id:
+            self.files.upload_to = self.upload_to
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.text[:15]
