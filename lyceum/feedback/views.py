@@ -16,6 +16,20 @@ def feedback_views(request):
         request.FILES or None,
     )
 
+    files_form = feedback.forms.FeedbackForm(
+        request.POST or None,
+        request.FILES or None,
+    )
+    files_form.fields = {key: files_form.fields[key] for key in ["file_field"]}
+
+    author_form = feedback.forms.FeedbackForm(request.POST or None)
+    author_form.fields = {
+        key: author_form.fields[key] for key in ["name", "mail"]
+    }
+
+    content_form = feedback.forms.FeedbackForm(request.POST or None)
+    content_form.fields = {key: content_form.fields[key] for key in ["text"]}
+
     if request.method == "POST":
         if form.is_valid():
             personal_data, created = (
@@ -56,5 +70,8 @@ def feedback_views(request):
 
     context = {
         "form": form,
+        "files_form": files_form,
+        "author_form": author_form,
+        "content_form": content_form,
     }
     return django.shortcuts.render(request, template, context)
