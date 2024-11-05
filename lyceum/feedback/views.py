@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import django.conf
 import django.contrib.messages
 import django.core.mail
@@ -35,23 +33,12 @@ def feedback_views(request):
 
             files = form.cleaned_data["file_field"]
             if files:
-                feedback_id = new_feedback.id
-                upload_path = (
-                    Path(django.conf.settings.MEDIA_ROOT)
-                    / f"uploads/{feedback_id}/"
-                )
-                upload_path.mkdir(parents=True, exist_ok=True)
-
                 for f in files:
                     multiple_file = feedback.models.MultipleFile(
                         feedback=new_feedback,
                         file=f,
                     )
                     multiple_file.save()
-                    file_path = upload_path / f.name
-                    with file_path.open("wb+") as destination:
-                        for chunk in f.chunks():
-                            destination.write(chunk)
 
             django.core.mail.send_mail(
                 f"FROM: {personal_data.mail}",

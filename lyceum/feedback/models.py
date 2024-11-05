@@ -115,7 +115,7 @@ class MultipleFile(django.db.models.Model):
     )
 
     def get_upload_path(self, filename):
-        return f"uploads/files_db/{self.feedback_id}/{filename}"
+        return f"uploads/{self.feedback_id}/{filename}"
 
     file = django.db.models.FileField(
         upload_to=get_upload_path,
