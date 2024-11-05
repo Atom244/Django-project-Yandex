@@ -7,43 +7,35 @@ __all__ = []
 
 class FeedbackInline(admin.StackedInline):
     model = feedback.models.Feedback
-    fields = (
-        feedback.models.Feedback.text.field.name,
-        feedback.models.Feedback.status.field.name,
-    )
-    readonly_fields = (
-        feedback.models.Feedback.text.field.name,
-        feedback.models.Feedback.created_on.field.name,
-    )
+    fields = ("text", "status", "created_on")
+    readonly_fields = ("text", "created_on")
     can_delete = False
     extra = 0
 
 
 @admin.register(feedback.models.PersonalData)
 class PersonalDataAdmin(admin.ModelAdmin):
-    list_display = (feedback.models.PersonalData.name.field.name,)
-    list_display_links = (feedback.models.PersonalData.name.field.name,)
-    readonly_fields = (
-        feedback.models.PersonalData.name.field.name,
-        feedback.models.PersonalData.mail.field.name,
-    )
+    list_display = ("name", "mail")
+    readonly_fields = ("name", "mail")
     inlines = [FeedbackInline]
 
-    def save_related(self, request, form, formsets, change):
-        feedback_instance = form.instance.feedbacks
-        for formset in formsets:
-            for feedback_form in formset:
-                if change and feedback_form.cleaned_data[
-                    "status"
-                ] != feedback_form.initial.get("status"):
-                    feedback.models.StatusLog.objects.create(
-                        user=request.user,
-                        from_status=feedback_form.initial.get("status"),
-                        to=feedback_form.cleaned_data["status"],
-                        feedback=feedback_instance,
-                    )
+    def save_model(self, request, obj, form, change):
+        if change and hasattr(obj, "feedbacks"):
+            feedback_instance = obj.feedbacks
+            new_status = feedback_instance.status
+            old_status = feedback.models.Feedback.objects.get(
+                pk=feedback_instance.pk,
+            ).status
 
-        super().save_related(request, form, formsets, change)
+            if new_status != old_status:
+                feedback.models.StatusLog.objects.create(
+                    user=request.user,
+                    feedback=feedback_instance,
+                    from_status=old_status,
+                    to=new_status,
+                )
+
+        super().save_model(request, obj, form, change)
 
     def has_delete_permission(self, request, obj=None):
         if obj and hasattr(obj, "feedbacks"):
