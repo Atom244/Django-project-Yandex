@@ -31,20 +31,24 @@ def feedback_views(request):
     content_form.fields = {key: content_form.fields[key] for key in ["text"]}
 
     if request.method == "POST":
-        if form.is_valid():
+        if (
+            files_form.is_valid()
+            and author_form.is_valid()
+            and content_form.is_valid()
+        ):
             personal_data = feedback.models.PersonalData(
-                name=form.cleaned_data["name"],
-                mail=form.cleaned_data["mail"],
+                name=author_form.cleaned_data["name"],
+                mail=author_form.cleaned_data["mail"],
             )
             personal_data.save()
 
             new_feedback = feedback.models.Feedback(
                 personal_data=personal_data,
-                text=form.cleaned_data["text"],
+                text=content_form.cleaned_data["text"],
             )
             new_feedback.save()
 
-            files = form.cleaned_data["file_field"]
+            files = files_form.cleaned_data["file_field"]
             if files:
                 for f in files:
                     multiple_file = feedback.models.MultipleFile(
