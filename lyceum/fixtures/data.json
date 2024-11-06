@@ -1,5 +1,749 @@
 [
 {
+  "model": "feedback.personaldata",
+  "pk": 25,
+  "fields": {
+    "name": "kkkkkkkkkkkkkkkk",
+    "mail": "kkk@gg.ty"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 26,
+  "fields": {
+    "name": "lllllllllllllllllllllll",
+    "mail": "llllllll@ggfg.ty"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 27,
+  "fields": {
+    "name": "iiiiiiiiiiii",
+    "mail": "iiiiiiiii@fgfgfg.ui"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 28,
+  "fields": {
+    "name": "rrrrrrrrrrrrrrrrr",
+    "mail": "rrrrrrrrrrrr@dfdf.io"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 29,
+  "fields": {
+    "name": "qqqqqqqqqqqqqq",
+    "mail": "qqqqqqqqqqqq@fdfsd.rt"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 30,
+  "fields": {
+    "name": "fffffffffffffffff",
+    "mail": "fffffffffff@fdf.uu"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 31,
+  "fields": {
+    "name": "uuuuuuuuuuuuu",
+    "mail": "gffdgffd@fgf.ui"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 32,
+  "fields": {
+    "name": "tttttttttttttttt",
+    "mail": "fdsfdsf@fgdfg.uj"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 33,
+  "fields": {
+    "name": "oooooooooooooooooooooooo",
+    "mail": "jhkjhk@fgd.ol"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 34,
+  "fields": {
+    "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "mail": "xxxxc@fdfd.ll"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 35,
+  "fields": {
+    "name": "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+    "mail": "vcvvc@fggfd.lk"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 36,
+  "fields": {
+    "name": "sssssssssssssssss",
+    "mail": "ssssssssss@dff.kk"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 37,
+  "fields": {
+    "name": "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+    "mail": "rrrrrrrrrrr@rr.rr"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 38,
+  "fields": {
+    "name": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+    "mail": "yyyyyyy@yy.yy"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 39,
+  "fields": {
+    "name": "uuuuuuuuuuuuuuuuuuuuuuuu",
+    "mail": "uuuuuuuuu@uuu.uu"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 1,
+  "fields": {
+    "personal_data": 25,
+    "text": "kkkkkkkkkkkkkkkkkkkkkk",
+    "created_on": "2024-11-05T15:53:12.142Z",
+    "status": "PR"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 2,
+  "fields": {
+    "personal_data": 26,
+    "text": "lllllllllllllllllllllllllll",
+    "created_on": "2024-11-05T16:08:05.856Z",
+    "status": "GT"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 3,
+  "fields": {
+    "personal_data": 27,
+    "text": "iiiiiiiiiiiiiiii",
+    "created_on": "2024-11-05T16:08:52.177Z",
+    "status": "OK"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 4,
+  "fields": {
+    "personal_data": 28,
+    "text": "rrrrrrrrrrrrrrrrrrrrrr",
+    "created_on": "2024-11-05T16:09:54.862Z",
+    "status": "GT"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 5,
+  "fields": {
+    "personal_data": 29,
+    "text": "qqqqqqqqqqqqqqqqqqqq",
+    "created_on": "2024-11-05T16:18:51.915Z",
+    "status": "OK"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 6,
+  "fields": {
+    "personal_data": 30,
+    "text": "fffffffffffffff",
+    "created_on": "2024-11-05T16:45:29.973Z",
+    "status": "PR"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 7,
+  "fields": {
+    "personal_data": 31,
+    "text": "gfdgfggdfgfdg",
+    "created_on": "2024-11-05T18:16:34.079Z",
+    "status": "OK"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 8,
+  "fields": {
+    "personal_data": 32,
+    "text": "tttttttttttttttttttttttttttttttttttttttttttt",
+    "created_on": "2024-11-05T18:48:41.096Z",
+    "status": "OK"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 9,
+  "fields": {
+    "personal_data": 33,
+    "text": "oooooooooooooooooooooooooooooooooooooooooooooooo",
+    "created_on": "2024-11-05T19:50:48.106Z",
+    "status": "OK"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 10,
+  "fields": {
+    "personal_data": 34,
+    "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "created_on": "2024-11-05T20:47:49.073Z",
+    "status": "GT"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 11,
+  "fields": {
+    "personal_data": 35,
+    "text": "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+    "created_on": "2024-11-05T21:10:58.580Z",
+    "status": "GT"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 12,
+  "fields": {
+    "personal_data": 36,
+    "text": "ssssssssssssssssssssssss",
+    "created_on": "2024-11-05T21:36:50.946Z",
+    "status": "GT"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 13,
+  "fields": {
+    "personal_data": 37,
+    "text": "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+    "created_on": "2024-11-06T14:31:38.333Z",
+    "status": "PR"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 14,
+  "fields": {
+    "personal_data": 38,
+    "text": "yyyyyyyyyyyyyyyyyyyyyyyy",
+    "created_on": "2024-11-06T16:06:47.920Z",
+    "status": "OK"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 15,
+  "fields": {
+    "personal_data": 39,
+    "text": "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+    "created_on": "2024-11-06T16:23:47.859Z",
+    "status": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 9,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T15:54:20.583Z",
+    "feedback": 1,
+    "from_status": "GT",
+    "to": "PR"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 10,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T17:27:24.868Z",
+    "feedback": 2,
+    "from_status": "OK",
+    "to": "GT"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 11,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T17:41:25.277Z",
+    "feedback": 3,
+    "from_status": "GT",
+    "to": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 12,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T18:18:27.700Z",
+    "feedback": 7,
+    "from_status": "GT",
+    "to": "PR"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 13,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T18:48:00.666Z",
+    "feedback": 4,
+    "from_status": "GT",
+    "to": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 14,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T18:49:12.680Z",
+    "feedback": 8,
+    "from_status": "GT",
+    "to": "PR"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 15,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T19:50:16.490Z",
+    "feedback": 5,
+    "from_status": "GT",
+    "to": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 16,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T20:22:44.182Z",
+    "feedback": 6,
+    "from_status": "GT",
+    "to": "PR"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 17,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T20:22:53.032Z",
+    "feedback": 9,
+    "from_status": "GT",
+    "to": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 18,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-05T20:47:16.001Z",
+    "feedback": 8,
+    "from_status": "PR",
+    "to": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 19,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-06T14:42:02.687Z",
+    "feedback": 13,
+    "from_status": "GT",
+    "to": "PR"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 20,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-06T16:07:43.329Z",
+    "feedback": 14,
+    "from_status": "GT",
+    "to": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 21,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-06T16:24:06.813Z",
+    "feedback": 15,
+    "from_status": "GT",
+    "to": "PR"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 22,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-06T16:24:14.620Z",
+    "feedback": 15,
+    "from_status": "PR",
+    "to": "OK"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 1,
+  "fields": {
+    "feedback": 1,
+    "file": "uploads/files_db/1/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 2,
+  "fields": {
+    "feedback": 1,
+    "file": "uploads/files_db/1/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 3,
+  "fields": {
+    "feedback": 1,
+    "file": "uploads/files_db/1/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 4,
+  "fields": {
+    "feedback": 3,
+    "file": "uploads/files_db/3/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 5,
+  "fields": {
+    "feedback": 3,
+    "file": "uploads/files_db/3/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 6,
+  "fields": {
+    "feedback": 3,
+    "file": "uploads/files_db/3/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 7,
+  "fields": {
+    "feedback": 4,
+    "file": "uploads/files_db/4/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 8,
+  "fields": {
+    "feedback": 4,
+    "file": "uploads/files_db/4/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 9,
+  "fields": {
+    "feedback": 4,
+    "file": "uploads/files_db/4/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 10,
+  "fields": {
+    "feedback": 5,
+    "file": "uploads/files_db/5/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 11,
+  "fields": {
+    "feedback": 5,
+    "file": "uploads/files_db/5/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 12,
+  "fields": {
+    "feedback": 5,
+    "file": "uploads/files_db/5/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 13,
+  "fields": {
+    "feedback": 6,
+    "file": "uploads/6/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 14,
+  "fields": {
+    "feedback": 6,
+    "file": "uploads/6/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 15,
+  "fields": {
+    "feedback": 6,
+    "file": "uploads/6/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 16,
+  "fields": {
+    "feedback": 7,
+    "file": "uploads/7/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 17,
+  "fields": {
+    "feedback": 7,
+    "file": "uploads/7/ER.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 18,
+  "fields": {
+    "feedback": 8,
+    "file": "uploads/8/image-_31_.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 19,
+  "fields": {
+    "feedback": 8,
+    "file": "uploads/8/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 20,
+  "fields": {
+    "feedback": 9,
+    "file": "uploads/9/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 21,
+  "fields": {
+    "feedback": 9,
+    "file": "uploads/9/ER.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 22,
+  "fields": {
+    "feedback": 9,
+    "file": "uploads/9/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 23,
+  "fields": {
+    "feedback": 10,
+    "file": "uploads/10/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 24,
+  "fields": {
+    "feedback": 10,
+    "file": "uploads/10/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 25,
+  "fields": {
+    "feedback": 10,
+    "file": "uploads/10/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 26,
+  "fields": {
+    "feedback": 11,
+    "file": "uploads/11/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 27,
+  "fields": {
+    "feedback": 11,
+    "file": "uploads/11/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 28,
+  "fields": {
+    "feedback": 11,
+    "file": "uploads/11/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 29,
+  "fields": {
+    "feedback": 12,
+    "file": "uploads/12/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 30,
+  "fields": {
+    "feedback": 12,
+    "file": "uploads/12/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 31,
+  "fields": {
+    "feedback": 12,
+    "file": "uploads/12/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 32,
+  "fields": {
+    "feedback": 13,
+    "file": "uploads/13/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 33,
+  "fields": {
+    "feedback": 13,
+    "file": "uploads/13/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 34,
+  "fields": {
+    "feedback": 13,
+    "file": "uploads/13/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 35,
+  "fields": {
+    "feedback": 14,
+    "file": "uploads/14/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 36,
+  "fields": {
+    "feedback": 14,
+    "file": "uploads/14/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 37,
+  "fields": {
+    "feedback": 14,
+    "file": "uploads/14/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 38,
+  "fields": {
+    "feedback": 15,
+    "file": "uploads/15/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 39,
+  "fields": {
+    "feedback": 15,
+    "file": "uploads/15/image_27.png"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 40,
+  "fields": {
+    "feedback": 15,
+    "file": "uploads/15/my_icon.txt"
+  }
+},
+{
   "model": "catalog.item",
   "pk": 1,
   "fields": {
@@ -84,9 +828,9 @@
   "pk": 1,
   "fields": {
     "is_published": true,
+    "normalized_name": "цитpycoвыe",
     "slug": "citrus-fruits",
-    "name": "Цитрусовые",
-    "normalized_name": "цитpycoвыe"
+    "name": "Цитрусовые"
   }
 },
 {
@@ -94,9 +838,9 @@
   "pk": 2,
   "fields": {
     "is_published": true,
+    "normalized_name": "ягoды",
     "slug": "berries",
-    "name": "Ягоды",
-    "normalized_name": "ягoды"
+    "name": "Ягоды"
   }
 },
 {
@@ -104,9 +848,9 @@
   "pk": 3,
   "fields": {
     "is_published": true,
+    "normalized_name": "яблoчныe",
     "slug": "apple",
-    "name": "Яблочные",
-    "normalized_name": "яблoчныe"
+    "name": "Яблочные"
   }
 },
 {
@@ -114,9 +858,9 @@
   "pk": 4,
   "fields": {
     "is_published": true,
+    "normalized_name": "тpoпичecкиe",
     "slug": "tropical",
-    "name": "Тропические",
-    "normalized_name": "тpoпичecкиe"
+    "name": "Тропические"
   }
 },
 {
@@ -124,9 +868,9 @@
   "pk": 5,
   "fields": {
     "is_published": true,
+    "normalized_name": "opexoвыe",
     "slug": "nutty",
-    "name": "Ореховые",
-    "normalized_name": "opexoвыe"
+    "name": "Ореховые"
   }
 },
 {
@@ -134,10 +878,10 @@
   "pk": 1,
   "fields": {
     "is_published": true,
+    "normalized_name": "фpyкты",
     "slug": "fruits",
     "weight": 150,
-    "name": "Фрукты",
-    "normalized_name": "фpyкты"
+    "name": "Фрукты"
   }
 },
 {
@@ -145,10 +889,10 @@
   "pk": 2,
   "fields": {
     "is_published": true,
+    "normalized_name": "oвoщи",
     "slug": "vegetables",
     "weight": 150,
-    "name": "Овощи",
-    "normalized_name": "oвoщи"
+    "name": "Овощи"
   }
 }
 ]
