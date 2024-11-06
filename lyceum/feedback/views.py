@@ -11,24 +11,15 @@ __all__ = []
 
 def feedback_views(request):
     template = "feedback/feedback.html"
-    form = feedback.forms.FeedbackForm(
+
+    files_form = feedback.forms.FilesForm(
         request.POST or None,
         request.FILES or None,
     )
 
-    files_form = feedback.forms.FeedbackForm(
-        request.POST or None,
-        request.FILES or None,
-    )
-    files_form.fields = {key: files_form.fields[key] for key in ["file_field"]}
+    author_form = feedback.forms.AuthorForm(request.POST or None)
 
-    author_form = feedback.forms.FeedbackForm(request.POST or None)
-    author_form.fields = {
-        key: author_form.fields[key] for key in ["name", "mail"]
-    }
-
-    content_form = feedback.forms.FeedbackForm(request.POST or None)
-    content_form.fields = {key: content_form.fields[key] for key in ["text"]}
+    content_form = feedback.forms.ContentForm(request.POST or None)
 
     if request.method == "POST":
         if (
@@ -72,9 +63,10 @@ def feedback_views(request):
             return django.shortcuts.redirect("feedback:feedback")
 
     context = {
-        "form": form,
-        "files_form": files_form,
-        "author_form": author_form,
-        "content_form": content_form,
+        "forms": {
+            "files_form": files_form,
+            "author_form": author_form,
+            "content_form": content_form,
+        },
     }
     return django.shortcuts.render(request, template, context)

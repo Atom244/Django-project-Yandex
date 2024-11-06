@@ -21,9 +21,9 @@
   {% csrf_token %}
   <div class="mx-1 my-2">
     <div class="my-3">
-      {{ author_form.as_p }}
-      {{ content_form.as_p }}
-      {{ files_form.as_p }}
+      {{ forms.author_form.as_p }}
+      {{ forms.content_form.as_p }}
+      {{ forms.files_form.as_p }}
     </div>
   </div>
   <input type="submit" class="btn btn-primary mb-2">

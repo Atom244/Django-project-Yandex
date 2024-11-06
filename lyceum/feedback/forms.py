@@ -68,3 +68,54 @@ class FeedbackForm(django.forms.ModelForm):
             "status",
             "personal_data",
         ]
+
+
+class AuthorForm(django.forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control my-1"
+            field.field.widget.attrs["placeholder"] = field.field.label
+
+    name = django.forms.CharField(
+        label="Имя",
+        help_text="Имя автора письма",
+        required=False,
+    )
+
+    mail = django.forms.EmailField(
+        label="Почта",
+        help_text="Ваш электронный адрес",
+        validators=[
+            django.core.validators.EmailValidator(
+                message="Некорректный e-mail адрес",
+            ),
+        ],
+    )
+
+
+class ContentForm(django.forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control my-1"
+            field.field.widget.attrs["placeholder"] = field.field.label
+
+    text = django.forms.CharField(
+        label="Текст отзыва",
+        help_text="Оставьте отзыв",
+        widget=django.forms.Textarea,
+    )
+
+
+class FilesForm(django.forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs["class"] = "form-control my-1"
+            field.field.widget.attrs["placeholder"] = field.field.label
+
+    file_field = MultipleFileField(
+        label="Загрузить файлы",
+        help_text="Вы можете загрузить несколько файлов",
+    )

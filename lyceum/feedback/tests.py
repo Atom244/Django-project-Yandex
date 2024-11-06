@@ -20,36 +20,40 @@ class FeedbackTests(django.test.TestCase):
         response = django.test.Client().get(
             django.urls.reverse("feedback:feedback"),
         )
-        form = response.context["form"]
-        self.assertIsInstance(form, feedback.forms.FeedbackForm)
+        form = response.context["forms"]
+        self.assertIsInstance(form["content_form"], feedback.forms.ContentForm)
+        self.assertIsInstance(form["author_form"], feedback.forms.AuthorForm)
+        self.assertIsInstance(form["files_form"], feedback.forms.FilesForm)
 
     @parameterized.parameterized.expand(
         [
-            ("text", "Текст отзыва"),
-            ("mail", "Почта"),
-            ("name", "Имя"),
+            ("content_form", "text", "Текст отзыва"),
+            ("author_form", "mail", "Почта"),
+            ("author_form", "name", "Имя"),
         ],
     )
-    def test_feedback_labels(self, field, expected_text):
+    def test_feedback_labels(self, form_name, field, expected_text):
         response = django.test.Client().get(
             django.urls.reverse("feedback:feedback"),
         )
-        form = response.context["form"]
+        forms = response.context["forms"]
+        form = forms[form_name]
         label = form.fields[field].label
         self.assertEqual(label, expected_text)
 
     @parameterized.parameterized.expand(
         [
-            ("text", "Оставьте отзыв"),
-            ("mail", "Ваш электронный адрес"),
-            ("name", "Имя автора письма"),
+            ("content_form", "text", "Оставьте отзыв"),
+            ("author_form", "mail", "Ваш электронный адрес"),
+            ("author_form", "name", "Имя автора письма"),
         ],
     )
-    def test_feedback_help_texts(self, field, expected_text):
+    def test_feedback_help_texts(self, form_name, field, expected_text):
         response = django.test.Client().get(
             django.urls.reverse("feedback:feedback"),
         )
-        form = response.context["form"]
+        forms = response.context["forms"]
+        form = forms[form_name]
         help_text = form.fields[field].help_text
         self.assertEqual(help_text, expected_text)
 
