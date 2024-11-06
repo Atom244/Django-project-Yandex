@@ -27,24 +27,20 @@ def feedback_views(request):
             and author_form.is_valid()
             and content_form.is_valid()
         ):
-            personal_data = feedback.models.PersonalData(
-                name=author_form.cleaned_data["name"],
-                mail=author_form.cleaned_data["mail"],
-            )
-            personal_data.save()
+            personal_data = author_form.save()
 
-            new_feedback = feedback.models.Feedback(
-                personal_data=personal_data,
-                text=content_form.cleaned_data["text"],
-            )
+            new_feedback = content_form.save(commit=False)
+            new_feedback.personal_data = personal_data
             new_feedback.save()
 
             files = files_form.cleaned_data["file_field"]
             if files:
                 for f in files:
-                    multiple_file = feedback.models.MultipleFile(
-                        feedback=new_feedback,
-                        file=f,
+                    multiple_file = (
+                        feedback.models.MultipleFile.objects.create(
+                            feedback=new_feedback,
+                            file=f,
+                        )
                     )
                     multiple_file.save()
 

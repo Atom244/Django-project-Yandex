@@ -73,34 +73,45 @@ class FeedbackTests(django.test.TestCase):
             django.urls.reverse("feedback:feedback"),
         )
 
-    def test_correct_data_form_submit(self):
+    def test_correct_data_author_form_submit(self):
         form_data = {
-            "text": "Good text",
             "mail": "good@mail.ru",
             "name": "Test Name",
         }
-        form = feedback.forms.FeedbackForm(form_data)
+        form = feedback.forms.AuthorForm(form_data)
         self.assertTrue(form.is_valid())
 
-    def test_incorrect_data_form_submit(self):
+    def test_correct_data_content_form_submit(self):
         form_data = {
-            "text": "Bad text",
+            "text": "Good text",
+        }
+        form = feedback.forms.ContentForm(form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_incorrect_data_author_form_submit(self):
+        form_data = {
             "mail": "a@a.a",
             "name": "bad name",
         }
-        form = feedback.forms.FeedbackForm(form_data)
+        form = feedback.forms.AuthorForm(form_data)
         self.assertFalse(form.is_valid())
         self.assertIn("Некорректный e-mail адрес", form.errors["mail"])
 
-    def test_empty_fields(self):
+    def test_empty_fields_author_form(self):
         form_data = {
-            "text": "",
             "mail": "",
             "name": "",
         }
-        form = feedback.forms.FeedbackForm(form_data)
+        form = feedback.forms.AuthorForm(form_data)
         self.assertFalse(form.is_valid())
         self.assertTrue(form.has_error("mail"))
+
+    def test_empty_fields_content_form(self):
+        form_data = {
+            "text": "",
+        }
+        form = feedback.forms.ContentForm(form_data)
+        self.assertFalse(form.is_valid())
         self.assertTrue(form.has_error("text"))
 
     def test_save_correct_feedback_form_in_model(self):
