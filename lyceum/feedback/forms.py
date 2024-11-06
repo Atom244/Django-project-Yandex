@@ -50,6 +50,13 @@ class AuthorForm(django.forms.ModelForm):
     class Meta:
         model = feedback.models.PersonalData
         fields = ["name", "mail"]
+        exclude = [
+            "text",
+            "file_field",
+            "created_on",
+            "status",
+            "personal_data",
+        ]
 
 
 class ContentForm(django.forms.ModelForm):
@@ -68,6 +75,14 @@ class ContentForm(django.forms.ModelForm):
     class Meta:
         model = feedback.models.Feedback
         fields = ["text"]
+        exclude = [
+            "name",
+            "mail",
+            "file_field",
+            "created_on",
+            "status",
+            "personal_data",
+        ]
 
 
 class FilesForm(django.forms.ModelForm):
@@ -85,3 +100,11 @@ class FilesForm(django.forms.ModelForm):
     class Meta:
         model = feedback.models.MultipleFile
         fields = ["file_field"]
+        exclude = [
+            "name",
+            "text",
+            "mail",
+            "created_on",
+            "status",
+            "personal_data",
+        ]
