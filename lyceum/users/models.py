@@ -1,5 +1,3 @@
-import sys
-
 from django.contrib.auth.models import (
     User as BaseUser,
     UserManager as BaseUserManager,
@@ -7,7 +5,7 @@ from django.contrib.auth.models import (
 from django.db import models
 
 
-__all__ = "Profile"
+__all__ = ["Profile"]
 
 
 class UserManager(BaseUserManager):
@@ -20,14 +18,12 @@ class UserManager(BaseUserManager):
     def by_mail(self, mail):
         return self.get_queryset().get(email=mail)
 
+    def set_email_unique(self):
+        BaseUser._meta.get_field("email")._unique = True
+
 
 class User(BaseUser):
     objects = UserManager()
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if "migrate" not in sys.argv and "makemigrations" not in sys.argv:
-            BaseUser._meta.get_field("email")._unique = True
 
     class Meta(BaseUser.Meta):
         proxy = True

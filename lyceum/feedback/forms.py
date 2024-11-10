@@ -52,7 +52,7 @@ class AuthorForm(django.forms.ModelForm):
         fields = ["name", "mail"]
 
 
-class ContentForm(django.forms.ModelForm):
+class FeedbackForm(django.forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():

@@ -21,7 +21,10 @@ class FeedbackTests(django.test.TestCase):
             django.urls.reverse("feedback:feedback"),
         )
         form = response.context["forms"]
-        self.assertIsInstance(form["content_form"], feedback.forms.ContentForm)
+        self.assertIsInstance(
+            form["content_form"],
+            feedback.forms.FeedbackForm,
+        )
         self.assertIsInstance(form["author_form"], feedback.forms.AuthorForm)
         self.assertIsInstance(form["files_form"], feedback.forms.FilesForm)
 
@@ -85,7 +88,7 @@ class FeedbackTests(django.test.TestCase):
         form_data = {
             "text": "Good text",
         }
-        form = feedback.forms.ContentForm(form_data)
+        form = feedback.forms.FeedbackForm(form_data)
         self.assertTrue(form.is_valid())
 
     def test_incorrect_data_author_form_submit(self):
@@ -110,7 +113,7 @@ class FeedbackTests(django.test.TestCase):
         form_data = {
             "text": "",
         }
-        form = feedback.forms.ContentForm(form_data)
+        form = feedback.forms.FeedbackForm(form_data)
         self.assertFalse(form.is_valid())
         self.assertTrue(form.has_error("text"))
 

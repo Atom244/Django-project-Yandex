@@ -19,7 +19,7 @@ def feedback_views(request):
 
     author_form = feedback.forms.AuthorForm(request.POST or None)
 
-    content_form = feedback.forms.ContentForm(request.POST or None)
+    content_form = feedback.forms.FeedbackForm(request.POST or None)
 
     if request.method == "POST":
         if (
