@@ -800,7 +800,7 @@
   "model": "users.profile",
   "pk": 1,
   "fields": {
-    "user": 2,
+    "user": 1,
     "birthday": null,
     "image": "",
     "coffee_count": 18
