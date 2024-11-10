@@ -26,6 +26,7 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1").split(
 )
 
 INSTALLED_APPS = [
+    "users.apps.UsersConfig",
     "feedback.apps.FeedbackConfig",
     "download.apps.DownloadConfig",
     "core.apps.CoreConfig",
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "lyceum.middleware.ReverseWordMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "users.middleware.ProxyUserMiddleware",
 ]
 
 INTERNAL_IPS = []
@@ -143,6 +145,12 @@ if DEBUG:
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
+LOGIN_URL = "../login/"
+
+LOGIN_REDIRECT_URL = "../profile/"
+
+LOGOUT_REDIRECT_URL = "../login/"
+
 FILE_UPLOAD_HANDLERS = [
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
@@ -184,3 +192,15 @@ CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
 EMAIL_ADDRESS = os.getenv("DJANGO_MAIL", "1@examplemail.com")
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+
+DEFAULT_USER_IS_ACTIVE = os.getenv(
+    "DJANGO_DEFAULT_USER_IS_ACTIVE",
+    str(DEBUG),
+) in [
+    "true",
+    "True",
+    "yes",
+    "YES",
+    "1",
+    "y",
+]

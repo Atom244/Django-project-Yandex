@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+    {% load static %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Детали</title>
+        <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" >
+        <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+        <link rel="icon" type="image" href="{% static 'img/favicon.ico' %}" >
+    </head>
+    <h1>Детали</h1>
+    <div class="card">
+        <p>
+        {{ user.mail }}
+        </p>
+        <p>
+        {% if user.first_name %} {{user.first_name}} 
+        {% else %} <i>не указано</i>
+        {% endif %}
+        </p>
+        <p>
+        {% if user.last_name %} {{user.last_name}} 
+        {% else %} <i>не указано</i>
+        {% endif %}
+        </p>
+        <p>
+        {{ profile.birthday }}
+        </p>
+        <p>
+        {{ profile.coffee_count }}
+        </p>
+    </div>
+</html>

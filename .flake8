@@ -3,6 +3,6 @@ inline-quotes = "
 multiline-quotes = "
 docstring-quotes = """
 import-order-style = google
-application-import-names = lyceum, about, catalog, homepage, core, download, feedback
+application-import-names = lyceum, about, catalog, homepage, core, download, feedback, users
 exclude = */migrations/ manage.py
 max-line-length = 79
