@@ -1,5 +1,193 @@
 [
 {
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$NwyVHg4BgkB0R7LTvFBEXw$5Y6ClJM6pGgfh1EpLX+D1JklKtQKQ07HXbAjaGkRntc=",
+    "last_login": "2024-11-03T19:39:09.892Z",
+    "is_superuser": true,
+    "username": "almas",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-10-13T08:15:17.109Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$KsNJdxeNMyCTwk2CchSqAb$Uqbu7jB2g5mc6+dlW1Aad0++pgK0TjStoip6FC6jaGA=",
+    "last_login": "2024-11-10T13:52:53.136Z",
+    "is_superuser": false,
+    "username": "Atom244",
+    "first_name": "",
+    "last_name": "",
+    "email": "almasvildanov@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-10T13:51:30.835Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "Яблоко \"Грэнни Смит\"",
+    "text": "<p>это яблоко превосходно</p>",
+    "category": 1,
+    "is_on_main": true,
+    "created_at": "2024-10-29T12:15:36.932Z",
+    "updated_at": "2024-10-29T12:15:36.942Z",
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "name": "Папайя",
+    "text": "<p>описание просто РОСКОШНО</p>",
+    "category": 1,
+    "is_on_main": true,
+    "created_at": "2024-10-29T12:15:36.932Z",
+    "updated_at": "2024-10-29T12:15:36.942Z",
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 3,
+  "fields": {
+    "is_published": true,
+    "name": "Фундук",
+    "text": "<p>превосходно подойдёт для перекуса</p>",
+    "category": 1,
+    "is_on_main": true,
+    "created_at": "2024-10-29T12:15:36.932Z",
+    "updated_at": "2024-10-29T12:15:36.942Z",
+    "tags": [
+      5
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "name": "Апельсин",
+    "text": "<p>это описание очень роскошно</p>",
+    "category": 1,
+    "is_on_main": false,
+    "created_at": "2024-10-29T12:15:36.932Z",
+    "updated_at": "2024-10-30T12:31:40.310Z",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "name": "Клубника",
+    "text": "<p>превосходно для украшения тортов</p>",
+    "category": 1,
+    "is_on_main": false,
+    "created_at": "2024-10-29T12:15:36.932Z",
+    "updated_at": "2024-10-29T12:15:36.942Z",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "normalized_name": "цитpycoвыe",
+    "slug": "citrus-fruits",
+    "name": "Цитрусовые"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "normalized_name": "ягoды",
+    "slug": "berries",
+    "name": "Ягоды"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 3,
+  "fields": {
+    "is_published": true,
+    "normalized_name": "яблoчныe",
+    "slug": "apple",
+    "name": "Яблочные"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "normalized_name": "тpoпичecкиe",
+    "slug": "tropical",
+    "name": "Тропические"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "normalized_name": "opexoвыe",
+    "slug": "nutty",
+    "name": "Ореховые"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "normalized_name": "фpyкты",
+    "slug": "fruits",
+    "weight": 150,
+    "name": "Фрукты"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "normalized_name": "oвoщи",
+    "slug": "vegetables",
+    "weight": 150,
+    "name": "Овощи"
+  }
+},
+{
   "model": "feedback.personaldata",
   "pk": 25,
   "fields": {
@@ -794,168 +982,6 @@
   "fields": {
     "feedback": 16,
     "file": "uploads/16/image_44.png"
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 1,
-  "fields": {
-    "user": 1,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 18
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 1,
-  "fields": {
-    "is_published": true,
-    "name": "Яблоко \"Грэнни Смит\"",
-    "text": "<p>это яблоко превосходно</p>",
-    "category": 1,
-    "is_on_main": true,
-    "created_at": "2024-10-29T12:15:36.932Z",
-    "updated_at": "2024-10-29T12:15:36.942Z",
-    "tags": [
-      3
-    ]
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 2,
-  "fields": {
-    "is_published": true,
-    "name": "Папайя",
-    "text": "<p>описание просто РОСКОШНО</p>",
-    "category": 1,
-    "is_on_main": true,
-    "created_at": "2024-10-29T12:15:36.932Z",
-    "updated_at": "2024-10-29T12:15:36.942Z",
-    "tags": [
-      4
-    ]
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 3,
-  "fields": {
-    "is_published": true,
-    "name": "Фундук",
-    "text": "<p>превосходно подойдёт для перекуса</p>",
-    "category": 1,
-    "is_on_main": true,
-    "created_at": "2024-10-29T12:15:36.932Z",
-    "updated_at": "2024-10-29T12:15:36.942Z",
-    "tags": [
-      5
-    ]
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 4,
-  "fields": {
-    "is_published": true,
-    "name": "Апельсин",
-    "text": "<p>это описание очень роскошно</p>",
-    "category": 1,
-    "is_on_main": false,
-    "created_at": "2024-10-29T12:15:36.932Z",
-    "updated_at": "2024-10-30T12:31:40.310Z",
-    "tags": [
-      1
-    ]
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 5,
-  "fields": {
-    "is_published": true,
-    "name": "Клубника",
-    "text": "<p>превосходно для украшения тортов</p>",
-    "category": 1,
-    "is_on_main": false,
-    "created_at": "2024-10-29T12:15:36.932Z",
-    "updated_at": "2024-10-29T12:15:36.942Z",
-    "tags": [
-      2
-    ]
-  }
-},
-{
-  "model": "catalog.tag",
-  "pk": 1,
-  "fields": {
-    "is_published": true,
-    "normalized_name": "цитpycoвыe",
-    "slug": "citrus-fruits",
-    "name": "Цитрусовые"
-  }
-},
-{
-  "model": "catalog.tag",
-  "pk": 2,
-  "fields": {
-    "is_published": true,
-    "normalized_name": "ягoды",
-    "slug": "berries",
-    "name": "Ягоды"
-  }
-},
-{
-  "model": "catalog.tag",
-  "pk": 3,
-  "fields": {
-    "is_published": true,
-    "normalized_name": "яблoчныe",
-    "slug": "apple",
-    "name": "Яблочные"
-  }
-},
-{
-  "model": "catalog.tag",
-  "pk": 4,
-  "fields": {
-    "is_published": true,
-    "normalized_name": "тpoпичecкиe",
-    "slug": "tropical",
-    "name": "Тропические"
-  }
-},
-{
-  "model": "catalog.tag",
-  "pk": 5,
-  "fields": {
-    "is_published": true,
-    "normalized_name": "opexoвыe",
-    "slug": "nutty",
-    "name": "Ореховые"
-  }
-},
-{
-  "model": "catalog.category",
-  "pk": 1,
-  "fields": {
-    "is_published": true,
-    "normalized_name": "фpyкты",
-    "slug": "fruits",
-    "weight": 150,
-    "name": "Фрукты"
-  }
-},
-{
-  "model": "catalog.category",
-  "pk": 2,
-  "fields": {
-    "is_published": true,
-    "normalized_name": "oвoщи",
-    "slug": "vegetables",
-    "weight": 150,
-    "name": "Овощи"
   }
 }
 ]
