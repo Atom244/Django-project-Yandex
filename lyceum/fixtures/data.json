@@ -120,6 +120,14 @@
   }
 },
 {
+  "model": "feedback.personaldata",
+  "pk": 40,
+  "fields": {
+    "name": "ooooooooooooooooooooooo",
+    "mail": "ooooooooo@oooooooo.oo"
+  }
+},
+{
   "model": "feedback.feedback",
   "pk": 1,
   "fields": {
@@ -267,6 +275,16 @@
     "text": "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
     "created_on": "2024-11-06T16:23:47.859Z",
     "status": "OK"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 16,
+  "fields": {
+    "personal_data": 40,
+    "text": "ooooooooooooooooooooooooooooo",
+    "created_on": "2024-11-07T10:19:14.678Z",
+    "status": "PR"
   }
 },
 {
@@ -421,6 +439,17 @@
     "feedback": 15,
     "from_status": "PR",
     "to": "OK"
+  }
+},
+{
+  "model": "feedback.statuslog",
+  "pk": 23,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-11-07T10:19:49.535Z",
+    "feedback": 16,
+    "from_status": "GT",
+    "to": "PR"
   }
 },
 {
@@ -741,6 +770,40 @@
   "fields": {
     "feedback": 15,
     "file": "uploads/15/my_icon.txt"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 41,
+  "fields": {
+    "feedback": 16,
+    "file": "uploads/16/6da9735c47ea073fe82fb9501cdab3bc_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 42,
+  "fields": {
+    "feedback": 16,
+    "file": "uploads/16/f8e0f72d11c9b7c68fef6c2c7ea5da42_1.jpg"
+  }
+},
+{
+  "model": "feedback.multiplefile",
+  "pk": 43,
+  "fields": {
+    "feedback": 16,
+    "file": "uploads/16/image_44.png"
+  }
+},
+{
+  "model": "users.profile",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "birthday": null,
+    "image": "",
+    "coffee_count": 18
   }
 },
 {
