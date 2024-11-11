@@ -1,6 +1,7 @@
 import pathlib
 
 import django.contrib.auth.models
+from django.contrib.auth.models import User
 import django.db
 import sorl
 
@@ -30,6 +31,9 @@ class UserManager(django.contrib.auth.models.UserManager):
 
     def by_mail(self, email):
         return self.get_queryset().get(email=email)
+
+    def set_email_unique(self):
+        User._meta.get_field("email")._unique = True
 
 
 class Profile(django.db.models.Model):

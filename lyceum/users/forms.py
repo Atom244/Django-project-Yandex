@@ -14,7 +14,7 @@ class SignUpForm(django.contrib.auth.forms.UserCreationForm):
         required=True,
     )
 
-    class Meta:
+    class Meta(django.contrib.auth.forms.UserCreationForm.Meta):
         model = django.contrib.auth.models.User
 
         fields = [
