@@ -1,15 +1,11 @@
 import pathlib
-import sys
 
-from django.contrib.auth.models import User
+import django.contrib.auth.models
 import django.db
 import sorl
 
 
 __all__ = []
-
-if "makemigrations" not in sys.argv and "migrate" not in sys.argv:
-    User._meta.get_field("email")._unique = True
 
 
 class UserManager(django.contrib.auth.models.UserManager):
@@ -93,5 +89,5 @@ class Profile(django.db.models.Model):
 class ProxyUser(django.contrib.auth.models.User):
     objects = UserManager()
 
-    class Meta:
+    class Meta(django.contrib.auth.models.User.Meta):
         proxy = True
