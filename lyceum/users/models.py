@@ -9,7 +9,7 @@ import sorl
 __all__ = []
 
 
-class UserManager(django.contrib.auth.models.UserManager):
+class UserManager(django.contrib.auth.models.BaseUserManager):
     def active(self):
         return (
             self.get_queryset().filter(is_active=True).only("id", "username")
@@ -31,9 +31,6 @@ class UserManager(django.contrib.auth.models.UserManager):
 
     def by_mail(self, email):
         return self.get_queryset().get(email=email)
-
-    def set_email_unique(self):
-        User._meta.get_field("email")._unique = True
 
 
 class Profile(django.db.models.Model):
@@ -91,6 +88,7 @@ class Profile(django.db.models.Model):
 
 
 class ProxyUser(django.contrib.auth.models.User):
+    User._meta.get_field("email")._unique = True
     objects = UserManager()
 
     class Meta(django.contrib.auth.models.User.Meta):
