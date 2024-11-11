@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html lang="ru">
-    {% load static %}
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Регистрация</title>
-        <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" >
-    </head>
-    <h1>Регистрация</h1>
-    <form method="post" action="">
-    {% csrf_token %}
-    {% include "includes/form.html" %}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-<button type="submit">Зарегистрироваться</button>
-</html>
+{% extends "base.html" %}
+
+{% load static widget_tweaks %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block content %}
+
+<h1 class="fs-2 fw-bold text-center">Регистрация</h1>
+
+{% include "includes/form.html" with submit_value="Зарегистрироваться" %}
+
+{% endblock %}

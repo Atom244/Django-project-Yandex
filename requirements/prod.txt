@@ -1,6 +1,7 @@
 Django==4.2.16
 django-ckeditor-5==0.2.15
 django-cleanup==9.0.0
+django-widget-tweaks==1.5.0
 pillow==11.0.0
 python-dotenv==1.0.1
 sorl-thumbnail==12.11.0

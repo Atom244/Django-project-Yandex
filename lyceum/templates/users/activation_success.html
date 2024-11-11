@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Аккаунт активирован
+{% endblock %}
+
+{% block content %}
+
+<h1 class="fs-2 fw-bold text-center">Активация аккаунта</h1>
+<div class="container d-flex justify-content-center">
+  <div class="alert {% if ok %}alert-success{% else %}alert-danger{% endif %}">
+    <h1 class="alert-heading">{% if ok %}Аккаунт успешно активирован!{% else %}{{ info }}{% endif %}</h1>
+    <p>{% if ok %}Ваш аккаунт активирован, а ссылка для активации больше недействительна{% else %}Упс! Что-то пошло не так{% endif %}</p>
+    <div class="d-grid gap-2 my-2">
+      <a class="btn btn-outline-{% if ok %}success{% else %}danger{% endif %}" href="{% url 'homepage:home' %}">На главную</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

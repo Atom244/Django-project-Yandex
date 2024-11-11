@@ -1,117 +1,150 @@
 from datetime import timedelta
 
-from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
-from django.http import HttpResponseNotFound
-from django.shortcuts import redirect, render, reverse
+import django.conf
+import django.contrib.auth
+import django.contrib.auth.decorators
+from django.contrib.auth.models import User
+import django.core.mail
+import django.http
+import django.shortcuts
+import django.urls
 from django.utils import timezone
 
 import users.forms
 import users.models
 
-__all__ = ("signup", "activate_user")
+
+__all__ = []
 
 
 def signup(request):
     template = "users/signup.html"
-    signup_form = users.forms.SignupForm(
-        request.POST or None,
-    )
+    form = users.forms.SignUpForm(request.POST or None)
     context = {
-        "form": signup_form,
+        "form": form,
     }
-    if request.method == "POST" and signup_form.is_valid():
-        user = signup_form.save(commit=False)
-        user.is_active = settings.DEFAULT_USER_IS_ACTIVE
-        user.save()
-        users.models.Profile.objects.create(user=user)
-        mail_to = signup_form.cleaned_data.get("email", "example@gmail.com")
-        activate_link = request.build_absolute_uri(
-            reverse("users:activate", kwargs={"username": user.username}),
-        )
-        send_mail(
-            "Активация пользователя",
-            f"для активации перейдите по ссылке \n {activate_link}",
-            settings.EMAIL_ADDRESS,
-            [mail_to],
-            fail_silently=False,
-        )
-        messages.success(
-            request,
-            "Регистрация успешна!",
-        )
-        messages.success(
-            request,
-            "Письмо для активации отправлено!",
-        )
+    if request.method == "POST":
+        if form.is_valid():
+            user = form.save()
+            users.models.Profile.objects.create(
+                user=user,
+            )
 
-        return redirect("users:signup")
+            if django.conf.settings.DEFAULT_USER_IS_ACTIVE:
+                user.is_active = True
+                user.save()
 
-    return render(request, template, context)
+            activation_link = request.build_absolute_uri(
+                django.urls.reverse(
+                    "users:activate",
+                    kwargs={
+                        "username": user.username,
+                    },
+                ),
+            )
+
+            msg_text = (
+                f"Вам необходимо активировать аккаунт в течение 12 "
+                "часов после регистрации. "
+                "Для активации перейдите по ссылке, указанной в"
+                " данном письме.\n"
+                f"Ссылка для активации: {activation_link}"
+            )
+
+            django.core.mail.send_mail(
+                "Активация аккаунта",
+                msg_text,
+                django.conf.settings.EMAIL_ADDRESS,
+                [user.email],
+            )
+
+            django.contrib.auth.login(
+                request,
+                user,
+                backend="users.backends.LoginBackend",
+            )
+            return django.shortcuts.redirect(
+                django.urls.reverse("homepage:home"),
+            )
+
+    return django.shortcuts.render(request, template, context)
 
 
 def activate_user(request, username):
-    user = users.models.User.objects.get(
+    user = User.objects.get(
         username=username,
     )
     if timezone.now() - timedelta(hours=12) <= user.date_joined:
         user.is_active = True
         user.save()
-        return redirect("users:login")
+        return django.shortcuts.redirect("users:login")
 
-    return HttpResponseNotFound(
+    return django.http.HttpResponseNotFound(
         "Пользователь не найден или время активации истекло",
     )
 
 
 def user_list(request):
     template = "users/user_list.html"
-    users_list = list(
-        users.models.User.objects.active(),
+    active_users = users.models.ProxyUser.objects.active().all()
+    context = {
+        "users": active_users,
+    }
+    return django.shortcuts.render(request, template, context)
+
+
+def user_detail(request, pk):
+    template = "users/user_detail.html"
+    user = django.shortcuts.get_object_or_404(
+        users.models.ProxyUser.objects.get_user_detail(pk),
     )
     context = {
-        "form": users_list,
-    }
-    return render(request, template, context)
-
-
-def user_deatil(request):
-    template = "users/user_detail.html"
-    user = request.user
-    profile = user.profile
-    context = {
         "user": user,
-        "profile": profile,
     }
-    return render(request, template, context)
+    return django.shortcuts.render(request, template, context)
 
 
-@login_required
+@django.contrib.auth.decorators.login_required
 def profile(request):
     template = "users/profile.html"
     user = request.user
-    profile_form = users.forms.ProfileChangeForm(
+
+    user_form = users.forms.UserEditForm(
         request.POST or None,
-        request.FILES or None,
-        instance=user.profile,
-    )
-    user_form = users.forms.UserChangeForm(
-        request.POST or None,
+        initial={
+            "first_name": user.first_name if user.first_name else "",
+            "last_name": user.last_name if user.last_name else "",
+            "username": user.username,
+            "email": user.email,
+        },
         instance=user,
     )
-    if request.method == "POST":
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(
-                request,
-                "Изменения успешны!",
-            )
-            return redirect("users:profile")
+
+    birthday = user.profile.birthday
+    if user.profile.birthday:
+        user.profile.birthday.isoformat()
+
+    profile_form = users.forms.ProfileEditForm(
+        request.POST or None,
+        request.FILES or None,
+        initial={
+            "image": user.profile.image,
+            "birthday": birthday,
+        },
+        instance=user.profile,
+    )
+
+    if user_form.is_valid() and profile_form.is_valid():
+        user_form.save()
+        profile_form.save()
+        return django.shortcuts.redirect("users:profile")
+
+    if not user.is_authenticated:
+        return django.shortcuts.redirect("users:login")
 
     context = {
-        "forms": [user_form, profile_form],
+        "user_form": user_form,
+        "profile_form": profile_form,
+        "coffee_count": user.profile.coffee_count,
     }
-    return render(request, template, context)
+    return django.shortcuts.render(request, template, context)

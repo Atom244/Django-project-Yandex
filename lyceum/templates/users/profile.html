@@ -1,23 +1,111 @@
-<!DOCTYPE html>
-<html lang="ru">
-    {% load static %}
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Детали</title>
-        <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" >
-        <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
-        <link rel="icon" type="image" href="{% static 'img/favicon.ico' %}" >
-    </head>
-    <h1>Профиль</h1>
-    {% for form in forms %}
-        {% include "includes/form.html" %}
-    {% endfor %}
-    <input type="submit" value="Submit">
-    <a href="../../coffee/" class="button">Выпить кофе</a>
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+{% extends "base.html" %}
+
+{% load static widget_tweaks thumbnail %}
+
+{% block title %}
+Мой профиль
+{% endblock %}
+
+{% block content %}
+
+<h1 class="fs-2 fw-bold text-center">Мой профиль <span class="text-muted">({{ user.username }})</span></h1>
+<div class="container d-flex justify-content-center">
+  <div class="w-50">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% with form=user_form %}
+
+      <div class="my-2">
+
+        {% for field in form.visible_fields %}
+
+        <div class="my-2">
+
+          {% for error in field.errors %}
+
+          <div class="my-1 alert alert-danger">
+            {{ error|escape }}
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+        <div class="form-floating my-2">
+          {{ field|add_class:"form-control" }}
+          <label for="{{ field.auto_id }}">{{ field.label }}</label>
+        </div>
+
+        {% if field.help_text %}
+
+        <p class="fs-6 text-muted">{{ field.help_text }}</p>
+
+        {% endif %}
+
         {% endfor %}
-    </ul>
-</html>
+
+      </div>
+
+      {% endwith %}
+
+      {% with form=profile_form %}
+
+      <div class="my-2">
+
+        {% for field in form.visible_fields %}
+
+        {% if field.label == "Аватарка" %}
+
+        {{ field|add_class:"form-control" }}
+        
+        {% else %}
+
+        <div class="my-2">
+
+          {% for error in field.errors %}
+
+          <div class="my-1 alert alert-danger">
+            {{ error|escape }}
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+        <div class="form-floating my-2">
+          {{ field|add_class:"form-control" }}
+          <label for="{{ field.auto_id }}">{{ field.label }}</label>
+        </div>
+
+        {% if field.help_text %}
+
+        <p class="fs-6 text-muted">{{ field.help_text }}</p>
+
+        {% endif %}
+
+        {% endif %}
+
+        {% endfor %}
+
+      </div>
+
+      {% endwith %}
+
+      <div class="my-2">
+        {% thumbnail user.profile.image "200x200" crop="center" as img %}
+        <img src="{{ img.url }}" class="img-thumbnail">
+        {% endthumbnail %}
+      </div>
+
+      <div class="my-2 d-grid gap-2">
+        <input type="submit" class="btn btn-primary" value="Подтвердить изменения">
+      </div>
+    </form>
+    <div class="my-2 d-grid gap-2">
+      <a class="btn btn-warning" href="{% url 'homepage:coffee' %}">Выпить кофе <span class="badge text-bg-dark rounded-pill">{{ coffee_count|default:"0" }}</span></a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

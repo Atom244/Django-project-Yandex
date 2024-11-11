@@ -1,57 +1,58 @@
-from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+import django.contrib.auth.forms
+from django.contrib.auth.models import User
+import django.forms
+import django.forms.fields
 
-from users.models import Profile, User
-
-__all__ = ()
+from users.models import Profile, ProxyUser
 
 
-class SignupForm(UserCreationForm):
-    email = forms.EmailField(max_length=200, help_text="Обязательно")
+__all__ = []
 
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = (
+
+class SignUpForm(django.contrib.auth.forms.UserCreationForm):
+    email = django.forms.EmailField(
+        required=True,
+    )
+
+    class Meta:
+        model = django.contrib.auth.models.User
+
+        fields = [
             User.username.field.name,
             User.email.field.name,
-            "password1",
-            "password2",
-        )
+        ]
 
 
-class UserChangeForm(UserChangeForm):
-    password = None
-
+class ProfileEditForm(django.forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs["class"] = "form-control"
-
-    class Meta(UserChangeForm.Meta):
-        model = User
-        fields = (
-            User.username.field.name,
-            User.email.field.name,
+        self.fields[Profile.coffee_count.field.name].disabled = True
+        self.fields[Profile.birthday.field.name].widget = (
+            django.forms.fields.TextInput(
+                {
+                    "type": "date",
+                },
+            )
         )
-
-
-class ProfileChangeForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs["class"] = "form-control"
-
-        self.fields["image"].widget.attrs["type"] = "file"
 
     class Meta:
         model = Profile
-        fields = (
+
+        fields = [
             Profile.birthday.field.name,
             Profile.image.field.name,
             Profile.coffee_count.field.name,
-        )
-        widgets = {
-            Profile.coffee_count.field.name: (
-                forms.NumberInput(attrs={"disabled": True})
-            ),
-        }
+        ]
+
+
+class UserEditForm(django.contrib.auth.forms.UserChangeForm):
+    password = None
+
+    class Meta(django.contrib.auth.forms.UserChangeForm.Meta):
+        model = ProxyUser
+
+        fields = [
+            User.first_name.field.name,
+            User.last_name.field.name,
+            User.email.field.name,
+        ]

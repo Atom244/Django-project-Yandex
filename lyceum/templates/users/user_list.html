@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="ru">
-    {% load static %}
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Список пользователей</title>
-        <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" >
-        <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
-        <link rel="icon" type="image" href="{% static 'img/favicon.ico' %}" >
-    </head>
-    <h1>Пользователи</h1>
-    {% for user in users_list %}
-    <div>
-        <p>{{user.username}}</p>
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Список активных пользователей
+{% endblock %}
+
+{% block content %}
+<h1 class="fs-2 fw-bold">Список активных пользователей</h1>
+<div class="row px-3 py-2">
+
+  {% for user in users %}
+
+  <div class="col-6">
+    <div class="d-grid gap-2">
+      <a class="btn btn-outline-success my-2 mx-2" href="{% url 'users:user_detail' user.id %}">{{ user.username }}</a>
     </div>
-    {% endfor %}
-</html>
+  </div>
+
+  {% endfor %}
+
+</div>
+{% endblock %}

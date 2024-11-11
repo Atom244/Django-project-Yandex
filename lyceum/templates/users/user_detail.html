@@ -1,34 +1,67 @@
-<!DOCTYPE html>
-<html lang="ru">
-    {% load static %}
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Детали</title>
-        <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" >
-        <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
-        <link rel="icon" type="image" href="{% static 'img/favicon.ico' %}" >
-    </head>
-    <h1>Детали</h1>
-    <div class="card">
-        <p>
-        {{ user.mail }}
-        </p>
-        <p>
-        {% if user.first_name %} {{user.first_name}} 
-        {% else %} <i>не указано</i>
-        {% endif %}
-        </p>
-        <p>
-        {% if user.last_name %} {{user.last_name}} 
-        {% else %} <i>не указано</i>
-        {% endif %}
-        </p>
-        <p>
-        {{ profile.birthday }}
-        </p>
-        <p>
-        {{ profile.coffee_count }}
-        </p>
+{% extends "base.html" %}
+
+{% load static thumbnail %}
+
+{% block title %}
+Подробнее о пользователе
+{% endblock %}
+
+{% block content %}
+
+<h1 class="fs-2 fw-bold">Пользователь {{ user.username }}</h1>
+<div class="container m-auto">
+  <div class="w-70">
+    <div class="row">
+      <div class="col-sm-6 col-mb-4 col-lg-3">
+
+        {% thumbnail user.profile.image "300x300" crop="center" as img %}
+
+        <img class="img-thumbnail" src="{{ img.url }}">
+
+        {% endthumbnail %}
+
+      </div>
+      <div class="col">
+
+        <div class="row">
+          <div class="col-3">
+            <p class="fs-6 fw-bold">Имя</p>
+          </div>
+          <div class="col">
+            <p class="fs-6 text-muted">{{ user.first_name|default:'<span class="badge bg-primary">не указано</span>' }}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <p class="fs-6 fw-bold">Фамилия</p>
+          </div>
+          <div class="col">
+            <p class="fs-6 text-muted">{{ user.last_name|default:'<span class="badge bg-primary">не указано</span>' }}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <p class="fs-6 fw-bold">Дата рождения</p>
+          </div>
+          <div class="col">
+            <p class="fs-6 text-muted">{{ user.profile.birthday|default:'<span class="badge bg-primary">не указано</span>' }}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <p class="fs-6 fw-bold">Выпито кофе</p>
+          </div>
+          <div class="col">
+            <p class="fs-6 text-muted fw-bold">{{ user.profile.coffee_count|default:'0' }}</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-</html>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,31 +1,15 @@
-<!DOCTYPE html>
-<html lang="ru">
-    {% load static %}
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>LogIn</title>
-        <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" >
-        <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
-        <link rel="icon" type="image" href="{% static 'img/favicon.ico' %}" >
-    </head>
-    <h1>логин</h1>
-    {% if forms.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                {{ error|escape }}
-            {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_erors %}
-            {{ error|escape}}
-        {% endfor %}
-    {% endif %}
-    <form method="post" action="">
-    {% csrf_token %}
-    {% include "includes/form.html" %}
+{% extends "base.html" %}
 
-    <button type="submit">Войти</button>
-    </form>
-    </form>
-    <a href="../password_change_form/">Забыли пароль?</a>
-</html>
+{% load static widget_tweaks %}
+
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+
+<h1 class="fs-2 fw-bold text-center">Авторизация пользователя</h1>
+
+{% include "includes/form.html" with submit_value="Войти" %}
+
+{% endblock %}

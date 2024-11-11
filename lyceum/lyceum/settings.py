@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "django_cleanup.apps.CleanupConfig",
     "django_ckeditor_5",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -110,6 +111,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = "/auth/login"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/auth/login"
+
+AUTHENTICATION_BACKENDS = [
+    "users.backends.LoginBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
 LANGUAGE_CODE = "ru-ru"
 USE_I18N = True
 
@@ -144,12 +154,6 @@ if DEBUG:
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
-
-LOGIN_URL = "../login/"
-
-LOGIN_REDIRECT_URL = "../profile/"
-
-LOGOUT_REDIRECT_URL = "../login/"
 
 FILE_UPLOAD_HANDLERS = [
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
@@ -188,6 +192,8 @@ CKEDITOR_5_CONFIGS = {
 }
 
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 EMAIL_ADDRESS = os.getenv("DJANGO_MAIL", "1@examplemail.com")
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"

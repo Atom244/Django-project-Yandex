@@ -1,118 +1,70 @@
-from datetime import timedelta
-from unittest import mock
-
-from django.test import Client, override_settings, TestCase
-from django.urls import reverse
-from django.utils import timezone
-from parameterized import parameterized
-
-import users.forms
-import users.models
+import django.conf
+from django.contrib.auth.models import User
+import django.test
+import django.urls
+import parameterized
 
 
-__all__ = ("ActivationTests", "SignupTests")
+__all__ = []
 
 
-class ActivationTests(TestCase):
-    @override_settings(DEFAULT_USER_IS_ACTIVE=True)
-    def test_default_activation_true(self):
-        old_len = users.models.User.objects.all().count()
-        data = {
-            "username": "testuser5",
-            "email": "example@gmail.com",
-            "password1": "P@ssqwerty",
-            "password2": "P@ssqwerty",
-        }
-
-        self.assertTrue(users.forms.SignupForm(data).is_valid())
-        self.client.post("/auth/signup/", data=data)
-        self.assertEqual(users.models.User.objects.all().count(), old_len + 1)
-        self.assertTrue(
-            users.models.User.objects.get(
-                username=data["username"],
-            ).is_active,
-        )
-
-    @override_settings(DEFAULT_USER_IS_ACTIVE=False)
-    def test_default_activation_false(self):
-        old_len = users.models.User.objects.all().count()
-        data = {
-            "username": "testuser5",
-            "email": "example@gmail.com",
-            "password1": "P@ssqwerty",
-            "password2": "P@ssqwerty",
-        }
-
-        self.assertTrue(users.forms.SignupForm(data).is_valid())
-        self.client.post("/auth/signup/", data=data)
-        self.assertEqual(users.models.User.objects.all().count(), old_len + 1)
-        self.assertFalse(
-            users.models.User.objects.get(
-                username=data["username"],
-            ).is_active,
-        )
-
-
-class SignupTests(TestCase):
+class UsersTests(django.test.TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.valid_signup = {
-            "email": "example@gmail.com",
-            "username": "testuser3",
-            "password1": "P@ssqwerty",
-            "password2": "P@ssqwerty",
+
+        cls.signup_data = {
+            "email": "test@mail.ru",
+            "username": "test_username_lol",
+            "password1": "asdkl;u@MKF4",
+            "password2": "asdkl;u@MKF4",
         }
-        cls.inactive_now_user = users.models.User.objects.create_user(
-            username="testuser4",
-            email="example@gmail.com",
-            password="P@ssqwerty",
-            date_joined=timezone.now(),
+
+        cls.active_user = User.objects.create_user(
+            username="active_user",
+            email="test2@mail.com",
+            password="passwoo231231",
+            is_active=True,
+        )
+
+        cls.nonactive_user = User.objects.create_user(
+            username="nonactive_user",
+            email="test3@mail.com",
+            password="passwoo23231231",
             is_active=False,
         )
 
-    @parameterized.expand(
+    def test_signup_successful(self):
+        count = User.objects.count()
+        django.test.Client().post(
+            django.urls.reverse("users:signup"),
+            data=self.signup_data,
+            follow=True,
+        )
+        self.assertEqual(
+            count + 1,
+            User.objects.count(),
+        )
+
+    @parameterized.parameterized.expand(
         [
-            ["ex@gmail.com", "ex@gmail.com"],
-            ["ars.plmr@yandex.ru", "ars-plmr@yandex.ru"],
-            ["example@yandex.ru", "example@ya.ru"],
+            ("active_user",),
+            ("test2@mail.com",),
         ],
     )
-    def test_normalization_email(self, email1, email2):
-        old_users = users.models.User.objects.count()
-        Client().post(
-            reverse("users:signup"),
-            data={
-                "username": "username7",
-                "email": email1,
-                "password1": "P@ssqwerty",
-                "password2": "P@ssqwerty",
-            },
+    def test_login(self, username):
+        login_data_by_mail = {
+            "username": username,
+            "password": "passwoo231231",
+        }
+        self.client.post(
+            django.urls.reverse("users:login"),
+            data=login_data_by_mail,
+            follow=True,
         )
-        Client().post(
-            reverse("users:signup"),
-            data={
-                "username": "username7",
-                "email": email2,
-                "password1": "P@ssqwerty",
-                "password2": "P@ssqwerty",
-            },
-        )
-        self.assertEqual(old_users + 1, users.models.User.objects.count())
 
-    def test_activation_positive_time(self):
-        user = self.inactive_now_user
-        self.assertFalse(user.is_active)
-        Client().get(reverse("users:activate", args=[user.username]))
-        user = users.models.User.objects.get(
-            username=user.username,
-        )
-        self.assertTrue(user.is_active)
+        user_context = self.client.get(
+            django.urls.reverse("homepage:home"),
+        ).context["user"]
 
-    @mock.patch("users.views.timezone")
-    def test_activation_negative_time(self, mocked_datetime):
-        mocked_datetime.now.return_value = timezone.now() + timedelta(hours=8)
-        user = self.inactive_now_user
-        self.assertFalse(user.is_active)
-        Client().get(reverse("users:activate", args=[user.username]))
-        self.assertFalse(user.is_active)
+        self.assertEqual(user_context.username, "active_user")
