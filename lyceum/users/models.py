@@ -2,6 +2,7 @@ import pathlib
 
 import django.contrib.auth.models
 from django.contrib.auth.models import User
+from django.core.management import ManagementUtility
 import django.db
 import sorl
 
@@ -9,7 +10,14 @@ import sorl
 __all__ = []
 
 
-class UserManager(django.contrib.auth.models.BaseUserManager):
+utility = ManagementUtility()
+command_args = utility.argv
+
+if "makemigrations" not in command_args and "migrate" not in command_args:
+    User._meta.get_field("email")._unique = True
+
+
+class UserManager(django.contrib.auth.models.UserManager):
     def active(self):
         return (
             self.get_queryset().filter(is_active=True).only("id", "username")
@@ -88,7 +96,6 @@ class Profile(django.db.models.Model):
 
 
 class ProxyUser(django.contrib.auth.models.User):
-    User._meta.get_field("email")._unique = True
     objects = UserManager()
 
     class Meta(django.contrib.auth.models.User.Meta):
