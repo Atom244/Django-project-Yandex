@@ -210,3 +210,5 @@ DEFAULT_USER_IS_ACTIVE = os.getenv(
     "1",
     "y",
 ]
+
+MAX_AUTH_ATTEMPTS = int(os.getenv("MAX_AUTH_ATTEMPTS", 5))

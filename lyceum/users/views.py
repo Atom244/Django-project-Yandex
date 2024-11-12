@@ -1,12 +1,14 @@
 from datetime import timedelta
 
 import django.conf
+from django.contrib import messages
 import django.contrib.auth
 import django.contrib.auth.decorators
 from django.contrib.auth.models import User
 import django.core.mail
 import django.http
 import django.shortcuts
+from django.shortcuts import get_object_or_404, redirect
 import django.urls
 from django.utils import timezone
 
@@ -82,6 +84,26 @@ def activate_user(request, username):
     return django.http.HttpResponseNotFound(
         "Пользователь не найден или время активации истекло",
     )
+
+
+def reactivate_user(request, username):
+    profile = get_object_or_404(users.models.Profile, user__username=username)
+
+    if (
+        profile.activation_sent_at
+        and timezone.now() - profile.activation_sent_at > timedelta(days=7)
+    ):
+        messages.error(
+            request,
+            "Ссылка для активации больше не действительна. Обратитесь в "
+            "поддержку.",
+        )
+        return redirect("users:login")
+
+    profile.user.is_active = True
+    profile.user.save()
+    messages.success(request, "Ваш аккаунт успешно активирован.")
+    return redirect("users:login")
 
 
 def user_list(request):

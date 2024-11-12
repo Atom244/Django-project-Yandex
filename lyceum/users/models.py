@@ -1,9 +1,13 @@
 import pathlib
 
+import django.conf
 import django.contrib.auth.models
 from django.contrib.auth.models import User
+import django.core.mail
 from django.core.management import ManagementUtility
 import django.db
+from django.urls import reverse
+from django.utils import timezone
 import sorl
 
 
@@ -70,6 +74,39 @@ class Profile(django.db.models.Model):
         "счётчик кофе",
         default=0,
     )
+
+    attempts_count = django.db.models.PositiveIntegerField(default=0)
+    activation_sent_at = django.db.models.DateTimeField(null=True, blank=True)
+
+    def deactivate_account(self):
+        self.user.is_active = False
+        self.user.save()
+
+    def send_reactivation_email(self, request):
+        activation_link = request.build_absolute_uri(
+            reverse(
+                "users:reactivate",
+                kwargs={"username": self.user.username},
+            ),
+        )
+
+        msg_text = (
+            "Ваш аккаунт был заблокирован из-за слишком большого количества "
+            "неудачных попыток входа. Для активации перейдите по ссылке, "
+            "указанной в данном письме.\n"
+            f"Ссылка для активации (действительна неделю): {activation_link}"
+        )
+
+        django.core.mail.send_mail(
+            "Активация аккаунта",
+            msg_text,
+            django.conf.settings.DEFAULT_FROM_EMAIL,
+            [self.user.email],
+            fail_silently=False,
+        )
+
+        self.activation_sent_at = timezone.now()
+        self.save()
 
     def get_image_x300(self):
         return sorl.thumbnail.get_thumbnail(
