@@ -48,11 +48,9 @@ class ProfileEditForm(django.forms.ModelForm):
         cleaned_data = super().clean()
         email = cleaned_data.get("email")
 
-        # Используем нормализацию из менеджера User
         normalized_email = User.objects.normalize_email(email)
         cleaned_data["email"] = normalized_email
 
-        # Проверяем, существует ли уже пользователь с этим email
         if User.objects.filter(email=normalized_email).exists():
             raise django.forms.ValidationError(
                 "Этот email уже зарегистрирован",

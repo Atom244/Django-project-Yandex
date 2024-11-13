@@ -41,17 +41,16 @@ class UserManager(django.contrib.auth.models.UserManager):
         )
 
     def normalize_email(self, email):
+        email = super().normalize_email(email)
         if not email or "@" not in email:
             return None
 
         email = email.lower().strip()
         left_part, domain_part = email.split("@", 1)
 
-        # Удаляем "+..." и нормализуем домен
         left_part = left_part.split("+", 1)[0]
         domain_part = domain_part.replace("ya.ru", "yandex.ru")
 
-        # Особая обработка для доменов Gmail и Yandex
         if domain_part == "gmail.com":
             left_part = left_part.replace(".", "")
         elif domain_part == "yandex.ru":
