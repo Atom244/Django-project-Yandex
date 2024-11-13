@@ -46,17 +46,17 @@ class ProfileEditForm(django.forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        email = self.cleaned_data["email"].lower().strip()
-        left_part = email.split("@")[0].replace("+", "")
-        right_part = email.split("@")[1].replace("ya.ru", "yandex.ru")
-        if right_part == "gmail.com":
-            left_part = left_part.replace(".", "")
-        elif right_part == "yandex.ru":
-            left_part = left_part.replace(".", "-")
+        email = cleaned_data.get("email")
 
-        cleaned_data["email"] = left_part + "@" + right_part
-        if User.objects.filter(email=email).exists():
-            raise django.forms.ValidationError("This mail already registered")
+        # Используем нормализацию из менеджера User
+        normalized_email = User.objects.normalize_email(email)
+        cleaned_data["email"] = normalized_email
+
+        # Проверяем, существует ли уже пользователь с этим email
+        if User.objects.filter(email=normalized_email).exists():
+            raise django.forms.ValidationError(
+                "Этот email уже зарегистрирован",
+            )
 
         return cleaned_data
 

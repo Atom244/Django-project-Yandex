@@ -7,7 +7,6 @@ import django.core.mail
 from django.core.management import ManagementUtility
 import django.db
 from django.urls import reverse
-from django.utils import timezone
 import sorl
 
 
@@ -41,8 +40,28 @@ class UserManager(django.contrib.auth.models.UserManager):
             )
         )
 
+    def normalize_email(self, email):
+        if not email or "@" not in email:
+            return None
+
+        email = email.lower().strip()
+        left_part, domain_part = email.split("@", 1)
+
+        # Удаляем "+..." и нормализуем домен
+        left_part = left_part.split("+", 1)[0]
+        domain_part = domain_part.replace("ya.ru", "yandex.ru")
+
+        # Особая обработка для доменов Gmail и Yandex
+        if domain_part == "gmail.com":
+            left_part = left_part.replace(".", "")
+        elif domain_part == "yandex.ru":
+            left_part = left_part.replace(".", "-")
+
+        return f"{left_part}@{domain_part}"
+
     def by_mail(self, email):
-        return self.get_queryset().get(email=email)
+        normalized_email = self.normalize_email(email)
+        return self.get_queryset().get(email=normalized_email)
 
 
 class Profile(django.db.models.Model):
@@ -78,10 +97,6 @@ class Profile(django.db.models.Model):
     attempts_count = django.db.models.PositiveIntegerField(default=0)
     activation_sent_at = django.db.models.DateTimeField(null=True, blank=True)
 
-    def deactivate_account(self):
-        self.user.is_active = False
-        self.user.save()
-
     def send_reactivation_email(self, request):
         activation_link = request.build_absolute_uri(
             reverse(
@@ -104,9 +119,6 @@ class Profile(django.db.models.Model):
             [self.user.email],
             fail_silently=False,
         )
-
-        self.activation_sent_at = timezone.now()
-        self.save()
 
     def get_image_x300(self):
         return sorl.thumbnail.get_thumbnail(

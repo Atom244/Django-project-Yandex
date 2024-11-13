@@ -1,6 +1,7 @@
 import django.conf
 import django.contrib.auth.backends
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 
 import users.models
 
@@ -10,7 +11,7 @@ __all__ = []
 class LoginBackend(django.contrib.auth.backends.ModelBackend):
     def authenticate(self, request, username=None, password=None):
         try:
-            user = users.models.ProxyUser.objects.get(email=username)
+            user = users.models.ProxyUser.objects.by_mail(username)
         except ObjectDoesNotExist:
             try:
                 user = users.models.ProxyUser.objects.get(username=username)
@@ -22,6 +23,7 @@ class LoginBackend(django.contrib.auth.backends.ModelBackend):
 
         if user.check_password(password):
             user.profile.attempts_count = 0
+            user.profile.activation_sent_at = None
             user.profile.save()
             return user if self.user_can_authenticate(user) else None
 
@@ -32,7 +34,9 @@ class LoginBackend(django.contrib.auth.backends.ModelBackend):
             user.profile.attempts_count
             >= django.conf.settings.MAX_AUTH_ATTEMPTS
         ):
-            user.profile.deactivate_account()
+            user.is_active = False
+            user.profile.activation_sent_at = timezone.now()
+            user.save()
             user.profile.send_reactivation_email(request)
 
         return None
