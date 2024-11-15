@@ -10,7 +10,7 @@ __all__ = []
 
 
 class LoginBackend(django.contrib.auth.backends.ModelBackend):
-    def authenticate(self, request, username=None, password=None):
+    def authenticate(self, request, username, password):
         try:
             validate_email(username)
             is_email = True

@@ -1,7 +1,10 @@
+from datetime import datetime, timedelta
+
 from django.db.models.query import QuerySet
 from django.test import Client, TestCase
 from django.urls import reverse
 import freezegun
+from freezegun import freeze_time
 from parameterized import parameterized
 
 from catalog import models
@@ -11,6 +14,7 @@ __all__ = []
 
 class ContextTests(TestCase):
     @classmethod
+    @freeze_time(datetime.now() - timedelta(days=1))
     def setUpTestData(cls):
 
         cls.published_category = models.Category.objects.create(
