@@ -51,11 +51,6 @@ class ProfileEditForm(django.forms.ModelForm):
         normalized_email = User.objects.normalize_email(email)
         cleaned_data["email"] = normalized_email
 
-        if User.objects.filter(email=normalized_email).exists():
-            raise django.forms.ValidationError(
-                "Этот email уже зарегистрирован",
-            )
-
         return cleaned_data
 
 

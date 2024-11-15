@@ -35,6 +35,38 @@
       {% else %}
         <li class="nav-item"><a href="{% url "catalog:item-list" %}" class="nav-link">{% trans "Список товаров" %}</a></li>
       {% endif %}
+
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          {% trans "Пользователи" %}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          {% if view_name == "users:login" %}
+            <li class="dropdown-item"><a class="dropdown-item active">Войти</a></li>
+          {% else %}
+            <li class="dropdown-item"><a href="{% url "users:login" %}" class="dropdown-item">Войти</a></li>
+          {% endif %}
+
+          {% if view_name == "users:signup" %}
+            <li class="dropdown-item"><a class="dropdown-item active">Зарегистрироваться</a></li>
+          {% else %}
+            <li class="dropdown-item"><a href="{% url "users:signup" %}" class="nav-link">Зарегистрироваться</a></li>
+          {% endif %}
+
+          {% if view_name == "users:user_list" %}
+            <li class="dropdown-item"><a class="dropdown-item active">Список пользователей</a></li>
+          {% else %}
+            <li class="dropdown-item"><a href="{% url "users:user_list" %}" class="nav-link">Список пользователей</a></li>
+          {% endif %}
+
+          {% if view_name == "users:profile" %}
+            <li class="dropdown-item"><a class="dropdown-item active">Профиль</a></li>
+          {% else %}
+            <li class="dropdown-item"><a href="{% url "users:profile" %}" class="nav-link">Профиль</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
       <form action="{% url 'set_language' %}" method="post" class="language-switcher">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ request.path }}" />

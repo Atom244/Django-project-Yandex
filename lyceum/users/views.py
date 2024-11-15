@@ -158,8 +158,10 @@ def profile(request):
 
     if user_form.is_valid() and profile_form.is_valid():
         user_form.save()
+        profile_form.save(commit=False)
+        profile_form.instance.user = request.user
         profile_form.save()
-        return django.shortcuts.redirect("users:profile")
+        return redirect("users:profile")
 
     if not user.is_authenticated:
         return django.shortcuts.redirect("users:login")

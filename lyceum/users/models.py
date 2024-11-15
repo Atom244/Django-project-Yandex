@@ -41,7 +41,6 @@ class UserManager(django.contrib.auth.models.UserManager):
         )
 
     def normalize_email(self, email):
-        email = super().normalize_email(email)
         if not email or "@" not in email:
             return None
 
