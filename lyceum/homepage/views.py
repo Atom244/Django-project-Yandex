@@ -1,10 +1,9 @@
 from http import HTTPStatus
 
 from django.http import HttpResponse, HttpResponseNotAllowed
+from django.views import View
 
 import catalog.models
-
-from django.views import View
 
 from django.views.generic import FormView, ListView
 
