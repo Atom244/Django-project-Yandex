@@ -8,45 +8,45 @@ import homepage.forms
 
 __all__ = []
 
+from django.views import View
 
-def home(request):
-    template = "homepage/main.html"
-    items = catalog.models.Item.objects.on_main()
-    context = {
-        "items": items,
-    }
-    return render(request, template, context)
+from django.views.generic import FormView, ListView, TemplateView
+
+from homepage import forms
 
 
-def coffee(request):
-    if request.user.is_authenticated:
-        request.user.profile.coffee_count += 1
-        request.user.profile.save()
-
-    return HttpResponse("Я чайник", status=HTTPStatus.IM_A_TEAPOT)
+class HomeView(ListView):
+    template_name = "homepage/main.html"
+    queryset = catalog.models.Item.objects.on_main()
+    context_object_name = "items"
 
 
-def echo(request):
-    if request.method == "GET":
-        template = "homepage/echo.html"
-        form = homepage.forms.EchoForm()
-        context = {
-            "form": form,
-        }
-        return render(request, template, context)
+class CoffeeView(View):
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            profile = request.user.profile
+            profile.coffee_count += 1
+            profile.save()
 
-    return HttpResponseNotAllowed(["POST"])
+        return HttpResponse("Я чайник", status=HTTPStatus.IM_A_TEAPOT)
 
 
-def echo_submit(request):
-    if request.method == "POST":
-        form = homepage.forms.EchoForm(request.POST)
+class EchoView(FormView):
+    template_name = "homepage/echo.html"
+    form_class = forms.EchoForm
+
+
+class EchoSubmitView(View):
+    def post(self, request, *args, **kwargs):
+        form = forms.EchoForm(request.POST)
         if form.is_valid():
             text = form.cleaned_data["text"]
             return HttpResponse(
-                text,
+                text.encode("utf-8"),
                 content_type="text/plain; charset=utf-8",
-                charset="utf-8",
             )
 
-    return HttpResponseNotAllowed(["POST"])
+        return HttpResponse(status=HTTPStatus.UNPROCESSABLE_ENTITY.value)
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponseNotAllowed(["POST"])
