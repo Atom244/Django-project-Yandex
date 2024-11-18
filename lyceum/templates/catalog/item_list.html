@@ -3,7 +3,7 @@
 {% load static i18n %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static "css/main.css" %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 <title>{{ title.title }}</title>
 {% endblock %}
 
@@ -12,20 +12,24 @@
 {% with request.resolver_match.view_name as view_name %}
 <div class="my-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-between border-bottom">
   <div class="btn-group">
-    <a href="{% url 'catalog:new' %}" class="btn btn-outline-success {% if view_name == "catalog:new" %}active{% endif %}">{% trans "Новинки" %}</a>
-    <a href="{% url 'catalog:friday' %}" class="btn btn-outline-success {% if view_name == "catalog:friday" %}active{% endif %}">{% trans "Пятница" %}</a>
-    <a href="{% url 'catalog:unverified' %}" class="btn btn-outline-success {% if view_name == "catalog:unverified" %}active{% endif %}">{% trans "Непроверенное" %}</a>
+    <a href="{% url 'catalog:new' %}"
+      class="btn btn-outline-success {% if view_name == 'catalog:new' %}active{% endif %}">{% trans "Новинки" %}</a>
+    <a href="{% url 'catalog:friday' %}"
+      class="btn btn-outline-success {% if view_name == 'catalog:friday' %}active{% endif %}">{% trans "Пятница" %}</a>
+    <a href="{% url 'catalog:unverified' %}"
+      class="btn btn-outline-success {% if view_name == 'catalog:unverified' %}active{% endif %}">{% trans
+      "Непроверенное" %}</a>
   </div>
 </div>
 {% endwith %}
 
 <div class="row container">
-    {% for item in items %}
-      {% ifchanged item.category.name %}<h2>{{ item.category.name }}</h2>{% endifchanged %}
-      {% include "includes/item_card.html" %}
-    {% empty %}
-      <p>{% trans "Список пуст :(" %}</p>
-    {% endfor %}
+  {% for item in items %}
+  {% ifchanged item.category.name %}<h2>{{ item.category.name }}</h2>{% endifchanged %}
+  {% include "includes/item_card.html" %}
+  {% empty %}
+  <p>{% trans "Список пуст :(" %}</p>
+  {% endfor %}
 </div>
 
 {% endblock %}

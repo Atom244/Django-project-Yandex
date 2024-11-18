@@ -30,16 +30,16 @@ python -m venv venv
 
 - ### Запуск виртуального окружения
 
+На Linux:
+
+```bash
+source venv/bin/activate
+```
+
 На Windows:
 
 ```bash
 venv\Scripts\activate
-```
-
-На Linux
-
-```bash
-source venv/bin/activate
 ```
 
 - ### Установка зависимостей
@@ -142,18 +142,32 @@ copy .env.example .env
 cd lyceum
 ```
 
-- ### Подготовка базы данных по данным из фикстур
+- ### Применение миграций
 
 На Linux:
 
 ```bash
-python3 manage.py loaddata data.json
+python3 manage.py migrate
 ```
 
 На Windows:
 
 ```bash
-python manage.py loaddata data.json
+python manage.py migrate
+```
+
+- ### Подготовка базы данных по данным из фикстур
+
+На Linux:
+
+```bash
+python3 manage.py loaddata fixtures/data.json
+```
+
+На Windows:
+
+```bash
+python manage.py loaddata fixtures/data.json
 ```
 
 - ### Создание супер-пользователя (если будете заходить в админку)

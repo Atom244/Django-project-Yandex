@@ -58,7 +58,7 @@
         {% if field.label == "Аватарка" %}
 
         {{ field|add_class:"form-control" }}
-        
+
         {% else %}
 
         <div class="my-2">
@@ -103,7 +103,8 @@
       </div>
     </form>
     <div class="my-2 d-grid gap-2">
-      <a class="btn btn-warning" href="{% url 'homepage:coffee' %}">Выпить кофе <span class="badge text-bg-dark rounded-pill">{{ coffee_count|default:"0" }}</span></a>
+      <a class="btn btn-warning" href="{% url 'homepage:coffee' %}">Выпить кофе <span
+          class="badge text-bg-dark rounded-pill">{{ coffee_count|default:"0" }}</span></a>
     </div>
     <div class="my-2 d-grid gap-2">
       <div class="btn-group">
@@ -111,8 +112,9 @@
           Действия
         </button>
         <ul class="dropdown-menu">
-          <li class="dropdown-item"><a href="{% url "users:user_detail" user.id %}" class="dropdown-item">Детальная информация</a></li>
-          <li class="dropdown-item"><a href="{% url "users:logout" %}" class="dropdown-item">Выйти</a></li>
+          <li class="dropdown-item"><a href="{% url 'users:user_detail' user.id %}" class="dropdown-item">Детальная
+              информация</a></li>
+          <li class="dropdown-item"><a href="{% url 'users:logout' %}" class="dropdown-item">Выйти</a></li>
         </ul>
       </div>
     </div>
