@@ -1,97 +1,94 @@
 import datetime
 
-import django.db.models
-import django.shortcuts
-from django.shortcuts import render
+from django.db.models import DurationField, ExpressionWrapper, F
+from django.shortcuts import get_object_or_404
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from django.views.generic import DetailView, ListView
 
-import catalog.models
-
+from catalog.models import Item
 
 __all__ = []
 
 
-def item_list(request):
-    template = "catalog/item_list.html"
-    items = catalog.models.Item.objects.published().order_by("name")
+class ItemListView(ListView):
+    template_name = "catalog/item_list.html"
+    context_object_name = "items"
     title = _("Каталог")
-    context = {
-        "items": items,
-        "title": title,
-    }
-    return render(request, template, context)
+
+    def get_queryset(self):
+        return Item.objects.published().order_by("name")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.title
+        return context
 
 
-def item_detail(request, pk):
-    template = "catalog/item.html"
-    item = catalog.models.Item.objects.published()
+class ItemDetailView(DetailView):
+    template_name = "catalog/item.html"
+    context_object_name = "item"
 
-    items = django.shortcuts.get_object_or_404(
-        item,
-        pk=pk,
-    )
-    context = {"item": items}
-    return render(request, template, context)
+    def get_queryset(self):
+        return Item.objects.published()
+
+    def get_object(self, queryset=None):
+        queryset = self.get_queryset() if queryset is None else queryset
+        return get_object_or_404(queryset, pk=self.kwargs["pk"])
 
 
-def catalog_new(request):
-    template = "catalog/item_list.html"
-    end_date = django.utils.timezone.now()
-    start_date = end_date - datetime.timedelta(days=7)
-
-    published_items = catalog.models.Item.objects.published()
-    recent_items = published_items.filter(
-        created_at__range=[start_date, end_date],
-    )
-
-    items = recent_items.order_by("?")[:5]
-
+class CatalogNewView(ListView):
+    template_name = "catalog/item_list.html"
+    context_object_name = "items"
     title = _("Новинки")
-    context = {
-        "items": items,
-        "title": title,
-    }
 
-    return django.shortcuts.render(request, template, context)
+    def get_queryset(self):
+        end_date = now()
+        start_date = end_date - datetime.timedelta(days=7)
+        return (
+            Item.objects.published()
+            .filter(created_at__range=[start_date, end_date])
+            .order_by("?")[:5]
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.title
+        return context
 
 
-def catalog_changed_on_friday(request):
-    template = "catalog/item_list.html"
-
-    published_items = catalog.models.Item.objects.published()
-
-    items = published_items.filter(updated_at__week_day=6)[:5]
-
+class CatalogChangedOnFridayView(ListView):
+    template_name = "catalog/item_list.html"
+    context_object_name = "items"
     title = _("Пятница")
-    context = {
-        "items": items,
-        "title": title,
-    }
 
-    return django.shortcuts.render(request, template, context)
+    def get_queryset(self):
+        return Item.objects.published().filter(updated_at__week_day=6)[:5]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.title
+        return context
 
 
-def catalog_unverified(request):
-    template = "catalog/item_list.html"
-
-    published_items = catalog.models.Item.objects.published()
-
-    annotated_items = published_items.annotate(
-        time_diff=django.db.models.ExpressionWrapper(
-            django.db.models.F("updated_at")
-            - django.db.models.F("created_at"),
-            output_field=django.db.models.DurationField(),
-        ),
-    )
-
-    unverified_items = annotated_items.filter(
-        time_diff__lte=datetime.timedelta(seconds=1),
-    )
-
+class CatalogUnverifiedView(ListView):
+    template_name = "catalog/item_list.html"
+    context_object_name = "items"
     title = _("Непроверенное")
-    context = {
-        "items": unverified_items,
-        "title": title,
-    }
 
-    return django.shortcuts.render(request, template, context)
+    def get_queryset(self):
+        return (
+            Item.objects.published()
+            .annotate(
+                time_diff=ExpressionWrapper(
+                    F("updated_at") - F("created_at"),
+                    output_field=DurationField(),
+                ),
+            )
+            .filter(time_diff__lte=datetime.timedelta(seconds=1))
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.title
+        return context
