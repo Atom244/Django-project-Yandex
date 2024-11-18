@@ -1,18 +1,14 @@
 from http import HTTPStatus
 
 from django.http import HttpResponse, HttpResponseNotAllowed
-from django.shortcuts import render
+from django.views import View
+from django.views.generic import FormView, ListView
 
 import catalog.models
-import homepage.forms
+from homepage import forms
+
 
 __all__ = []
-
-from django.views import View
-
-from django.views.generic import FormView, ListView, TemplateView
-
-from homepage import forms
 
 
 class HomeView(ListView):

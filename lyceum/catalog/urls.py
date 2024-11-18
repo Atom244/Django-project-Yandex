@@ -6,9 +6,13 @@ app_name = "catalog"
 
 
 urlpatterns = [
-    path("", views.item_list, name="item-list"),
-    path("<int:pk>/", views.item_detail, name="item-detail"),
-    path("new/", views.catalog_new, name="new"),
-    path("friday/", views.catalog_changed_on_friday, name="friday"),
-    path("unverified/", views.catalog_unverified, name="unverified"),
+    path("", views.ItemListView.as_view(), name="item-list"),
+    path("<int:pk>/", views.ItemDetailView.as_view(), name="item-detail"),
+    path("new/", views.CatalogNewView.as_view(), name="new"),
+    path("friday/", views.CatalogChangedOnFridayView.as_view(), name="friday"),
+    path(
+        "unverified/",
+        views.CatalogUnverifiedView.as_view(),
+        name="unverified",
+    ),
 ]

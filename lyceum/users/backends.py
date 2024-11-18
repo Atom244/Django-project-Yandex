@@ -47,6 +47,7 @@ class LoginBackend(django.contrib.auth.backends.ModelBackend):
             user.is_active = False
             user.profile.activation_sent_at = timezone.now()
             user.save()
+            user.profile.save()
             user.profile.send_reactivation_email(request)
 
         return None
