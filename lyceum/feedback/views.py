@@ -2,6 +2,7 @@ import django.conf
 import django.contrib.messages
 import django.core.mail
 import django.shortcuts
+import django.views
 
 import feedback.forms
 import feedback.models
@@ -9,24 +10,35 @@ import feedback.models
 __all__ = []
 
 
-def feedback_views(request):
-    template = "feedback/feedback.html"
+class FeedbackView(django.views.View):
+    template_name = "feedback/feedback.html"
 
-    files_form = feedback.forms.FilesForm(
-        request.POST or None,
-        request.FILES or None,
-    )
+    def get(self, request):
+        files_form = feedback.forms.FilesForm()
+        author_form = feedback.forms.AuthorForm()
+        content_form = feedback.forms.FeedbackForm()
 
-    author_form = feedback.forms.AuthorForm(request.POST or None)
+        context = {
+            "forms": {
+                "files_form": files_form,
+                "author_form": author_form,
+                "content_form": content_form,
+            },
+        }
 
-    content_form = feedback.forms.FeedbackForm(request.POST or None)
+        return django.shortcuts.render(request, self.template_name, context)
 
-    if request.method == "POST":
+    def post(self, request):
+        files_form = feedback.forms.FilesForm(request.POST, request.FILES)
+        author_form = feedback.forms.AuthorForm(request.POST)
+        content_form = feedback.forms.FeedbackForm(request.POST)
+
         if (
             files_form.is_valid()
             and author_form.is_valid()
             and content_form.is_valid()
         ):
+
             personal_data = author_form.save()
 
             new_feedback = content_form.save(commit=False)
@@ -34,15 +46,13 @@ def feedback_views(request):
             new_feedback.save()
 
             files = files_form.cleaned_data["file_field"]
+
             if files:
-                for f in files:
-                    multiple_file = (
-                        feedback.models.MultipleFile.objects.create(
-                            feedback=new_feedback,
-                            file=f,
-                        )
+                for file in files:
+                    feedback.models.MultipleFile.objects.create(
+                        feedback=new_feedback,
+                        file=file,
                     )
-                    multiple_file.save()
 
             django.core.mail.send_mail(
                 f"FROM: {personal_data.mail}",
@@ -58,11 +68,11 @@ def feedback_views(request):
             )
             return django.shortcuts.redirect("feedback:feedback")
 
-    context = {
-        "forms": {
-            "files_form": files_form,
-            "author_form": author_form,
-            "content_form": content_form,
-        },
-    }
-    return django.shortcuts.render(request, template, context)
+        context = {
+            "forms": {
+                "files_form": files_form,
+                "author_form": author_form,
+                "content_form": content_form,
+            },
+        }
+        return django.shortcuts.render(request, self.template_name, context)
