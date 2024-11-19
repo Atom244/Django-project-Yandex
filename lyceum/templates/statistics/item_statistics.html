@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Статистика по товарам</h1>
+  <div class="row container">
+    {% for stat in item_stats %}
+      {% include "includes/statistic_card.html" %}
+    {% endfor %}
+  </div>
+{% endblock %}

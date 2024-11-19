@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Статистика пользователя {{ user.username }}</h1>
+
+  <h2>Всего оценок: {{ total_ratings }}</h2>
+  <h2>Средняя оценка: {{ average_rating }}</h2>
+
+  <h2>Лучший товар: <a href="{% url "catalog:item-detail" best_item.id %}">{{ best_item.name }}</a></h2>
+  <h2>Худший товар: <a href="{% url "catalog:item-detail" worst_item.id %}">{{ worst_item.name }}</a></h2>
+{% endblock %}

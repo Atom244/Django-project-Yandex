@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Товары, оцененные вами</h1>
+
+  <ul>
+    {% for rating in ratings %}
+      <h3><a href="{% url 'catalog:item-detail' rating.item.id %}">{{ rating.item.name }}</a> - Оценка: {{ rating.score }}</h3>
+    {% endfor %}
+  </ul>
+{% endblock %}
