@@ -28,12 +28,12 @@
         {% endfor %}
       </div>
       {% if form.non_field_errors %}
-        <div class="alert alert-danger my-2">
-          <h4 class="alert-heading">Ошибка</h4>
-          {% for error in form.non_field_errors %}
-          <p>{{ error|escape }}</p>
-          {% endfor %}
-        </div>
+      <div class="alert alert-danger my-2">
+        <h4 class="alert-heading">Ошибка</h4>
+        {% for error in form.non_field_errors %}
+        <p>{{ error|escape }}</p>
+        {% endfor %}
+      </div>
       {% endif %}
       <div class="my-2">
         <button type="submit" class="btn btn-primary">{{ submit_value }}</button>
