@@ -65,11 +65,16 @@ class ItemDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
         item = self.get_object()
+
+        if not request.user.is_authenticated:
+            return redirect("login")
+
         score = request.POST.get("score")
         user_rating = Rating.objects.filter(
-            user=self.request.user,
+            user=request.user,
             item=item,
         ).first()
+
         if "delete" in request.POST and user_rating is not None:
             user_rating.delete()
             return redirect("catalog:item-detail", pk=item.pk)

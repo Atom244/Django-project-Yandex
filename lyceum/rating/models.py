@@ -29,6 +29,8 @@ class Rating(models.Model):
     score = models.IntegerField(choices=RATING_CHOICES)
 
     class Meta:
+        verbose_name = "оценка"
+        verbose_name_plural = "оценки"
         unique_together = ("user", "item")
 
     def __str__(self):

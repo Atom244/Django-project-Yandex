@@ -6,3 +6,4 @@ __all__ = []
 class RatingConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "rating"
+    verbose_name = "оценка"
