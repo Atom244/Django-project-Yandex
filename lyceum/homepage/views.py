@@ -2,11 +2,10 @@ from http import HTTPStatus
 
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.views import View
-
-import catalog.models
-
 from django.views.generic import FormView, ListView
 
+
+import catalog.models
 from homepage import forms
 
 __all__ = []
