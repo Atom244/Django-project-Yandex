@@ -11,8 +11,7 @@
     {% with request.resolver_match.view_name as view_name %}
     <ul class="nav nav-pills">
       {% if request.user.is_staff and request.user.is_superuser %}
-      <li class="nav-item"><a class="badge bg-dark" style="margin:10px;" href="{% url 'admin:index' %}">{% trans "Админ"
-          %}</a></li>
+      <li class="nav-item"><a class="badge bg-dark" style="margin:10px;" href="{% url 'admin:index' %}">{% trans "Админ" %}</a></li>
       {% endif %}
       {% if view_name == "homepage:home" %}
       <li class="nav-item"><a class="nav-link active">{% trans "Главная" %}</a></li>

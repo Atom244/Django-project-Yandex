@@ -4,6 +4,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/rating.css' %}">
 <title>{% trans "Товар" %}</title>
 {% endblock %}
 
@@ -21,39 +22,92 @@
     <div class="row g-0">
       <div class="col-md-4">
         <img src="{{ item.main_image.image.url }}" class="img-fluid rounded-start" alt="...">
-        <a href="{{ item.main_image.image.url }}" download class="btn btn-light btn-sm" style="margin-left:5px;">{%
-          trans "скачать картинку" %}</a>
+        <a href="{{ item.main_image.image.url }}" download class="btn btn-light btn-sm" style="margin-left:5px;">
+          {% trans "скачать картинку" %}</a>
+        <div class="rating-widget">
+          <div class="rating-summary">
+            {% if total_ratings > 0 %}
+              <small>Средняя оценка: {{ average_rating|floatformat:1 }} из 5 ({{ total_ratings }} оценок)</small>
+            {% else %}
+              <small>Пока нет оценок для этого товара.</small>
+            {% endif %}
+          </div>
+          
+          {% if user.is_authenticated %}
+            <div class="user-rating">
+              {% if user_rating %}
+                <small>Ваша оценка: {{ user_rating.score }}</small>
+              {% else %}
+                <small>Вы ещё не оценили этот товар.</small>
+              {% endif %}
+              <form method="post" id="rating-form">
+                {% csrf_token %}
+                <form method="post" id="rating-form">
+                  {% csrf_token %}
+                  <div class="rating">
+                    <input type="radio" id="star5" name="score" value="5" {% if user_rating and user_rating.score == 5 %}checked{% endif %}/>
+                    <label for="star5">★</label>
+                
+                    <input type="radio" id="star4" name="score" value="4" {% if user_rating and user_rating.score == 4 %}checked{% endif %}/>
+                    <label for="star4">★</label>
+                
+                    <input type="radio" id="star3" name="score" value="3" {% if user_rating and user_rating.score == 3 %}checked{% endif %}/>
+                    <label for="star3">★</label>
+                
+                    <input type="radio" id="star2" name="score" value="2" {% if user_rating and user_rating.score == 2 %}checked{% endif %}/>
+                    <label for="star2">★</label>
+                
+                    <input type="radio" id="star1" name="score" value="1" {% if user_rating and user_rating.score == 1 %}checked{% endif %}/>
+                    <label for="star1">★</label>
+                  </div>
+                
+                  <button type="submit" class="btn btn-success btn-sm">Оценить</button>            
+                </form>
+                <form method="post" id="rating-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="delete" value="true">
+                  <button type="submit" class="badge rounded-pill bg-danger">Удалить оценку</button>
+                </form>
+              </form>
+            </div>
+          {% else %}
+            <p>Войдите, чтобы оставить оценку.</p>
+          {% endif %}
+        </div>
+
       </div>
+
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{ item.name|safe }}</h5>
-          <p class="card-text">{{ item.text|safe }}</p>
+            <h5 class="card-title">{{ item.name|safe }}</h5>
+            <p class="card-text">{{ item.text|safe }}</p>
 
-          <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-              {% for image in item.images.all %}
-              <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                {% thumbnail image.image "800x650" crop="center" as img %}
-                <img src="{{ img.url }}" class="d-block w-100" alt="..." style="border-radius:20px;">
-                {% endthumbnail %}
-                <a href="{{ image.image.url }}" download class="btn btn-light btn-sm"
-                  style="position: relative; z-index: 1; margin:5px;">{% trans "скачать картинку" %}</a>
-              </div>
-              {% endfor %}
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    {% for image in item.images.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            {% thumbnail image.image "800x650" crop="center" as img %}
+                                <img src="{{ img.url }}" class="d-block w-100" alt="..."  style="border-radius:20px;">
+                            {% endthumbnail %}
+                            <a href="{{ image.image.url }}" download class="btn btn-light btn-sm" style="position: relative; z-index: 1; margin:5px;">{% trans "скачать картинку" %}</a>
+                            
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="z-index: 0;">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Следующий</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"
-              style="z-index: 0;">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Предыдущий</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Следующий</span>
-            </button>
-          </div>
-          <a href="{% url 'homepage:home' %}" class="btn btn-success" style="margin: 10px;">{% trans "Купить" %}</a>
+            <a href="{% url "homepage:home" %}" class="btn btn-success" style="margin: 10px;">{% trans "Купить" %}</a>
         </div>
       </div>
+
+      
     </div>
   </div>
 </div>
