@@ -53,22 +53,49 @@
           {% if view_name == "users:signup" %}
           <li class="dropdown-item"><a class="dropdown-item active">Зарегистрироваться</a></li>
           {% else %}
-          <li class="dropdown-item"><a href="{% url 'users:signup' %}" class="nav-link">Зарегистрироваться</a></li>
+          <li class="dropdown-item"><a href="{% url 'users:signup' %}" class="dropdown-item">Зарегистрироваться</a></li>
           {% endif %}
 
           {% if view_name == "users:user_list" %}
           <li class="dropdown-item"><a class="dropdown-item active">Список пользователей</a></li>
           {% else %}
-          <li class="dropdown-item"><a href="{% url 'users:user_list' %}" class="nav-link">Список пользователей</a>
+          <li class="dropdown-item"><a href="{% url 'users:user_list' %}" class="dropdown-item">Список пользователей</a>
           </li>
           {% endif %}
 
           {% if view_name == "users:profile" %}
           <li class="dropdown-item"><a class="dropdown-item active">Профиль</a></li>
           {% else %}
-          <li class="dropdown-item"><a href="{% url 'users:profile' %}" class="nav-link">Профиль</a></li>
+          <li class="dropdown-item"><a href="{% url 'users:profile' %}" class="dropdown-item">Профиль</a></li>
           {% endif %}
-        </ul>
+        </ul>       
+      </div>
+
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          {% trans "Статистика" %}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          {% if view_name == "statistics:user_statistics" %}
+          <li class="dropdown-item"><a class="dropdown-item active">Статистика пользователя</a></li>
+          {% else %}
+          <li class="dropdown-item"><a href="{% url 'statistics:user_statistics' %}" class="dropdown-item">Статистика пользователя</a></li>
+          {% endif %}
+
+          {% if view_name == "statistics:item_statistics" %}
+          <li class="dropdown-item"><a class="dropdown-item active">Статистика товаров</a></li>
+          {% else %}
+          <li class="dropdown-item"><a href="{% url 'statistics:item_statistics' %}" class="dropdown-item">Статистика товаров</a></li>
+          {% endif %}
+
+          {% if view_name == "statistics:user_rated_items" %}
+          <li class="dropdown-item"><a class="dropdown-item active">Статистика по оценённым товарам</a></li>
+          {% else %}
+          <li class="dropdown-item"><a href="{% url 'statistics:user_rated_items' %}" class="dropdown-item">Статистика по оценённым товарам</a>
+          </li>
+          {% endif %}
+        </ul>       
       </div>
 
       <form action="{% url 'set_language' %}" method="post" class="language-switcher">

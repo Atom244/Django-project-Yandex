@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-03 14:51+0300\n"
+"POT-Creation-Date: 2024-11-20 22:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,80 +20,88 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\catalog\views.py:18
+#: .\catalog\views.py:20
 msgid "Каталог"
 msgstr "Каталог"
 
-#: .\catalog\views.py:53 .\templates\catalog\item_list.html:15
+#: .\catalog\views.py:95 .\templates\catalog\item_list.html:16
 msgid "Новинки"
 msgstr "Новинки"
 
-#: .\catalog\views.py:68 .\templates\catalog\item_list.html:16
+#: .\catalog\views.py:115 .\templates\catalog\item_list.html:18
 msgid "Пятница"
 msgstr "Пятница"
 
-#: .\catalog\views.py:93 .\templates\catalog\item_list.html:17
+#: .\catalog\views.py:129 .\templates\catalog\item_list.html:20
 msgid "Непроверенное"
 msgstr "Непроверенное"
 
-#: .\lyceum\settings.py:115
+#: .\lyceum\settings.py:129
 msgid "Russian"
 msgstr "Русский"
 
-#: .\lyceum\settings.py:116
+#: .\lyceum\settings.py:130
 msgid "English"
 msgstr "Английский"
 
-#: .\templates\about\about.html:7 .\templates\includes\header.html:22
-#: .\templates\includes\header.html:24
+#: .\templates\about\about.html:7 .\templates\includes\header.html:23
+#: .\templates\includes\header.html:25
 msgid "О проекте"
 msgstr "О проекте"
 
-#: .\templates\catalog\item.html:7
+#: .\templates\catalog\item.html:8
 msgid "Товар"
 msgstr "Товар"
 
-#: .\templates\catalog\item.html:24 .\templates\catalog\item.html:38
+#: .\templates\catalog\item.html:26 .\templates\catalog\item.html:92
 msgid "скачать картинку"
 msgstr "скачать картинку"
 
-#: .\templates\catalog\item.html:52
+#: .\templates\catalog\item.html:106
 msgid "Купить"
 msgstr "Купить"
 
-#: .\templates\catalog\item_list.html:27
+#: .\templates\catalog\item_list.html:30
 msgid "Список пуст :("
 msgstr "Список пуст :("
 
-#: .\templates\homepage\main.html:6 .\templates\includes\header.html:16
-#: .\templates\includes\header.html:18
+#: .\templates\homepage\main.html:6 .\templates\includes\header.html:17
+#: .\templates\includes\header.html:19
 msgid "Главная"
 msgstr "Главная"
 
-#: .\templates\includes\header.html:8
+#: .\templates\includes\header.html:9
 msgid "Продукты у Кота"
 msgstr "Продукты у Кота"
 
-#: .\templates\includes\header.html:13
+#: .\templates\includes\header.html:14
 msgid "Админ"
 msgstr "Админ"
 
-#: .\templates\includes\header.html:28 .\templates\includes\header.html:30
+#: .\templates\includes\header.html:29 .\templates\includes\header.html:31
 msgid "Отзыв"
 msgstr "Отзыв"
 
-#: .\templates\includes\header.html:34 .\templates\includes\header.html:36
+#: .\templates\includes\header.html:35 .\templates\includes\header.html:37
 msgid "Список товаров"
 msgstr "Список товаров"
 
-#: .\templates\includes\header.html:47
+#: .\templates\includes\header.html:44
+msgid "Пользователи"
+msgstr "Пользователи"
+
+#: .\templates\includes\header.html:77
+msgid "Статистика"
+msgstr "Статистика"
+
+#: .\templates\includes\header.html:110
 msgid "Английский"
 msgstr "Английский"
 
-#: .\templates\includes\header.html:49
+#: .\templates\includes\header.html:112
 msgid "Русский"
 msgstr "Русский"
 
-#: .\templates\includes\item_card.html:14
+#: .\templates\includes\item_card.html:13
 msgid "Подробнее"
 msgstr "Подробнее"

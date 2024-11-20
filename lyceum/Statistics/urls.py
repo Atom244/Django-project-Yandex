@@ -5,6 +5,8 @@ from Statistics.views import (
     UserStatisticsView,
 )
 
+app_name = "statistics"
+
 urlpatterns = [
     path("user/", UserStatisticsView.as_view(), name="user_statistics"),
     path("items/", ItemStatisticsView.as_view(), name="item_statistics"),

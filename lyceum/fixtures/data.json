@@ -1,173 +1,5 @@
 [
 {
-  "model": "users.profile",
-  "pk": 1,
-  "fields": {
-    "user": 1,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 18,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 2,
-  "fields": {
-    "user": 3,
-    "birthday": "2008-03-20",
-    "image": "users/avatar_user_3.png",
-    "coffee_count": 26,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 3,
-  "fields": {
-    "user": 4,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 4,
-  "fields": {
-    "user": 5,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 5,
-  "fields": {
-    "user": 6,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 6,
-  "fields": {
-    "user": 7,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 7,
-  "fields": {
-    "user": 8,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 8,
-  "fields": {
-    "user": 9,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 9,
-  "fields": {
-    "user": 10,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 4,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 10,
-  "fields": {
-    "user": 11,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 11,
-  "fields": {
-    "user": 12,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 0,
-    "activation_sent_at": "2024-11-12T19:23:55.588Z"
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 12,
-  "fields": {
-    "user": 13,
-    "birthday": "1996-10-11",
-    "image": "users/avatar_user_13.png",
-    "coffee_count": 5,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 13,
-  "fields": {
-    "user": 14,
-    "birthday": "2024-11-01",
-    "image": "users/avatar_user_14.png",
-    "coffee_count": 6,
-    "attempts_count": 0,
-    "activation_sent_at": null
-  }
-},
-{
-  "model": "users.profile",
-  "pk": 14,
-  "fields": {
-    "user": 2,
-    "birthday": null,
-    "image": "",
-    "coffee_count": 0,
-    "attempts_count": 1,
-    "activation_sent_at": null
-  }
-},
-{
   "model": "rating.rating",
   "pk": 1,
   "fields": {
@@ -191,7 +23,7 @@
   "fields": {
     "user": 1,
     "item": 4,
-    "score": 5
+    "score": 3
   }
 },
 {
@@ -201,6 +33,42 @@
     "user": 1,
     "item": 5,
     "score": 4
+  }
+},
+{
+  "model": "rating.rating",
+  "pk": 20,
+  "fields": {
+    "user": 3,
+    "item": 4,
+    "score": 4
+  }
+},
+{
+  "model": "rating.rating",
+  "pk": 21,
+  "fields": {
+    "user": 3,
+    "item": 5,
+    "score": 4
+  }
+},
+{
+  "model": "rating.rating",
+  "pk": 22,
+  "fields": {
+    "user": 3,
+    "item": 3,
+    "score": 1
+  }
+},
+{
+  "model": "rating.rating",
+  "pk": 23,
+  "fields": {
+    "user": 3,
+    "item": 1,
+    "score": 5
   }
 },
 {
@@ -244,7 +112,7 @@
   "pk": 3,
   "fields": {
     "password": "pbkdf2_sha256$600000$0bAkfkqog5m3bfX04NW1za$X19PY715xswC5qUkel6Yo2zqNKrPRLcqusVlMDFTMsg=",
-    "last_login": "2024-11-11T13:48:21.186Z",
+    "last_login": "2024-11-20T18:51:49.235Z",
     "is_superuser": false,
     "username": "colbasa",
     "first_name": "Алмас",
