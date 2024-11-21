@@ -1,0 +1,17 @@
+{% if birthday_users %}
+<div class="birthday-banner container mt-4">
+    <div class="card shadow-lg">
+        <p class="card-header bg-info text-white text-center">Поздравляем с днем рождения🎉:</p>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for user in birthday_users %}
+                <li class="list-group-item">
+                    <strong>{{ user.username }}</strong>
+                    <span class="text-muted">({{ user.email }})</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
