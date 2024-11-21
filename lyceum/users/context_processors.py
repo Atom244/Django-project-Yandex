@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
+__all__ = []
+
 
 def birthday_context(request):
     today = now().date()

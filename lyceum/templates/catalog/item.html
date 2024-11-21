@@ -45,20 +45,16 @@
                 <form method="post" id="rating-form">
                   {% csrf_token %}
                   <div class="rating">
-                    <input type="radio" id="star5" name="score" value="5" {% if user_rating and user_rating.score == 5 %}checked{% endif %}/>
-                    <label for="star5">★</label>
-                
-                    <input type="radio" id="star4" name="score" value="4" {% if user_rating and user_rating.score == 4 %}checked{% endif %}/>
-                    <label for="star4">★</label>
-                
-                    <input type="radio" id="star3" name="score" value="3" {% if user_rating and user_rating.score == 3 %}checked{% endif %}/>
-                    <label for="star3">★</label>
-                
-                    <input type="radio" id="star2" name="score" value="2" {% if user_rating and user_rating.score == 2 %}checked{% endif %}/>
-                    <label for="star2">★</label>
-                
-                    <input type="radio" id="star1" name="score" value="1" {% if user_rating and user_rating.score == 1 %}checked{% endif %}/>
-                    <label for="star1">★</label>
+                    {% for star in "54321"|make_list %}
+                        <input 
+                            type="radio" 
+                            id="star{{ star }}" 
+                            name="score" 
+                            value="{{ star }}" 
+                            {% if user_rating and user_rating.score|stringformat:"d" == star %}checked{% endif %}
+                        />
+                        <label for="star{{ star }}">★</label>
+                    {% endfor %}
                   </div>
                 
                   <button type="submit" class="btn btn-success btn-sm">Оценить</button>            
@@ -66,7 +62,9 @@
                 <form method="post" id="rating-form">
                   {% csrf_token %}
                   <input type="hidden" name="delete" value="true">
-                  <button type="submit" class="badge rounded-pill bg-danger">Удалить оценку</button>
+                  {% if user_rating %}
+                    <button type="submit" class="badge rounded-pill bg-danger">Удалить оценку</button>
+                  {% endif %}
                 </form>
               </form>
             </div>

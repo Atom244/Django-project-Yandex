@@ -37,6 +37,12 @@ class RatingTests(TestCase):
             password="correct_password",
         )
 
+        self.another_user = User.objects.create_user(
+            username="TestUser1",
+            password="Qw123456#",
+            is_active=True,
+        )
+
         self.rating_url = reverse(
             "catalog:item-detail",
             kwargs={"pk": self.item.pk},
@@ -44,12 +50,8 @@ class RatingTests(TestCase):
 
     def test_response_object_adding(self):
         Rating.objects.create(user=self.user, item=self.item, score=4)
-        another_user = User.objects.create_user(
-            username="TestUser1",
-            password="Qw123456#",
-            is_active=True,
-        )
-        Rating.objects.create(user=another_user, item=self.item, score=2)
+
+        Rating.objects.create(user=self.another_user, item=self.item, score=2)
 
         response = self.client.get(self.rating_url)
 
@@ -89,3 +91,14 @@ class RatingTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Rating.objects.count(), 0)
+
+    def test_context_avg_count(self):
+        Rating.objects.create(user=self.user, item=self.item, score=2)
+        Rating.objects.create(user=self.another_user, item=self.item, score=4)
+        response = self.client.get(
+            reverse("catalog:item-detail", kwargs={"pk": self.item.id}),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["average_rating"], 3)
+        self.assertEqual(response.context["total_ratings"], 2)
