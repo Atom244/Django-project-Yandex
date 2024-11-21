@@ -1,3 +1,5 @@
+import datetime
+
 import django.conf
 from django.contrib.auth.models import User
 from django.core import mail
@@ -6,7 +8,8 @@ from django.test import Client, override_settings
 from django.urls import reverse
 from parameterized import parameterized
 
-import users.models
+import users.context_processors
+from users.models import Profile
 
 __all__ = []
 
@@ -106,7 +109,7 @@ class UserLockoutTests(django.test.TestCase):
             email="testuser@example.com",
             password="correct_password",
         )
-        self.profile = users.models.Profile.objects.create(user=self.user)
+        self.profile = Profile.objects.create(user=self.user)
         self.profile.attempts_count = 0
         self.profile.save()
 
@@ -165,3 +168,72 @@ class UserLockoutTests(django.test.TestCase):
 
         self.user.refresh_from_db()
         self.assertEqual(self.user.profile.attempts_count, 0)
+
+
+class BirthdayContextTests(django.test.TestCase):
+    def setUp(self):
+        self.factory = django.test.RequestFactory()
+
+        self.user_with_birthday = User.objects.create_user(
+            username="with_birthday",
+            email="with_birthday@example.com",
+            password="password",
+        )
+        self.user_with_birthday_profile = Profile.objects.create(
+            user=self.user_with_birthday,
+            birthday=datetime.datetime(year=1990, month=11, day=21),
+        )
+
+        self.user_without_birthday = User.objects.create_user(
+            username="without_birthday",
+            email="without_birthday@example.com",
+            password="password",
+        )
+
+        self.user_without_birthday_profile = Profile.objects.create(
+            user=self.user_without_birthday,
+        )
+
+    def test_birthday_context_no_timezone(self):
+        request = self.factory.get(django.urls.reverse("homepage:home"))
+        context = users.context_processors.birthday_context(request)
+        self.assertIn("birthday_users", context)
+        self.assertEqual(len(context["birthday_users"]), 1)
+        self.assertEqual(
+            context["birthday_users"][0]["username"],
+            "with_birthday",
+        )
+
+    def test_birthday_context_with_valid_timezone(self):
+        request = self.factory.get(django.urls.reverse("homepage:home"))
+        request.COOKIES["timezone"] = "Europe/Moscow"
+        context = users.context_processors.birthday_context(request)
+        self.assertIn("birthday_users", context)
+        self.assertEqual(len(context["birthday_users"]), 1)
+        self.assertEqual(
+            context["birthday_users"][0]["username"],
+            "with_birthday",
+        )
+
+    def test_birthday_context_with_invalid_timezone(self):
+        request = self.factory.get(django.urls.reverse("homepage:home"))
+        request.COOKIES["timezone"] = "Invalid/Timezone"
+        context = users.context_processors.birthday_context(request)
+        self.assertIn("birthday_users", context)
+        self.assertEqual(len(context["birthday_users"]), 1)
+        self.assertEqual(
+            context["birthday_users"][0]["username"],
+            "with_birthday",
+        )
+
+    def test_birthday_context_with_no_birthday_today(self):
+        request = self.factory.get(django.urls.reverse("homepage:home"))
+        self.user_with_birthday_profile.birthday = datetime.datetime(
+            year=1870,
+            month=4,
+            day=22,
+        )
+        self.user_with_birthday_profile.save()
+        context = users.context_processors.birthday_context(request)
+        self.assertIn("birthday_users", context)
+        self.assertEqual(len(context["birthday_users"]), 0)
