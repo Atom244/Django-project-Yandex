@@ -14,7 +14,7 @@ __all__ = []
 
 class ContextTests(TestCase):
     @classmethod
-    @freeze_time(datetime.now() - timedelta(days=1))
+    @freeze_time(datetime.now() - timedelta(days=2))
     def setUpTestData(cls):
 
         cls.published_category = models.Category.objects.create(
