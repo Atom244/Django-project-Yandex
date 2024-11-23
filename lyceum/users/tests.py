@@ -6,6 +6,7 @@ from django.core import mail
 import django.test
 from django.test import Client, override_settings
 from django.urls import reverse
+from freezegun import freeze_time
 from parameterized import parameterized
 
 import users.context_processors
@@ -194,6 +195,7 @@ class BirthdayContextTests(django.test.TestCase):
             user=self.user_without_birthday,
         )
 
+    @freeze_time("2024-11-21")
     def test_birthday_context_no_timezone(self):
         request = self.factory.get(django.urls.reverse("homepage:home"))
         context = users.context_processors.birthday_context(request)
@@ -204,6 +206,7 @@ class BirthdayContextTests(django.test.TestCase):
             "with_birthday",
         )
 
+    @freeze_time("2024-11-21")
     def test_birthday_context_with_valid_timezone(self):
         request = self.factory.get(django.urls.reverse("homepage:home"))
         request.COOKIES["timezone"] = "Europe/Moscow"
@@ -215,6 +218,7 @@ class BirthdayContextTests(django.test.TestCase):
             "with_birthday",
         )
 
+    @freeze_time("2024-11-21")
     def test_birthday_context_with_invalid_timezone(self):
         request = self.factory.get(django.urls.reverse("homepage:home"))
         request.COOKIES["timezone"] = "Invalid/Timezone"
@@ -226,6 +230,7 @@ class BirthdayContextTests(django.test.TestCase):
             "with_birthday",
         )
 
+    @freeze_time("2024-11-21")
     def test_birthday_context_with_no_birthday_today(self):
         request = self.factory.get(django.urls.reverse("homepage:home"))
         self.user_with_birthday_profile.birthday = datetime.datetime(

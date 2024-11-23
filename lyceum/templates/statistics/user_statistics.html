@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Статистика пользователя {{ user.username }}</h1>
-
-  
-  <h2>Всего оценок: {% if total_ratings %}{{ total_ratings }}{% else %}нет оценок{% endif %}</h2>
-
-  <h2>Средняя оценка: {% if average_rating %}{{ average_rating }}{% else %}нет оценок{% endif %}</h2>
-  
-
-  
-  <h2>Лучший товар: {% if best_item %}<a href="{% url "catalog:item-detail" best_item.id %}">{{ best_item.name }}</a>{% else %}нет товара{% endif %}</h2>
+<h1>Статистика пользователя {{ user.username }}</h1>
 
 
-  <h2>Худший товар: {% if worst_item %}<a href="{% url "catalog:item-detail" worst_item.id %}">{{ worst_item.name }}</a>{% else %}нет товара{% endif %}</h2>
+<h2>Всего оценок: {% if total_ratings %}{{ total_ratings }}{% else %}нет оценок{% endif %}</h2>
+
+<h2>Средняя оценка: {% if average_rating %}{{ average_rating }}{% else %}нет оценок{% endif %}</h2>
+
+
+<h2>Лучший товар: 
+  {% if best_item %}
+    <a href="{% url 'catalog:item-detail' best_item.id %}">{{ best_item.name }}</a>
+  {% else %}нет товара{% endif %}</h2>
+
+<h2>Худший товар: 
+  {% if worst_item %}
+    <a href="{% url 'catalog:item-detail' worst_item.id %}">{{ worst_item.name }}</a>
+    {% else %}нет товара{% endif %}</h2>
 
 {% endblock %}
