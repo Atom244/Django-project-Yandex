@@ -124,7 +124,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LANGUAGE_CODE = "ru-ru"
-USE_I18N = True
 
 LANGUAGES = [
     ("ru-ru", _("Russian")),

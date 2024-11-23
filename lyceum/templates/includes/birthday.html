@@ -9,6 +9,8 @@
                     <strong>{{ user.username }}</strong>
                     <span class="text-muted">({{ user.email }})</span>
                 </li>
+                {% empty %}
+                <p class="text-center">Сегодня никто не празднует день рождения</p>
                 {% endfor %}
             </ul>
         </div>

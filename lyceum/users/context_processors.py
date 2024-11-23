@@ -1,26 +1,27 @@
+from datetime import datetime, timedelta, timezone
+
 from django.contrib.auth.models import User
-from django.utils.timezone import now
+from django.db.models import Q
 
 __all__ = []
 
 
 def birthday_context(request):
-    today = now().date()
-    user_timezone = request.COOKIES.get("timezone")
+    now = datetime.now(timezone.utc)
 
-    if user_timezone:
-        import pytz
+    earliest_time = now - timedelta(hours=12)
+    latest_time = now + timedelta(hours=14)
 
-        try:
-            user_tz = pytz.timezone(user_timezone)
-            today = now().astimezone(user_tz).date()
-        except pytz.UnknownTimeZoneError:
-            pass
+    earliest_date = earliest_time.date()
+    latest_date = latest_time.date()
 
-    birthday_users = User.objects.filter(
-        is_active=True,
-        profile__birthday__day=today.day,
-        profile__birthday__month=today.month,
-    ).values("username", "email", "first_name")
+    start_month, start_day = earliest_date.month, earliest_date.day
+    end_month, end_day = latest_date.month, latest_date.day
 
-    return {"birthday_users": birthday_users}
+    birthday_users = (User.objects.filter(
+        Q(profile__birthday__month=start_month, profile__birthday__day=start_day) |
+        Q(profile__birthday__month=end_month, profile__birthday__day=end_day),
+        is_active=True
+    ).values("username", "email"))
+
+    return {'birthday_users':birthday_users}
