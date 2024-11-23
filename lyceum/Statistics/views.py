@@ -81,7 +81,7 @@ class ItemStatisticsView(TemplateView):
             item_stats.append(
                 {
                     "item": item,
-                    "avg_rating": item.avg_rating,
+                    "avg_rating": round(item.avg_rating, 2),
                     "rating_count": item.rating_count,
                     "last_max_user": (
                         last_max_rating.user if last_max_rating else None
