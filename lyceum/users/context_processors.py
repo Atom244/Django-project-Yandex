@@ -1,33 +1,33 @@
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 
 from django.contrib.auth.models import User
-from django.db.models import CharField, Value
-from django.db.models.functions import Concat, ExtractDay, ExtractMonth
-from django.utils.timezone import now
+from django.db.models import Q
 
 __all__ = []
 
 
 def birthday_context(request):
+    now = datetime.now(timezone.utc)
 
-    current_time = now()
-    start_date = (current_time - timedelta(hours=12)).date().strftime("%m-%d")
-    end_date = (current_time + timedelta(hours=14)).date().strftime("%m-%d")
+    earliest_time = now - timedelta(hours=12)
+    latest_time = now + timedelta(hours=14)
 
-    birthday_users = (
-        User.objects.annotate(
-            birthday_md=Concat(
-                ExtractMonth("profile__birthday", output_field=CharField()),
-                Value("-"),
-                ExtractDay("profile__birthday", output_field=CharField()),
-            ),
+    earliest_date = earliest_time.date()
+    latest_date = latest_time.date()
+
+    start_month, start_day = earliest_date.month, earliest_date.day
+    end_month, end_day = latest_date.month, latest_date.day
+
+    birthday_users = User.objects.filter(
+        Q(
+            profile__birthday__month=start_month,
+            profile__birthday__day=start_day,
         )
-        .filter(
-            is_active=True,
-            birthday_md__gte=start_date,
-            birthday_md__lte=end_date,
-        )
-        .values("username", "email", "first_name")
-    )
+        | Q(
+            profile__birthday__month=end_month,
+            profile__birthday__day=end_day,
+        ),
+        is_active=True,
+    ).values("username", "email")
 
     return {"birthday_users": birthday_users}
