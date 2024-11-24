@@ -24,8 +24,8 @@ class UserStatisticsView(LoginRequiredMixin, TemplateView):
             min_score=Min("score"),
         )
 
-        best_rating = ratings.filter(score=rating_data["max_score"]).first()
-        worst_rating = ratings.filter(score=rating_data["min_score"]).first()
+        best_rating = ratings.filter(score=rating_data["max_score"]).last()
+        worst_rating = ratings.filter(score=rating_data["min_score"]).last()
 
         best_item = best_rating.item if best_rating else None
         worst_item = worst_rating.item if worst_rating else None
