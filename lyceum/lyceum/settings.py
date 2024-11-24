@@ -26,7 +26,7 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1").split(
 )
 
 INSTALLED_APPS = [
-    "Statistics.apps.StatisticsConfig",
+    "stats.apps.StatsConfig",
     "rating.apps.RatingConfig",
     "users.apps.UsersConfig",
     "feedback.apps.FeedbackConfig",

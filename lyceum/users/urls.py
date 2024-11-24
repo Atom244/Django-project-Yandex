@@ -27,21 +27,6 @@ urlpatterns = [
         name="reactivate",
     ),
     django.urls.path(
-        "user_list/",
-        users.views.UserList.as_view(),
-        name="user_list",
-    ),
-    django.urls.path(
-        "user_detail/<int:pk>/",
-        users.views.UserDetail.as_view(),
-        name="user_detail",
-    ),
-    django.urls.path(
-        "profile/",
-        users.views.Profile.as_view(),
-        name="profile",
-    ),
-    django.urls.path(
         "login/",
         LoginView.as_view(
             template_name="users/login.html",
@@ -84,18 +69,16 @@ urlpatterns = [
         name="password_reset_done",
     ),
     django.urls.path(
+        "profile/",
+        users.views.Profile.as_view(),
+        name="profile",
+    ),
+    django.urls.path(
         "reset/<uidb64>/<token>/",
         PasswordResetConfirmView.as_view(
             template_name="users/password_reset_confirm.html",
         ),
         name="password_reset_confirm",
-    ),
-    django.urls.path(
-        "reset/done/",
-        PasswordResetCompleteView.as_view(
-            template_name="users/password_reset_complete.html",
-        ),
-        name="password_reset_complete",
     ),
     django.urls.path(
         "reset/complete/",
@@ -105,8 +88,25 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     django.urls.path(
+        "reset/done/",
+        PasswordResetCompleteView.as_view(
+            template_name="users/password_reset_complete.html",
+        ),
+        name="password_reset_complete",
+    ),
+    django.urls.path(
         "signup/",
         users.views.SignUpView.as_view(),
         name="signup",
+    ),
+    django.urls.path(
+        "user_detail/<int:pk>/",
+        users.views.UserDetail.as_view(),
+        name="user_detail",
+    ),
+    django.urls.path(
+        "user_list/",
+        users.views.UserList.as_view(),
+        name="user_list",
     ),
 ]

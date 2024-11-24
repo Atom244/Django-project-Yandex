@@ -1,3 +1,4 @@
+import http
 from pathlib import Path
 
 import django.conf
@@ -169,7 +170,7 @@ class FeedbackTests(django.test.TestCase):
             follow=True,
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, http.HTTPStatus.OK)
 
         feedback_instance = feedback.models.Feedback.objects.last()
 

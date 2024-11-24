@@ -1,3 +1,5 @@
+import http
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
@@ -55,7 +57,7 @@ class RatingTests(TestCase):
 
         response = self.client.get(self.rating_url)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, http.HTTPStatus.OK)
 
     def test_anonymous_user_cannot_rate_or_delete(self):
         headers = {"Authorization": "JWT <token>"}
@@ -64,14 +66,14 @@ class RatingTests(TestCase):
             {"score": 5},
             headers=headers,
         )
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, http.HTTPStatus.FOUND)
         self.assertEqual(Rating.objects.count(), 0)
 
     def test_authenticated_user_can_rate(self):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.post(self.rating_url, {"score": 5}, follow=True)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, http.HTTPStatus.OK)
         self.assertEqual(Rating.objects.count(), 1)
         rating = Rating.objects.first()
         self.assertEqual(rating.user, self.user)
@@ -89,7 +91,7 @@ class RatingTests(TestCase):
             follow=True,
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, http.HTTPStatus.OK)
         self.assertEqual(Rating.objects.count(), 0)
 
     def test_context_avg_count(self):
@@ -99,6 +101,6 @@ class RatingTests(TestCase):
             reverse("catalog:item-detail", kwargs={"pk": self.item.id}),
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, http.HTTPStatus.OK)
         self.assertEqual(response.context["average_rating"], 3)
         self.assertEqual(response.context["total_ratings"], 2)

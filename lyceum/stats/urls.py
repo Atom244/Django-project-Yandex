@@ -1,5 +1,5 @@
 from django.urls import path
-from Statistics.views import (
+from stats.views import (
     ItemStatisticsView,
     UserRatedItemsView,
     UserStatisticsView,
@@ -8,8 +8,8 @@ from Statistics.views import (
 app_name = "statistics"
 
 urlpatterns = [
-    path("user/", UserStatisticsView.as_view(), name="user_statistics"),
     path("items/", ItemStatisticsView.as_view(), name="item_statistics"),
+    path("user/", UserStatisticsView.as_view(), name="user_statistics"),
     path(
         "user-rated-items/",
         UserRatedItemsView.as_view(),
