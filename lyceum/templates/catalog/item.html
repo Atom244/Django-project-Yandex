@@ -38,7 +38,7 @@
                 {% csrf_token %}
                 <div class="rating">
                   {% for star in "54321"|make_list %}
-                  <input type="radio" id="star{{ star }}" name="score" value="{{ star }}" {% if user_rating and user_rating.score|stringformat:"d"==star %}checked{% endif %}/>
+                  <input type="radio" id="star{{ star }}" name="score" value="{{ star }}" {% if user_rating and user_rating.score|stringformat:"d" == star %}checked{% endif %}/>
                   <label for="star{{ star }}">★</label>
                   {% endfor %}
                 </div>
