@@ -1,3 +1,5 @@
+import http
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
@@ -73,7 +75,7 @@ class RatingTests(TestCase):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.get(reverse("statistics:user_statistics"))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, http.HTTPStatus.OK)
 
         self.assertEqual(response.context["user"], self.user)
         self.assertEqual(response.context["total_ratings"], 3)
@@ -85,7 +87,7 @@ class RatingTests(TestCase):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.get(reverse("statistics:item_statistics"))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, http.HTTPStatus.OK)
 
         rating = response.context["item_stats"][0]
 
@@ -104,7 +106,7 @@ class RatingTests(TestCase):
     def test_anonymous_user_cant_open_stats(self):
 
         response = self.client.get(reverse("statistics:user_rated_items"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, http.HTTPStatus.FOUND)
 
         response = self.client.get(reverse("statistics:user_statistics"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, http.HTTPStatus.FOUND)
