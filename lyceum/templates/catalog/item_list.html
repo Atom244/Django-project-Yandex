@@ -1,14 +1,10 @@
 {% extends "base.html" %}
-
 {% load static i18n %}
-
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <title>{{ title.title }}</title>
 {% endblock %}
-
 {% block content %}
-
 {% with request.resolver_match.view_name as view_name %}
 <div class="my-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-between border-bottom">
   <div class="btn-group">
@@ -21,14 +17,14 @@
   </div>
 </div>
 {% endwith %}
-
 <div class="row container">
   {% for item in items %}
-  {% ifchanged item.category.name %}<h2>{{ item.category.name }}</h2>{% endifchanged %}
+  {% ifchanged item.category.name %}
+  <h2>{{ item.category.name }}</h2>
+  {% endifchanged %}
   {% include "includes/item_card.html" %}
   {% empty %}
   <p>{% trans "Список пуст :(" %}</p>
   {% endfor %}
 </div>
-
 {% endblock %}

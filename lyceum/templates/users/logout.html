@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-
-{% load static %}
-
+{% load i18n static %}
 <div class="container d-flex justify-content-center">
   <div class="w-50">
-    <h1 class="fs-2 fw-bold text-center">Вы вышли из аккаунта. Будем ждать Вас снова!</h1>
-    <p class="fs-5 text-muted">Вы всегда можете передумать</p>
-    <a class="btn d-grid gap-2 btn-lg btn-primary" href="{% url 'homepage:home' %}">На главную</a>
+    <h1 class="fs-2 fw-bold text-center">{% trans "Вы вышли из аккаунта. Будем ждать Вас снова!" %}</h1>
+    <p class="fs-5 text-muted">{% trans "Вы всегда можете передумать" %}</p>
+    <a class="btn d-grid gap-2 btn-lg btn-primary" href="{% url 'homepage:home' %}">{% trans "На главную" %}</a>
   </div>
 </div>

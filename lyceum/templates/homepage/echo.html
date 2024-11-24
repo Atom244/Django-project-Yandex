@@ -1,18 +1,13 @@
 {% extends "base.html" %}
-
-{% load static %}
-
+{% load i18n static %}
 {% block title %}
-echo
+{% trans "echo" %}
 {% endblock %}
-
 {% block content %}
-<h1>Echo</h1>
+<h1>{% trans "Echo" %}</h1>
 <form action="{% url 'homepage:echo-submit' %}" method="post">
   {% csrf_token %}
-  <div class="mx-1 my-2">
-    {{ form.as_p }}
-  </div>
+  <div class="mx-1 my-2">{{ form.as_p }}</div>
   <input type="submit" class="btn btn-primary mb-2">
 </form>
 {% endblock %}

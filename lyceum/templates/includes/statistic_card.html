@@ -1,19 +1,26 @@
+{% load i18n %}
 <div class="card bg-light" style="width: 36rem; margin: 5px;">
   <div class="container">
-    <h5 class="card-title"><a href="{% url 'catalog:item-detail' stat.item.id %}">{{ stat.item.name }}</a></h5>
-    <p class="card-text"> Средняя оценка: {{ stat.avg_rating }}</p>
-    <p class="card-text"> Количество оценок: {{ stat.rating_count }}</p>
-    <p class="card-text"><small>Последний пользователь, поставивший максимальную оценку: </small>
+    <h5 class="card-title">
+      <a href="{% url 'catalog:item-detail' stat.item.id %}">{{ stat.item.name }}</a>
+    </h5>
+    <p class="card-text">{% trans "Средняя оценка:" %} {{ stat.avg_rating }}</p>
+    <p class="card-text">{% trans "Количество оценок:" %} {{ stat.rating_count }}</p>
+    <p class="card-text">
+      <small>{% trans "Последний пользователь, поставивший максимальную оценку:" %}</small>
       {% if stat.last_max_user %}
-        <small><a href="{% url 'users:user_detail' stat.last_max_user.id %}">{{ stat.last_max_user }} </a></small>
+      <small><a href="{% url 'users:user_detail' stat.last_max_user.id %}">{{ stat.last_max_user }}</a></small>
       {% else %}
-        <small>нет</small>
-      {% endif %}</p>
-    <p class="card-text"><small>Последний пользователь, поставивший минимальную оценку: </small>
+      <small>{% trans "нет" %}</small>
+      {% endif %}
+    </p>
+    <p class="card-text">
+      <small>{% trans "Последний пользователь, поставивший минимальную оценку:" %}</small>
       {% if stat.last_min_user %}
-        <small><a href="{% url 'users:user_detail' stat.last_min_user.id %}">{{ stat.last_min_user }}</a></small>
+      <small><a href="{% url 'users:user_detail' stat.last_min_user.id %}">{{ stat.last_min_user }}</a></small>
       {% else %}
-        <small>нет</small>
-      {% endif %}</p>
+      <small>{% trans "нет" %}</small>
+      {% endif %}
+    </p>
   </div>
 </div>

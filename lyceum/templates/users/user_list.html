@@ -1,24 +1,17 @@
 {% extends "base.html" %}
-
-{% load static %}
-
+{% load i18n static %}
 {% block title %}
-Список активных пользователей
+{% trans "Список активных пользователей" %}
 {% endblock %}
-
 {% block content %}
-<h1 class="fs-2 fw-bold">Список активных пользователей</h1>
+<h1 class="fs-2 fw-bold">{% trans "Список активных пользователей" %}</h1>
 <div class="row px-3 py-2">
-
   {% for user in users %}
-
   <div class="col-6">
     <div class="d-grid gap-2">
       <a class="btn btn-outline-success my-2 mx-2" href="{% url 'users:user_detail' user.id %}">{{ user.username }}</a>
     </div>
   </div>
-
   {% endfor %}
-
 </div>
 {% endblock %}

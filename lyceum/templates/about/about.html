@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-
 {% load i18n static %}
-
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <title>{% trans "О проекте" %}</title>
 {% endblock %}
-
 {% block content %}
-<h1>О проекте</h1>
-<h2>Проект по специализации Яндекс 'Разработка веб-приложений на Django'</h2>
+<h1>{% trans "О проекте" %}</h1>
+<h2>{% trans "Проект по специализации Яндекс 'Разработка веб-приложений на Django'" %}</h2>
 {% endblock %}

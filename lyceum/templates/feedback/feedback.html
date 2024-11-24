@@ -1,22 +1,15 @@
 {% extends "base.html" %}
-
-{% load static %}
-
+{% load i18n static %}
 {% block title %}
-Форма обратной связи
+{% trans "Форма обратной связи" %}
 {% endblock %}
-
 {% block content %}
-<h1>Форма обратной связи</h1>
-
+<h1>{% trans "Форма обратной связи" %}</h1>
 {% if messages %}
 <div class="my-2 mx-auto">
-  {% for message in messages %}
-  <div class="alert alert-warning my-1">{{ message }}</div>
-  {% endfor %}
+  {% for message in messages %}<div class="alert alert-warning my-1">{{ message }}</div>{% endfor %}
 </div>
 {% endif %}
-
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="mx-1 my-2">

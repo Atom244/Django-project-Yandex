@@ -1,14 +1,14 @@
-{% load i18n static %}
+{% load i18n %}
 <div class="card bg-light" style="width: 18rem; margin: 5px;">
   <img src="{{ item.main_image.image.url }}" class="card-img-top" alt="...">
   <div class="card-body">
     <div>
-      <h5 class="card-title"> {{ item.name|safe }} </h5>
-      <p class="card-text"><small>{{ item.category.name }}</small></p>
-      <p class="card-text"> {{ item.text|truncatewords_html:10|safe }} </p>
-      {% for tag in item.tags.all %}
-      <span class="badge bg-success rounded-pill">{{ tag.name }}</span>
-      {% endfor %}
+      <h5 class="card-title">{{ item.name|safe }}</h5>
+      <p class="card-text">
+        <small>{{ item.category.name }}</small>
+      </p>
+      <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
+      {% for tag in item.tags.all %}<span class="badge bg-success rounded-pill">{{ tag.name }}</span>{% endfor %}
     </div>
     <a href="{% url 'catalog:item-detail' item.pk %}" class="btn btn-secondary">{% trans "Подробнее" %}</a>
   </div>

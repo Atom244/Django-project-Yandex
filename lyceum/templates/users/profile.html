@@ -1,124 +1,76 @@
 {% extends "base.html" %}
-
-{% load static widget_tweaks thumbnail %}
-
+{% load i18n static widget_tweaks thumbnail %}
 {% block title %}
-Мой профиль
+{% trans "Мой профиль" %}
 {% endblock %}
-
 {% block content %}
-
-<h1 class="fs-2 fw-bold text-center">Мой профиль <span class="text-muted">({{ user.username }})</span></h1>
+<h1 class="fs-2 fw-bold text-center">
+  {% trans "Мой профиль" %}<span class="text-muted">({{ user.username }})</span>
+</h1>
 <div class="container d-flex justify-content-center">
   <div class="w-50">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-
       {% with form=user_form %}
-
       <div class="my-2">
-
         {% for field in form.visible_fields %}
-
         <div class="my-2">
-
-          {% for error in field.errors %}
-
-          <div class="my-1 alert alert-danger">
-            {{ error|escape }}
-          </div>
-
-          {% endfor %}
-
+          {% for error in field.errors %}<div class="my-1 alert alert-danger">{{ error|escape }}</div>{% endfor %}
         </div>
-
         <div class="form-floating my-2">
           {{ field|add_class:"form-control" }}
           <label for="{{ field.auto_id }}">{{ field.label }}</label>
         </div>
-
-        {% if field.help_text %}
-
-        <p class="fs-6 text-muted">{{ field.help_text }}</p>
-
-        {% endif %}
-
+        {% if field.help_text %}<p class="fs-6 text-muted">{{ field.help_text }}</p>{% endif %}
         {% endfor %}
-
       </div>
-
       {% endwith %}
-
       {% with form=profile_form %}
-
       <div class="my-2">
-
         {% for field in form.visible_fields %}
-
         {% if field.label == "Аватарка" %}
-
         {{ field|add_class:"form-control" }}
-
         {% else %}
-
         <div class="my-2">
-
-          {% for error in field.errors %}
-
-          <div class="my-1 alert alert-danger">
-            {{ error|escape }}
-          </div>
-
-          {% endfor %}
-
+          {% for error in field.errors %}<div class="my-1 alert alert-danger">{{ error|escape }}</div>{% endfor %}
         </div>
-
         <div class="form-floating my-2">
           {{ field|add_class:"form-control" }}
           <label for="{{ field.auto_id }}">{{ field.label }}</label>
         </div>
-
-        {% if field.help_text %}
-
-        <p class="fs-6 text-muted">{{ field.help_text }}</p>
-
+        {% if field.help_text %}<p class="fs-6 text-muted">{{ field.help_text }}</p>{% endif %}
         {% endif %}
-
-        {% endif %}
-
         {% endfor %}
-
       </div>
-
       {% endwith %}
-
       <div class="my-2">
         {% thumbnail user.profile.image "200x200" crop="center" as img %}
         <img src="{{ img.url }}" class="img-thumbnail">
         {% endthumbnail %}
       </div>
-
       <div class="my-2 d-grid gap-2">
         <input type="submit" class="btn btn-primary" value="Подтвердить изменения">
       </div>
     </form>
     <div class="my-2 d-grid gap-2">
-      <a class="btn btn-warning" href="{% url 'homepage:coffee' %}">Выпить кофе <span
+      <a class="btn btn-warning" href="{% url 'homepage:coffee' %}">{% trans "Выпить кофе" %}<span
           class="badge text-bg-dark rounded-pill">{{ coffee_count|default:"0" }}</span></a>
     </div>
     <div class="my-2 d-grid gap-2">
       <div class="btn-group">
         <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          Действия
+          {% trans "Действия" %}
         </button>
         <ul class="dropdown-menu">
-          <li class="dropdown-item"><a href="{% url 'users:user_detail' user.id %}" class="dropdown-item">Детальная
-              информация</a></li>
-          <li class="dropdown-item"><a href="{% url 'users:logout' %}" class="dropdown-item">Выйти</a></li>
+          <li class="dropdown-item">
+            <a href="{% url 'users:user_detail' user.id %}" class="dropdown-item">{% trans "Детальная информация" %}</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="{% url 'users:logout' %}" class="dropdown-item">{% trans "Выйти" %}</a>
+          </li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock %}

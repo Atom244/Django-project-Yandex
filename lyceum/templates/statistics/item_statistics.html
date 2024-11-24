@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
-<h1>Статистика по товарам</h1>
+<h1>{% trans "Статистика по товарам" %}</h1>
 <div class="row container">
   {% for stat in item_stats %}
   {% include "includes/statistic_card.html" %}

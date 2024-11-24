@@ -1,15 +1,9 @@
 {% extends "base.html" %}
-
-{% load static widget_tweaks %}
-
+{% load i18n static widget_tweaks %}
 {% block title %}
-Регистрация
+{% trans "Регистрация" %}
 {% endblock %}
-
 {% block content %}
-
-<h1 class="fs-2 fw-bold text-center">Регистрация</h1>
-
+<h1 class="fs-2 fw-bold text-center">{% trans "Регистрация" %}</h1>
 {% include "includes/form.html" with submit_value="Зарегистрироваться" %}
-
 {% endblock %}

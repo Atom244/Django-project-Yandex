@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-20 22:59+0300\n"
+"POT-Creation-Date: 2024-11-24 10:19-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,88 +20,398 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\catalog\views.py:20
+#: catalog/views.py:20
 msgid "Каталог"
 msgstr "Каталог"
 
-#: .\catalog\views.py:95 .\templates\catalog\item_list.html:16
+#: catalog/views.py:95 templates/catalog/item_list.html:12
 msgid "Новинки"
 msgstr "Новинки"
 
-#: .\catalog\views.py:115 .\templates\catalog\item_list.html:18
+#: catalog/views.py:115 templates/catalog/item_list.html:14
 msgid "Пятница"
 msgstr "Пятница"
 
-#: .\catalog\views.py:129 .\templates\catalog\item_list.html:20
+#: catalog/views.py:129 templates/catalog/item_list.html:16
 msgid "Непроверенное"
 msgstr "Непроверенное"
 
-#: .\lyceum\settings.py:129
+#: lyceum/settings.py:130
 msgid "Russian"
 msgstr "Русский"
 
-#: .\lyceum\settings.py:130
+#: lyceum/settings.py:131
 msgid "English"
 msgstr "Английский"
 
-#: .\templates\about\about.html:7 .\templates\includes\header.html:23
-#: .\templates\includes\header.html:25
+#: templates/about/about.html:5 templates/about/about.html:8
+#: templates/includes/header.html:27 templates/includes/header.html:31
 msgid "О проекте"
 msgstr "О проекте"
 
-#: .\templates\catalog\item.html:8
+#: templates/about/about.html:9
+msgid "Проект по специализации Яндекс 'Разработка веб-приложений на Django'"
+msgstr "Проект по специализации Яндекс 'Разработка веб-приложений на Django'"
+
+#: templates/catalog/item.html:6
 msgid "Товар"
 msgstr "Товар"
 
-#: .\templates\catalog\item.html:26 .\templates\catalog\item.html:92
+#: templates/catalog/item.html:19 templates/catalog/item.html:72
 msgid "скачать картинку"
 msgstr "скачать картинку"
 
-#: .\templates\catalog\item.html:106
+#: templates/catalog/item.html:23 templates/includes/statistic_card.html:7
+#: templates/statistics/user_statistics.html:14
+msgid "Средняя оценка:"
+msgstr "Средняя оценка:"
+
+#: templates/catalog/item.html:23
+msgid "оценок"
+msgstr "оценок"
+
+#: templates/catalog/item.html:25
+msgid "Пока нет оценок для этого товара."
+msgstr "Пока нет оценок для этого товара."
+
+#: templates/catalog/item.html:31
+msgid "Ваша оценка:"
+msgstr "Ваша оценка:"
+
+#: templates/catalog/item.html:33
+msgid "Вы ещё не оценили этот товар."
+msgstr "Вы ещё не оценили этот товар."
+
+#: templates/catalog/item.html:45
+msgid "Оценить"
+msgstr "Оценить"
+
+#: templates/catalog/item.html:51
+msgid "Удалить оценку"
+msgstr "Удалить оценку"
+
+#: templates/catalog/item.html:57
+msgid "Войдите, чтобы оставить оценку."
+msgstr "Войдите, чтобы оставить оценку."
+
+#: templates/catalog/item.html:79
+msgid "Предыдущий"
+msgstr "Предыдущий"
+
+#: templates/catalog/item.html:83
+msgid "Следующий"
+msgstr "Следующий"
+
+#: templates/catalog/item.html:86
 msgid "Купить"
 msgstr "Купить"
 
-#: .\templates\catalog\item_list.html:30
+#: templates/catalog/item_list.html:27 templates/homepage/main.html:15
 msgid "Список пуст :("
 msgstr "Список пуст :("
 
-#: .\templates\homepage\main.html:6 .\templates\includes\header.html:17
-#: .\templates\includes\header.html:19
+#: templates/feedback/feedback.html:4 templates/feedback/feedback.html:7
+msgid "Форма обратной связи"
+msgstr "Форма обратной связи"
+
+#: templates/homepage/echo.html:4
+msgid "echo"
+msgstr "эхо"
+
+#: templates/homepage/echo.html:7
+msgid "Echo"
+msgstr "Эхо"
+
+#: templates/homepage/main.html:4 templates/includes/header.html:18
+#: templates/includes/header.html:22
 msgid "Главная"
 msgstr "Главная"
 
-#: .\templates\includes\header.html:9
+#: templates/includes/birthday.html:5
+msgid "Поздравляем с днем рождения🎉:"
+msgstr "Поздравляем с днем рождения🎉:"
+
+#: templates/includes/form.html:20
+msgid "Ошибка"
+msgstr "Ошибка"
+
+#: templates/includes/form.html:28
+msgid "Забыли пароль?"
+msgstr "Забыли пароль?"
+
+#: templates/includes/form.html:30
+msgid "Уже есть аккаунт?"
+msgstr "Уже есть аккаунт?"
+
+#: templates/includes/header.html:7
 msgid "Продукты у Кота"
 msgstr "Продукты у Кота"
 
-#: .\templates\includes\header.html:14
+#: templates/includes/header.html:13
 msgid "Админ"
 msgstr "Админ"
 
-#: .\templates\includes\header.html:29 .\templates\includes\header.html:31
+#: templates/includes/header.html:36 templates/includes/header.html:40
 msgid "Отзыв"
 msgstr "Отзыв"
 
-#: .\templates\includes\header.html:35 .\templates\includes\header.html:37
+#: templates/includes/header.html:45 templates/includes/header.html:49
 msgid "Список товаров"
 msgstr "Список товаров"
 
-#: .\templates\includes\header.html:44
+#: templates/includes/header.html:54
 msgid "Пользователи"
 msgstr "Пользователи"
 
-#: .\templates\includes\header.html:77
+#: templates/includes/header.html:58 templates/includes/header.html:62
+msgid "Войти"
+msgstr "Войти"
+
+#: templates/includes/header.html:67 templates/includes/header.html:71
+msgid "Зарегистрироваться"
+msgstr "Зарегистрироваться"
+
+#: templates/includes/header.html:76 templates/includes/header.html:80
+msgid "Список пользователей"
+msgstr "Список пользователей"
+
+#: templates/includes/header.html:85 templates/includes/header.html:89
+msgid "Профиль"
+msgstr "Профиль"
+
+#: templates/includes/header.html:96
 msgid "Статистика"
 msgstr "Статистика"
 
-#: .\templates\includes\header.html:110
+#: templates/includes/header.html:100 templates/includes/header.html:104
+#: templates/statistics/user_statistics.html:4
+msgid "Статистика пользователя"
+msgstr "Статистика пользователя"
+
+#: templates/includes/header.html:109 templates/includes/header.html:113
+msgid "Статистика товаров"
+msgstr "Статистика товаров"
+
+#: templates/includes/header.html:118 templates/includes/header.html:122
+msgid "Статистика по оценённым товарам"
+msgstr "Статистика по оценённым товарам"
+
+#: templates/includes/header.html:136
 msgid "Английский"
 msgstr "Английский"
 
-#: .\templates\includes\header.html:112
+#: templates/includes/header.html:138
 msgid "Русский"
 msgstr "Русский"
 
-#: .\templates\includes\item_card.html:13
+#: templates/includes/item_card.html:13
 msgid "Подробнее"
 msgstr "Подробнее"
+
+#: templates/includes/statistic_card.html:8
+msgid "Количество оценок:"
+msgstr "Количество оценок:"
+
+#: templates/includes/statistic_card.html:10
+msgid "Последний пользователь, поставивший максимальную оценку:"
+msgstr "Последний пользователь, поставивший максимальную оценку:"
+
+#: templates/includes/statistic_card.html:14
+#: templates/includes/statistic_card.html:22
+msgid "нет"
+msgstr "нет"
+
+#: templates/includes/statistic_card.html:18
+msgid "Последний пользователь, поставивший минимальную оценку:"
+msgstr "Последний пользователь, поставивший минимальную оценку:"
+
+#: templates/statistics/item_statistics.html:4
+msgid "Статистика по товарам"
+msgstr "Статистика по товарам"
+
+#: templates/statistics/user_rated_items.html:4
+msgid "Товары, оцененные вами"
+msgstr "Товары, оцененные вами"
+
+#: templates/statistics/user_rated_items.html:8
+msgid " - Оценка:"
+msgstr " - Оценка:"
+
+#: templates/statistics/user_statistics.html:6
+msgid "Всего оценок:"
+msgstr "Всего оценок:"
+
+#: templates/statistics/user_statistics.html:10
+#: templates/statistics/user_statistics.html:18
+msgid "нет оценок"
+msgstr "нет оценок"
+
+#: templates/statistics/user_statistics.html:22
+msgid "Лучший товар:"
+msgstr "Лучший товар:"
+
+#: templates/statistics/user_statistics.html:26
+#: templates/statistics/user_statistics.html:34
+msgid "нет товара"
+msgstr "нет товара"
+
+#: templates/statistics/user_statistics.html:30
+msgid "Худший товар:"
+msgstr "Худший товар:"
+
+#: templates/users/activation_success.html:4
+msgid "Аккаунт активирован"
+msgstr "Аккаунт активирован"
+
+#: templates/users/activation_success.html:7
+msgid "Активация аккаунта"
+msgstr "Активация аккаунта"
+
+#: templates/users/activation_success.html:12
+msgid "Аккаунт успешно активирован!"
+msgstr "Аккаунт успешно активирован!"
+
+#: templates/users/activation_success.html:19
+msgid "Ваш аккаунт активирован, а ссылка для активации больше недействительна"
+msgstr "Ваш аккаунт активирован, а ссылка для активации больше недействительна"
+
+#: templates/users/activation_success.html:21
+msgid "Упс! Что-то пошло не так"
+msgstr ""
+
+#: templates/users/activation_success.html:25 templates/users/logout.html:7
+msgid "На главную"
+msgstr "На главную"
+
+#: templates/users/login.html:4
+msgid "Авторизация"
+msgstr "Авторизация"
+
+#: templates/users/login.html:7
+msgid "Авторизация пользователя"
+msgstr "Авторизация пользователя"
+
+#: templates/users/logout.html:5
+msgid "Вы вышли из аккаунта. Будем ждать Вас снова!"
+msgstr "Вы вышли из аккаунта. Будем ждать Вас снова!"
+
+#: templates/users/logout.html:6
+msgid "Вы всегда можете передумать"
+msgstr "Вы всегда можете передумать"
+
+#: templates/users/password_change.html:4
+#: templates/users/password_change.html:7
+#: templates/users/password_change_done.html:4
+#: templates/users/password_reset_complete.html:4
+msgid "Смена пароля"
+msgstr "Смена пароля"
+
+#: templates/users/password_change_done.html:7
+msgid "Успешно!"
+msgstr "Успешно!"
+
+#: templates/users/password_change_done.html:11
+msgid "Ура!"
+msgstr "Ура!"
+
+#: templates/users/password_reset.html:4 templates/users/password_reset.html:7
+#: templates/users/password_reset_confirm.html:4
+#: templates/users/password_reset_done.html:4
+msgid "Восстановление пароля"
+msgstr "Восстановление пароля"
+
+#: templates/users/password_reset_complete.html:8
+msgid "Пароль успешно изменён"
+msgstr "Пароль успешно изменён"
+
+#: templates/users/password_reset_complete.html:12
+msgid "Можете пользоваться новым паролем!"
+msgstr "Можете пользоваться новым паролем!"
+
+#: templates/users/password_reset_complete.html:13
+msgid "Удачного пользования сервисом"
+msgstr "Удачного пользования сервисом"
+
+#: templates/users/password_reset_complete.html:22
+msgid "Ссылка больше недействительна"
+msgstr "Ссылка больше недействительна"
+
+#: templates/users/password_reset_complete.html:23
+msgid "Вероятно, у неё истёк период действия, или ей уже воспользовались :("
+msgstr "Вероятно, у неё истёк период действия, или ей уже воспользовались :("
+
+#: templates/users/password_reset_confirm.html:7
+msgid "Придумайте новый пароль"
+msgstr "Придумайте новый пароль"
+
+#: templates/users/password_reset_done.html:7
+msgid "Письмо отправлено!"
+msgstr "Письмо отправлено!"
+
+#: templates/users/password_reset_done.html:11
+msgid ""
+"Мы отправили сообщение с инструкцией по восстановлению пароля на электронную "
+"почту"
+msgstr ""
+"Мы отправили сообщение с инструкцией по восстановлению пароля на электронную "
+"почту"
+
+#: templates/users/password_reset_done.html:12
+msgid ""
+"Если вам не приходит письмо, проверьте, корректно ли вы заполнили данные эл. "
+"почты"
+msgstr ""
+"Если вам не приходит письмо, проверьте, корректно ли вы заполнили данные эл. "
+"почты"
+
+#: templates/users/profile.html:4 templates/users/profile.html:8
+msgid "Мой профиль"
+msgstr "Мой профиль"
+
+#: templates/users/profile.html:56
+msgid "Выпить кофе"
+msgstr "Выпить кофе"
+
+#: templates/users/profile.html:62
+msgid "Действия"
+msgstr "Действия"
+
+#: templates/users/profile.html:66
+msgid "Детальная информация"
+msgstr "Детальная информация"
+
+#: templates/users/profile.html:69
+msgid "Выйти"
+msgstr "Выйти"
+
+#: templates/users/signup.html:4 templates/users/signup.html:7
+msgid "Регистрация"
+msgstr "Регистрация"
+
+#: templates/users/user_detail.html:4
+msgid "Подробнее о пользователе"
+msgstr "Подробнее о пользователе"
+
+#: templates/users/user_detail.html:7
+msgid "Пользователь"
+msgstr "Пользователь"
+
+#: templates/users/user_detail.html:19
+msgid "Имя"
+msgstr "Имя"
+
+#: templates/users/user_detail.html:29
+msgid "Фамилия"
+msgstr "Фамилия"
+
+#: templates/users/user_detail.html:39
+msgid "Дата рождения"
+msgstr "Дата рождения"
+
+#: templates/users/user_detail.html:49
+msgid "Выпито кофе"
+msgstr "Выпито кофе"
+
+#: templates/users/user_list.html:4 templates/users/user_list.html:7
+msgid "Список активных пользователей"
+msgstr "Список активных пользователей"
