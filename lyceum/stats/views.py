@@ -10,7 +10,7 @@ __all__ = []
 
 
 class UserStatisticsView(LoginRequiredMixin, TemplateView):
-    template_name = "statistics/user_statistics.html"
+    template_name = "stats/user_statistics.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -49,7 +49,7 @@ class UserStatisticsView(LoginRequiredMixin, TemplateView):
 
 
 class ItemStatisticsView(TemplateView):
-    template_name = "statistics/item_statistics.html"
+    template_name = "stats/item_statistics.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -98,7 +98,7 @@ class ItemStatisticsView(TemplateView):
 
 class UserRatedItemsView(LoginRequiredMixin, ListView):
     model = Rating
-    template_name = "statistics/user_rated_items.html"
+    template_name = "stats/user_rated_items.html"
     context_object_name = "ratings"
 
     def get_queryset(self):

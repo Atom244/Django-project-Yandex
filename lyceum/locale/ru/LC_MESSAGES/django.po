@@ -62,7 +62,7 @@ msgid "скачать картинку"
 msgstr "скачать картинку"
 
 #: templates/catalog/item.html:23 templates/includes/statistic_card.html:7
-#: templates/statistics/user_statistics.html:14
+#: templates/stats/user_statistics.html:14
 msgid "Средняя оценка:"
 msgstr "Средняя оценка:"
 
@@ -184,7 +184,7 @@ msgid "Статистика"
 msgstr "Статистика"
 
 #: templates/includes/header.html:100 templates/includes/header.html:104
-#: templates/statistics/user_statistics.html:4
+#: templates/stats/user_statistics.html:4
 msgid "Статистика пользователя"
 msgstr "Статистика пользователя"
 
@@ -225,37 +225,37 @@ msgstr "нет"
 msgid "Последний пользователь, поставивший минимальную оценку:"
 msgstr "Последний пользователь, поставивший минимальную оценку:"
 
-#: templates/statistics/item_statistics.html:4
+#: templates/stats/item_statistics.html:4
 msgid "Статистика по товарам"
 msgstr "Статистика по товарам"
 
-#: templates/statistics/user_rated_items.html:4
+#: templates/stats/user_rated_items.html:4
 msgid "Товары, оцененные вами"
 msgstr "Товары, оцененные вами"
 
-#: templates/statistics/user_rated_items.html:8
+#: templates/stats/user_rated_items.html:8
 msgid " - Оценка:"
 msgstr " - Оценка:"
 
-#: templates/statistics/user_statistics.html:6
+#: templates/stats/user_statistics.html:6
 msgid "Всего оценок:"
 msgstr "Всего оценок:"
 
-#: templates/statistics/user_statistics.html:10
-#: templates/statistics/user_statistics.html:18
+#: templates/stats/user_statistics.html:10
+#: templates/stats/user_statistics.html:18
 msgid "нет оценок"
 msgstr "нет оценок"
 
-#: templates/statistics/user_statistics.html:22
+#: templates/stats/user_statistics.html:22
 msgid "Лучший товар:"
 msgstr "Лучший товар:"
 
-#: templates/statistics/user_statistics.html:26
-#: templates/statistics/user_statistics.html:34
+#: templates/stats/user_statistics.html:26
+#: templates/stats/user_statistics.html:34
 msgid "нет товара"
 msgstr "нет товара"
 
-#: templates/statistics/user_statistics.html:30
+#: templates/stats/user_statistics.html:30
 msgid "Худший товар:"
 msgstr "Худший товар:"
 

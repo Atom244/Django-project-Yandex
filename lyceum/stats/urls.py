@@ -1,5 +1,5 @@
 from django.urls import path
-from Statistics.views import (
+from stats.views import (
     ItemStatisticsView,
     UserRatedItemsView,
     UserStatisticsView,

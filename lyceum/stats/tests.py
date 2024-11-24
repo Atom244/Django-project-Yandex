@@ -69,7 +69,7 @@ class RatingTests(TestCase):
 
         Rating.objects.create(user=self.user, item=self.worst_item, score=1)
 
-    def test_user_statistics(self):
+    def test_user_stats(self):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.get(reverse("statistics:user_statistics"))
 
@@ -81,7 +81,7 @@ class RatingTests(TestCase):
         self.assertEqual(response.context["best_item"], self.best_item)
         self.assertEqual(response.context["worst_item"], self.worst_item)
 
-    def test_item_statistics(self):
+    def test_item_stats(self):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.get(reverse("statistics:item_statistics"))
 
@@ -95,13 +95,13 @@ class RatingTests(TestCase):
         self.assertEqual(rating["last_min_user"], self.min_user)
         self.assertEqual(rating["rating_count"], 2)
 
-    def test_user_rated_item_statistics(self):
+    def test_user_rated_item_stats(self):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.get(reverse("statistics:user_rated_items"))
 
         self.assertEqual(len(response.context["ratings"]), 3)
 
-    def test_anonymous_user_cant_open_statistics(self):
+    def test_anonymous_user_cant_open_stats(self):
 
         response = self.client.get(reverse("statistics:user_rated_items"))
         self.assertEqual(response.status_code, 302)
