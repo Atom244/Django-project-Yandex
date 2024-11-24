@@ -28,6 +28,8 @@ class Rating(models.Model):
     )
     score = models.IntegerField(choices=RATING_CHOICES)
 
+    created_at = models.DateTimeField(auto_now=True, null=True)
+
     class Meta:
         verbose_name = "оценка"
         verbose_name_plural = "оценки"

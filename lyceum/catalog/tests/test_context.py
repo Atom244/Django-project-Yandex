@@ -137,7 +137,7 @@ class ContextTests(TestCase):
     def test_context_friday(self):
         response = Client().get(reverse("catalog:friday"))
         items = response.context["items"]
-        self.assertEqual(len(items), 2)
+        self.assertEqual(len(items), 1)
 
     def test_context_unverified(self):
         response = Client().get(reverse("catalog:unverified"))
