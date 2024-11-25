@@ -71,6 +71,14 @@ class RatingTests(TestCase):
 
         Rating.objects.create(user=self.user, item=self.worst_item, score=1)
 
+    def tearDown(self):
+        User.objects.all().delete()
+        catalog.models.Category.objects.all().delete()
+        catalog.models.Tag.objects.all().delete()
+        catalog.models.Item.objects.all().delete()
+        Rating.objects.all().delete()
+
+
     def test_user_stats(self):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.get(reverse("statistics:user_statistics"))
