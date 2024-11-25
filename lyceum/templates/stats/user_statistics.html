@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% block title %}{% trans "Статистика пользователя" %}{% endblock %}
 {% block content %}
 <h1>{% trans "Статистика пользователя" %} {{ user.username }}</h1>
 <h2>

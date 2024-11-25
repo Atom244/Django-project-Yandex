@@ -78,7 +78,6 @@ class RatingTests(TestCase):
         catalog.models.Item.objects.all().delete()
         Rating.objects.all().delete()
 
-
     def test_user_stats(self):
         self.client.login(username="testuser", password="correct_password")
         response = self.client.get(reverse("statistics:user_statistics"))
